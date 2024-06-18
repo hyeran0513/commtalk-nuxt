@@ -13,7 +13,9 @@
         </div>
       </div>
 
-      <button type="button" class="btn-s-fill-main btn-logout" title="로그아웃">로그아웃</button>
+      <button type="button" class="btn-mypage" title="마이페이지">
+        <i class="icon-user" />
+      </button>
     </div>
   </header>
 </template>

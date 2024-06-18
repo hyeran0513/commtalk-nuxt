@@ -9,6 +9,33 @@
     flex: 1;
   }
 
+  .sub-header {
+    border-bottom: 1px solid #d7d7d7;
+
+    &-inner {
+      margin: 0 auto;
+      max-width: 1200px;
+      height: 50px;
+      line-height: 48px;
+      
+      .gnb {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 20px;
+
+        &-item {
+          font-size: 14px;
+          transition: all ease .2s;
+
+          &:hover {
+            color: darken(#4876ef ,10%);
+          }
+        }
+      }
+    }
+  }
+
   header {
     height: 80px;
 
@@ -27,8 +54,17 @@
         background: url('@/assets/images/logo.png') no-repeat center/auto 100%;
       }
 
-      .btn-logout {
+      .btn-mypage {
         margin-left: auto;
+        width: 40px;
+        height: 40px;
+        border: 1px solid #d7d7d7;
+        border-radius: 4px;
+        transition: all ease .2;
+
+        &:hover {
+          background: darken(#FFF, 3%);
+        }
       }
     }
   }
