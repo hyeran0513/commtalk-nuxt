@@ -1,0 +1,14 @@
+.main {
+  display: flex;
+  gap: 40px;
+  margin: 40px auto;
+  max-width: 1200px;
+
+  &-left-area {
+    flex: 1;
+  }
+
+  &-right-area {
+    width: 360px;
+  }
+}
