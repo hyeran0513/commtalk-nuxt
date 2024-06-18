@@ -1,75 +1,19 @@
-# Nuxt 3 Minimal Starter
+commtalk - 커뮤니티
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+### <b>2024.06.18 ~ commtalk Nuxt3로 리팩토링 진행 중</b> 🎉🎉🎉
 
-## Setup
+😺 참여 인원
 
-Make sure to install the dependencies:
+|김혜란(본인)|이유리|
+|------|---|
+|DB설계|DB설계 및 관리|
+|프론트엔드|백엔드|
+|UI&UX||
 
-```bash
-# npm
-npm install
+🛠️ 사용 기술 스택
 
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+|front-end|back-end|DB|
+|---|---|---|
+|Nuxt3|spring boot|jpa|
+|scss||mysql|
+|UI&UX|||
