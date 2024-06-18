@@ -4,12 +4,12 @@
       <div class="category-box" v-if="!isFold">
         <div class="category-box-inner">
           <div class="item" v-for="(category, categoryIdx) in categoryData" :key="categoryIdx">
-            <div class="title">{{ category.title }}</div>
+            <div class="title">{{ category.TITLE }}</div>
             
             <div class="list">
-              <div class="list-item" v-for="(board, boardIdx) in category.boards" :key="boardIdx">
-                <NuxtLink :to="`/board/${board.boardId}`" :title="board.boardName">
-                  {{ board.boardName }}
+              <div class="list-item" v-for="(board, boardIdx) in category.BOARDS" :key="boardIdx">
+                <NuxtLink :to="`/board/${board.BOARD_ID}`" :title="board.BOARD_NAME">
+                  {{ board.BOARD_NAME }}
                 </NuxtLink>
               </div>
             </div>
@@ -29,26 +29,26 @@
 
   const categoryData = reactive([
     {
-      title: '일반',
-      boards: [
-        { boardName: '자유게시판', boardId: '1' },
-        { boardName: '비밀게시판', boardId: '2' },
-        { boardName: '정보게시판', boardId: '3' }
+      TITLE: '일반',
+      BOARDS: [
+        { BOARD_NAME: '자유게시판', BOARD_ID: '1' },
+        { BOARD_NAME: '비밀게시판', BOARD_ID: '2' },
+        { BOARD_NAME: '정보게시판', BOARD_ID: '3' }
       ]
     },
     {
-      title: '생활',
-      boards: [
-        { boardName: '여행', boardId: '1' },
-        { boardName: '요리', boardId: '2' },
-        { boardName: '알바 과외', boardId: '3' },
-        { boardName: '자취', boardId: '4' },
-        { boardName: '건강', boardId: '5' }
+      TITLE: '생활',
+      BOARDS: [
+        { BOARD_NAME: '여행', BOARD_ID: '1' },
+        { BOARD_NAME: '요리', BOARD_ID: '2' },
+        { BOARD_NAME: '알바 과외', BOARD_ID: '3' },
+        { BOARD_NAME: '자취', BOARD_ID: '4' },
+        { BOARD_NAME: '건강', BOARD_ID: '5' }
       ]
     }
   ]);
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 @import url('~/assets/scss/components/layout/category.scss');
 </style>
