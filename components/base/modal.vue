@@ -3,7 +3,7 @@
     <div class="modal-container">
       <div class="modal-head">
         <p class="title"><slot name="title" /></p>
-        <button type="button" class="btn-close" @click="modalClose"><i class="icon-close" /></button>
+        <button type="button" class="btn-close" @click="modalClose"><i class="icon-x" /></button>
       </div>
 
       <div class="modal-body">

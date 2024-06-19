@@ -50,6 +50,13 @@
                           <ul class="tooltip-list">
                             <li class="item">
                               <button type="button" class="has-icon">
+                                <i class="icon-alert-triangle" />
+                                <span class="txt">신고</span>
+                              </button>
+                            </li>
+
+                            <li class="item">
+                              <button type="button" class="has-icon">
                                 <i class="icon-edit" />
                                 <span class="txt">수정</span>
                               </button>
