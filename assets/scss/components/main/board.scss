@@ -1,0 +1,79 @@
+.btn-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 14px;
+
+  .btn-edit {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    color: var(--primary-color);
+
+    &:hover {
+      color: darken(#4876ef, 10%);
+    }
+
+    &::before {
+      content: '\e962';
+      font-family: 'iconFont';
+    }
+  }
+}
+
+.drag-area {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+
+  .item {
+    padding: 10px 0;
+    border: 1px solid #d7d7d7;
+    border-radius: 8px;
+
+    & > .title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      height: 40px;
+      line-height: 38px;
+      font-weight: bold;
+
+      & > i {
+        cursor: grab;
+      }
+    }
+
+    .list {
+      &-item {
+        & > a {
+          display: flex;
+          justify-content: space-between;
+          padding: 0 30px;
+          height: 40px;
+          line-height: 38px;
+
+          .title {
+            &:hover {
+              text-decoration: underline;
+              text-underline-offset: 0.08em;
+            }
+          }
+
+          .comment-count {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            font-size: 14px;
+
+            &:before {
+              content: '\e9a1';
+              font-family: 'iconFont';
+            }
+          }
+        }
+      }
+    }
+  }
+}

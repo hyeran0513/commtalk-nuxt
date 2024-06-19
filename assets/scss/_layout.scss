@@ -55,6 +55,9 @@
       }
 
       .btn-mypage {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         margin-left: auto;
         width: 40px;
         height: 40px;

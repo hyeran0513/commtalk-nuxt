@@ -9,6 +9,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-close:before {
+  content: "\ea21";
+}
 .icon-fill-pin:before {
   content: "\e900";
 }

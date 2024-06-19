@@ -7,6 +7,12 @@ button {
   border: 0;
   background: none;
   cursor: pointer;
+
+  &.has-icon {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
 }
 
 [class*="btn-s-"] {
@@ -41,11 +47,19 @@ button {
     &-main {
       @include btn-type(var(--primary-color), white, darken(#4876ef, 10%), darken(#4876ef, 10%));
     }
+
+    &-gray {
+      @include btn-type(#999, white, darken(#999, 10%), darken(#999, 10%));
+    }
   }
 
   &-fill {
     &-main {
       @include btn-type-fill(var(--primary-color), white, darken(#4876ef, 10%));
+    }
+
+    &-gray {
+      @include btn-type-fill(#999, white, darken(#999, 10%));
     }
   }
 }
@@ -341,6 +355,10 @@ select {
   border: 2px solid var(--primary-color);
   border-radius: 6px;
 
+  &.small {
+    width: 300px;
+  }
+
   &-inner {
     display: flex;
     align-items: center;
@@ -359,3 +377,29 @@ select {
   }
 }
 /* END: 검색창 */
+
+.tooltip {
+  position: relative;
+
+  &-box {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 10;
+    border: 1px solid #d7d7d7;
+    border-radius: 8px;
+    background: #FFF;
+    min-width: 100px;
+  }
+
+  &-list {
+    .item {
+      padding: 8px 10px;
+      transition: all ease .2s;
+
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+  }
+}

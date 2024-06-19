@@ -7,7 +7,7 @@
         </li>
         
         <li class="gnb-item">
-          <NuxtLink to="/" title="로그아웃">로그아웃</NuxtLink>
+          <NuxtLink to="/" title="회원가입">회원가입</NuxtLink>
         </li>
       </ul>
     </div>

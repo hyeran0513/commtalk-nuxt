@@ -4,11 +4,23 @@
   margin: 40px auto;
   max-width: 1200px;
 
-  &-left-area {
+  &-left {
     flex: 1;
+
+    &-item {
+      &:not(:first-child) {
+        margin-top: 50px;
+      }
+    }
   }
 
-  &-right-area {
+  &-right {
     width: 360px;
+
+    &-item {
+      &:not(:first-child) {
+        margin-top: 50px;
+      }
+    }
   }
 }
