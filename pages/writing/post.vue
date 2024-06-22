@@ -1,31 +1,16 @@
 <template>
-  <div class="detail">
-    <div class="detail-inner">
-      <div class="grid-top">
-        <div class="title">
-          <div class="txt">{{ boardName }}</div>
-          <div class="count"><span class="point-color">{{ data?.length }}</span>건</div>
-        </div>
-
-        <div class="search small">
-          <div class="search-inner">
-            <input type="text" placeholder="검색어를 입력해 주세요." />
-
-            <button type="button" title="검색">
-              <i class="icon-search" />
-            </button>
-          </div>
-        </div>
+   <section>
+    <div class="section-title">내가 쓴 글</div>
+  
+    <div class="section-content">
+      <div class="section-content-inner">
+        <List :data="data" />
       </div>
-
-      <List :data="data" />
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>
-  const boardName = ref('자유게시판');
-
   const data = reactive([
     {
       POST_ID: '1',
@@ -60,8 +45,8 @@
       MODIFY_DATE: '2024.06.19'
     }
   ])
-</script>
 
-<style lang="scss" scoped>
-@import url('~/assets/scss/pages/detail/board.scss');
-</style>
+  definePageMeta({
+    layout: 'mypage'
+  })
+</script>

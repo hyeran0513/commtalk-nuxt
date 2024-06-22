@@ -3,7 +3,7 @@
     <div class="section-title">개인정보 변경</div>
   
     <div class="section-content">
-      <div class="section-content-inner">
+      <div class="section-content-inner w-600">
         <div class="form">
           <div class="form-box">
             <dl class="form-item">

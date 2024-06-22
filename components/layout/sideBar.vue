@@ -6,13 +6,17 @@
 
     <div class="menu">
       <div v-for="(item, index) in menuItems" :key="index" class="menu-item">
-        <NuxtLink :to="item.link" class="menu-title" @click="toggle(index)" :class="{'is-active': activeIndex === index}">
+        <NuxtLink :to="item.link" 
+                  class="menu-title" 
+                  @click="toggle(index)" 
+                  :class="{'is-active': activeIndex === index}">
           {{ item.title }}
         </NuxtLink>
 
         <div v-show="activeIndex === index" class="submenu">
           <div v-for="(subItem, subIndex) in item.submenu" :key="subIndex" class="submenu-item">
-           <button type="button" class="submenu-title">{{ subItem }}</button>
+           <NuxtLink :to="subItem.link" 
+                      class="submenu-title">{{ subItem.title }}</NuxtLink>
           </div>
         </div>
       </div>
@@ -24,11 +28,40 @@
 import { ref } from 'vue'
 
 const menuItems = ref([
-  { title: '개인정보 변경',
-    link: '/info',
-  submenu: [] },
-  { title: '글', submenu: ['내가 쓴 글', '댓글 단 글'] },
-  { title: '활동', submenu: ['공감', '스크랩', '신고'] }
+  { 
+    title: '개인정보 변경',
+    link: '/info'
+  },
+  { 
+    title: '글', 
+    submenu: [
+      {
+        title: '내가 쓴 글',
+        link: '/writing/post'
+      }, 
+      {
+        title: '댓글 단 글',
+        link: '/writing/comment'
+      }
+    ] 
+  },
+  { 
+    title: '활동', 
+    submenu: [
+        {
+          title: '공감',
+          link: '/activity/like'
+        },
+        {
+          title: '스크랩',
+          link: '/activity/scrap'
+        },
+        {
+          title: '신고',
+          link: '/activity/report'
+        }
+      ] 
+    }
 ])
 
 const activeIndex = ref(null)

@@ -403,3 +403,31 @@ select {
     }
   }
 }
+
+section {
+  margin: 0 auto;
+  max-width: 1200px;
+  min-height: calc(100vh - 160px);
+  background: #FFF;
+  border-radius: 30px;
+
+  .section {
+    &-title {
+      padding: 30px 50px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    &-content {
+      padding: 0 50px 40px 50px;
+
+      &-inner {
+        margin: 0 auto;
+
+        &.w-600 {
+          max-width: 600px;
+        }
+      }
+    }
+  }
+}

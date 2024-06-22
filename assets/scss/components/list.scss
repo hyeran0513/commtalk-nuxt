@@ -1,0 +1,100 @@
+.list {
+  &-item {
+    padding: 20px 0;
+
+    .title {
+      font-size: 18px;
+      transition: all ease .2s;
+
+      &:hover {
+        text-decoration: underline;
+        text-underline-offset: 0.12em;
+      }
+    }
+
+    .content {
+      margin-top: 8px;
+      color: #999;
+    }
+
+    .bottom-area {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .count {
+        display: flex;
+        gap: 10px;
+        &-comment {
+          font-size: 14px;
+
+          &:before {
+            margin-right: 4px;
+            content: "\e9a1";
+            font-family: 'iconFont';
+          }
+        }
+
+        &-view {
+          font-size: 14px;
+          
+          &:before {
+            margin-right: 4px;
+            content: "\e966";
+            font-family: 'iconFont';
+          }
+        }
+
+        &-like {
+          font-size: 14px;
+          
+          &:before {
+            margin-right: 4px;
+            content: "\e906";
+            font-family: 'iconFont';
+          }
+        }
+      }
+
+      .user-info {
+        display: flex;
+        align-items: center;
+
+        .user-profile {
+          margin-right: 10px;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          overflow: hidden;
+
+          &-default {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #f8f8f8;
+
+            &:before {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              content: "\ea07";
+              font-family: 'iconFont';
+              color: #dcdcdc;
+              font-size: 18px;
+            }
+          }
+        }
+
+        .user-name {
+          margin-right: 8px;
+          font-size: 14px;
+        }
+
+        .date {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
