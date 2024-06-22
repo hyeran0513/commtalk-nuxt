@@ -30,95 +30,13 @@
         <NuxtLink to="/board/1" class="btn-s-fill-main" title="목록으로">목록으로</NuxtLink>
       </div>
 
-      <transition name="fade">
-        <div class="comment-box" v-if="showComment">      
-          <div class="user-comment-box">
-            <div class="comment-list">
-              <div class="comment-list-item" v-for="(item, i) in data" :key="i">
-                <div class="profile">
-                  <div class="profile-img" v-if="item.USER_INFO.PROFILE"></div>
-                  <div class="profile-default" v-else></div>
-                </div>
-
-                <div class="detail">
-                  <div class="top-area">
-                    <div class="user-name">{{ item.USER_INFO.USER_NAME}}</div>
-                    
-                    <div class="tooltip" ref="tooltipRef">
-                      <transition name="fade">
-                        <div class="tooltip-box" v-if="tooltipIndex === i">
-                          <ul class="tooltip-list">
-                            <li class="item">
-                              <button type="button" class="has-icon">
-                                <i class="icon-alert-triangle" />
-                                <span class="txt">신고</span>
-                              </button>
-                            </li>
-
-                            <li class="item">
-                              <button type="button" class="has-icon">
-                                <i class="icon-edit" />
-                                <span class="txt">수정</span>
-                              </button>
-                            </li>
-                            
-                            <li class="item">
-                              <button type="button" class="has-icon">
-                                <i class="icon-trash-2" />
-                                <span class="txt">삭제</span>
-                              </button>
-                            </li>
-                          </ul>
-                        </div>
-                      </transition>
-
-                      <button type="button" class="btn-dots tooltip-btn" @click="tooltipIndex = i"><span class="icon-more-vertical" /></button>
-                    </div>
-                  </div>
-
-                  <div class="content">
-                    <span class="tag-user">@{{ item.TAG }}</span>{{ item.CONTENT }}
-                  </div>
-
-                  <div class="bottom-area">
-                    <span class="date">
-                      <template v-if="item.MODIFY_DATE">{{ item.MODIFY_DATE }}</template>
-                      <template v-else>{{ item.CREATE_DATE}}</template>
-                    </span>
-
-                    <button type="button" class="btn-reply" title="답글 쓰기">
-                      <i class="icon-corner-down-right" />
-                      <span class="txt">답글 쓰기</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <p class="title">댓글 작성</p>
-
-            <div class="write">
-              <textarea type="text" class="write-input" placeholder="댓글을 작성해 주세요." />
-              <button type="button" class="btn-submit">등록</button>
-            </div>
-          </div>
-        </div>
-      </transition>
+      <CommentForm />
+      <CommentList />
     </div>
   </div>
 </template>
 
 <script setup>
-import { onClickOutside } from "@vueuse/core";
-
-const tooltipRef = ref();
-const tooltipIndex = ref();
-
-onClickOutside(tooltipRef, event => {
-  tooltipIndex.value = '';
-});
-
-const showComment = ref(true);
 const isLike = ref(false);
 
 const boardData = reactive({
