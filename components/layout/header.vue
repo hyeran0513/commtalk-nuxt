@@ -13,9 +13,13 @@
         </div>
       </div>
 
-      <button type="button" class="btn-mypage" title="마이페이지">
+      <NuxtLink to="/mypage" class="btn-mypage" title="마이페이지">
         <i class="icon-user" />
-      </button>
+      </NuxtLink>
     </div>
   </header>
 </template>
+
+<style lang="scss" scoped>
+@import url('~/assets/scss/components/layout/header.scss');
+</style>

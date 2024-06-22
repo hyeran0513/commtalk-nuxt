@@ -1,75 +1,21 @@
+.wrapper {
+  display: flex;
+  background: #f8f8f8;
+}
+
 .layout {
   position: relative;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: #FFF;
+  flex: 1;
+
+  &.bg-white {
+    background: #FFF;
+  }
 
   .content {
     flex: 1;
-  }
-
-  .sub-header {
-    border-bottom: 1px solid #d7d7d7;
-
-    &-inner {
-      margin: 0 auto;
-      max-width: 1200px;
-      height: 50px;
-      line-height: 48px;
-      
-      .gnb {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 20px;
-
-        &-item {
-          font-size: 14px;
-          transition: all ease .2s;
-
-          &:hover {
-            color: darken(#4876ef ,10%);
-          }
-        }
-      }
-    }
-  }
-
-  header {
-    height: 80px;
-
-    .header-inner {
-      display: flex;
-      align-items: center;
-      margin: 0 auto;
-      max-width: 1200px;
-      height: 100%;
-
-      .logo {
-        display: inline-block;
-        margin-right: 40px;
-        width: 120px;
-        height: 30px;
-        background: url('@/assets/images/logo.png') no-repeat center/auto 100%;
-      }
-
-      .btn-mypage {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-left: auto;
-        width: 40px;
-        height: 40px;
-        border: 1px solid #d7d7d7;
-        border-radius: 4px;
-        transition: all ease .2;
-
-        &:hover {
-          background: darken(#FFF, 3%);
-        }
-      }
-    }
   }
 
   footer {

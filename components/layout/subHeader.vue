@@ -13,3 +13,7 @@
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+@import url('~/assets/scss/components/layout/sub-header.scss');
+</style>
