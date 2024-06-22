@@ -5,9 +5,9 @@
         <div class="profile-img" v-if="userInfo.profile" :style="{background: `url(${ userInfo.PROFILE }) no-repeat center/auto 100%`}"></div>
         <div class="profile-default" v-else></div>
 
-        <button type="button" class="btn-setting">
+        <NuxtLink to="/info" class="btn-setting">
           <i class="icon-settings" />
-        </button>
+        </NuxtLink>
       </div>
 
       <div class="user-info">

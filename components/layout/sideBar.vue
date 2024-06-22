@@ -6,13 +6,13 @@
 
     <div class="menu">
       <div v-for="(item, index) in menuItems" :key="index" class="menu-item">
-        <button type="button" class="menu-title" @click="toggle(index)">
+        <NuxtLink :to="item.link" class="menu-title" @click="toggle(index)" :class="{'is-active': activeIndex === index}">
           {{ item.title }}
-        </button>
+        </NuxtLink>
 
         <div v-show="activeIndex === index" class="submenu">
           <div v-for="(subItem, subIndex) in item.submenu" :key="subIndex" class="submenu-item">
-           <button type="button">{{ subItem }}</button>
+           <button type="button" class="submenu-title">{{ subItem }}</button>
           </div>
         </div>
       </div>
@@ -24,7 +24,9 @@
 import { ref } from 'vue'
 
 const menuItems = ref([
-  { title: '개인정보 변경', submenu: [] },
+  { title: '개인정보 변경',
+    link: '/info',
+  submenu: [] },
   { title: '글', submenu: ['내가 쓴 글', '댓글 단 글'] },
   { title: '활동', submenu: ['공감', '스크랩', '신고'] }
 ])

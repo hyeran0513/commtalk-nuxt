@@ -18,14 +18,17 @@
 
   .menu {
     &-title {
+      display: block;
       padding: 10px 30px;
       font-size: 18px;
       font-weight: bold;
     }
 
     .submenu {
-      &-item {
+      &-title {
+        display: block;
         padding: 10px 30px;
+        font-size: 18px;
         font-size: 18px;
       }
     }
