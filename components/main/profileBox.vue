@@ -17,9 +17,9 @@
     </div>
 
     <div class="btn-wrap">
-      <button type="button" title="내 댓글">내 댓글</button>
-      <button type="button" title="내 공감">내 공감</button>
-      <button type="button" title="내 스크랩">내 스크랩</button>
+      <NuxtLink to="/writing/comment" title="내 댓글">내 댓글</NuxtLink>
+      <NuxtLink to="/activity/like" title="내 공감">내 공감</NuxtLink>
+      <NuxtLink to="/activity/scrap" title="내 스크랩">내 스크랩</NuxtLink>
     </div>
   </div>
 </template>

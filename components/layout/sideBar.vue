@@ -28,6 +28,10 @@
 import { ref } from 'vue'
 
 const menuItems = ref([
+{ 
+    title: '마이페이지 홈',
+    link: '/mypage'
+  },
   { 
     title: '개인정보 변경',
     link: '/info'

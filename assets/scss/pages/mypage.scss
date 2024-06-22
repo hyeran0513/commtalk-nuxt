@@ -1,0 +1,52 @@
+section {
+  margin: 0 auto;
+  max-width: 1200px;
+
+  .widget {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+
+    &-item {
+      padding: 20px 30px;;
+      background: #FFF;
+      border-radius: 12px;
+
+      & > .title {
+        display: flex;
+        justify-content: space-between;
+
+        .txt {
+          font-size: 20px;
+          font-weight: bold;
+        }
+        
+        .btn-more {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 24px;
+          height: 24px;
+          border: 1px solid var(--colorBorder3);
+          border-radius: 5px;
+          color: var(--colorText3);
+          transition: all ease .2s;
+
+          &:hover {
+            i {
+              transform: rotate(180deg);
+            }
+          }
+
+          & > i {
+            transition: all ease .2s;
+          }
+        }
+      }
+
+      & > .content {
+        max-height: 280px;
+      }
+    }
+  }
+}

@@ -1,6 +1,13 @@
 <template>
   <header>
     <div class="header-inner">
+      <div class="user-info">
+        <div class="profile">
+          <div class="profile-default"></div>
+        </div>
+
+        <div class="user-name">홍길동</div>
+      </div>
     </div>
   </header>
 </template>

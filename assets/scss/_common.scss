@@ -411,6 +411,10 @@ section {
   background: #FFF;
   border-radius: 30px;
 
+  &.bg-transparency {
+    background: transparent;
+  }
+
   .section {
     &-title {
       padding: 30px 50px;
