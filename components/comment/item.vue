@@ -41,7 +41,18 @@
         </div>
 
         <div class="content">
-          {{ comment.content }}
+          <template v-if="showEditForm">
+            <textarea v-html="comment.content" />
+
+            <div class="btn-wrap">
+              <button type="button" class="btn-s-line-main" @click="showEditForm = false">취소</button>
+              <button type="button" class="btn-s-fill-main">수정</button>
+            </div>
+          </template>
+
+          <template v-else>
+            {{ comment.content }}
+          </template>
         </div>
 
         <div class="flex-box">
@@ -66,6 +77,8 @@ onClickOutside(tooltipRef, event => {
   showActions.value = false;
 });
 
+const showEditForm = ref(false);
+
 const props = defineProps({
   comment: Object
 })
@@ -82,6 +95,7 @@ const toggleReplyForm = () => {
 }
 
 const editComment = () => {
+  showEditForm.value = true;
 }
 
 const deleteComment = () => {

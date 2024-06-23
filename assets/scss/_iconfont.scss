@@ -9,6 +9,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-outline-star:before {
+  content: "\ea22";
+}
 .icon-close:before {
   content: "\ea21";
 }

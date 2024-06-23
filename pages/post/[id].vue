@@ -23,21 +23,23 @@
           </button>
 
           <button type="button" class="btn-like" :class="{'is-active': isLike}" @click="isLike = !isLike">좋아요 {{ boardData.COUNT.LIKE }}</button>
-          
+          <button type="button" class="btn-scrap" :class="{'is-active': isScrap}" @click="isScrap = !isScrap">스크랩 {{ boardData.COUNT.SCRAP }}</button>
           <button type="button" class="btn-view" disabled>조회수 {{ boardData.COUNT.VIEW }}</button>
         </div>
 
         <NuxtLink to="/board/1" class="btn-s-fill-main" title="목록으로">목록으로</NuxtLink>
       </div>
 
-      <CommentForm />
-      <CommentList />
+      <CommentForm v-if="showComment" />
+      <CommentList v-if="showComment" />
     </div>
   </div>
 </template>
 
 <script setup>
+const showComment = ref(true);
 const isLike = ref(false);
+const isScrap = ref(false);
 
 const boardData = reactive({
   USER_INFO: {
@@ -50,7 +52,8 @@ const boardData = reactive({
   COUNT: {
     LIKE: '10',
     COMMENT: '10',
-    VIEW: '10'
+    VIEW: '10',
+    SCRAP: '10'
   }
 });
 

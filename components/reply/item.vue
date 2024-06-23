@@ -41,14 +41,29 @@
         </div>
 
         <div class="content">
-          {{ reply.content }}
+          <template v-if="showEditForm">
+            <textarea v-html="reply.content" />
+
+            <div class="btn-wrap">
+              <button type="button" class="btn-s-line-main" @click="showEditForm = false">취소</button>
+              <button type="button" class="btn-s-fill-main">수정</button>
+            </div>
+          </template>
+
+          <template v-else>
+            {{ reply.content }}
+          </template>
         </div>
 
         <div class="flex-box">
           <div class="date">2024.06.22</div>
+          <button type="button" class="btn-reply" @click="toggleReplyForm"><i class="icon-corner-down-right" />답글 쓰기</button>
         </div>
       </div>
     </div>
+
+    <ReplyForm v-if="showReplyForm" />
+    <ReplyList :replies="reply.replies" />
   </div>
 </template>
 
@@ -62,17 +77,25 @@ onClickOutside(tooltipRef, event => {
   showActions.value = false;
 });
 
+const showEditForm = ref(false);
+
 const props = defineProps({
   reply: Object
 })
 
 const showActions = ref(false)
+const showReplyForm = ref(false)
 
 const toggleActions = () => {
   showActions.value = !showActions.value
 }
 
+const toggleReplyForm = () => {
+  showReplyForm.value = !showReplyForm.value
+}
+
 const editReply = () => {
+  showEditForm.value = true;
 }
 
 const deleteReply = () => {

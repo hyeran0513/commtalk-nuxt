@@ -62,6 +62,21 @@
 
       .content {
         margin: 10px 0;
+
+        textarea {
+          padding: 10px 20px;
+          width: 100%;
+          min-height: 120px;
+          border: 1px solid #d7d7d7;
+          border-radius: 8px;
+        }
+
+        .btn-wrap {
+          display: flex;
+          justify-content: flex-end;
+          gap: 8px;
+          margin-top: 10px;
+        }
       }
 
       .detail {
