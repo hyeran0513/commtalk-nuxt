@@ -3,7 +3,7 @@
     <div class="header-inner">
       <NuxtLink to="/" class="logo"></NuxtLink>
 
-      <div class="search">
+      <div class="search" v-if="!isGate">
         <div class="search-inner">
           <input type="text" placeholder="검색어를 입력해 주세요." />
 
@@ -13,13 +13,18 @@
         </div>
       </div>
 
-      <NuxtLink to="/mypage" class="btn-mypage" title="마이페이지">
+      <NuxtLink to="/mypage" class="btn-mypage" title="마이페이지" v-if="!isGate">
         <i class="icon-user" />
       </NuxtLink>
     </div>
   </header>
 </template>
 
+<script setup>
+const props = defineProps(['isGate']);
+</script>
+
 <style lang="scss" scoped>
 @import url('~/assets/scss/components/layout/header.scss');
 </style>
+
