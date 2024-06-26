@@ -10,6 +10,13 @@ export default defineNuxtConfig({
       },
     },
   },
+  nitro: {
+    routeRules: {
+      "/write": {
+        ssr: false,
+      }, 
+    },
+  },
   css : [
     "@/assets/scss/main.scss"
   ],

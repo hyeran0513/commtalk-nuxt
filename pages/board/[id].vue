@@ -19,6 +19,10 @@
       </div>
 
       <List :data="data" />
+
+      <div class="btn-wrap">
+        <NuxtLink to="/write" class="btn-s-fill-main">글 쓰기</NuxtLink>
+      </div>
     </div>
   </div>
 </template>
