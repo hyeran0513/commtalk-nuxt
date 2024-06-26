@@ -70,7 +70,7 @@
     <template #title>신고 요청</template>
 
     <template #default>
-      <textarea class="report-textarea" placeholder="신고 요청 내용을 입력해 주세요." />
+      <textarea class="textarea-custom" placeholder="신고 요청 내용을 입력해 주세요." />
     </template>
 
     <template #footer>
