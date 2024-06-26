@@ -435,3 +435,27 @@ section {
     }
   }
 }
+
+.report-textarea {
+  padding: 20px;
+  width: 100%;
+  height: 150px;
+  border: 1px solid #d7d7d7;
+  border-radius: 10px;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--colorBg2);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar-track-piece {
+    background-color: #eee;
+    border-radius: 3px;
+  }
+}

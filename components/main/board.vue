@@ -3,7 +3,7 @@
     <div class="btn-wrap">
       <button type="button" 
       class="btn-edit" 
-        @click="modal.modalOpen('modal')">게시판 노출 위치 편집</button>
+        @click="modal.modalOpen()">게시판 노출 위치 편집</button>
     </div>
 
     <draggable

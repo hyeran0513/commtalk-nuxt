@@ -65,11 +65,25 @@
     <ReplyForm v-if="showReplyForm" />
     <ReplyList :replies="reply.replies" />
   </div>
+
+  <BaseModal ref="modal" id="modal">
+    <template #title>신고 요청</template>
+
+    <template #default>
+      <textarea class="report-textarea" placeholder="신고 요청 내용을 입력해 주세요." />
+    </template>
+
+    <template #footer>
+      <button type="button" class="btn-main" @click="modal.modalClose()">제출</button>
+    </template>
+  </BaseModal>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import { onClickOutside } from "@vueuse/core";
+
+const modal = ref();
 
 const tooltipRef = ref();
 
@@ -102,6 +116,7 @@ const deleteReply = () => {
 }
 
 const reportReply = () => {
+  modal.value.modalOpen();
 }
 </script>
 
