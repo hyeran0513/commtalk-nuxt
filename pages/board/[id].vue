@@ -4,7 +4,7 @@
       <div class="grid-top">
         <div class="title">
           {{boards}}
-          <div class="txt">{{ boardName }}</div>
+          <div class="txt">{{ boardName.boardName }}</div>
           <div class="count"><span class="point-color">{{ boards?.length }}</span>건</div>
         </div>
 
@@ -29,11 +29,24 @@
 </template>
 
 <script setup>
-  const boardName = ref('자유게시판');
-
   const route = useRoute();
-  const { data: boards } = await useAsyncData('boards',
+  // 게시판 이름 호출
+  const { data: boardName } = await useAsyncData('boardName',
       () => $fetch(`/api/v1/boards/${route.params.id}`)
+  );
+
+  const pageableParams = {
+    page: 0
+  };
+
+  // 게시판 목록 호출
+  const { data: boards } = await useAsyncData('boards',
+      () => $fetch(`/api/v1/boards/${route.params.id}/posts`, {
+        params: {
+          boardId: route.params.id,
+          pageable: JSON.stringify(pageableParams)
+        }
+      })
   );
 
   // const data = reactive([
