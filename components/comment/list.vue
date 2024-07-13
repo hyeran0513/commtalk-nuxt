@@ -1,25 +1,22 @@
 <template>
   <div>
-    <CommentItem v-for="comment in comments" :key="comment.id" :comment="comment" />
+    <CommentItem v-for="comment in comments" :key="comment?.commentId" :comment="comment" />
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
-const comments = ref([
-  {
-    id: 1,
-    content: '댓글 내용 1',
-    replies: [
-      { id: 1, content: '답글 내용 1' },
-      { id: 2, content: '답글 내용 2' },
-    ]
+const props = defineProps({
+  postId: {
+    type: String,
+    required: true
   },
-  {
-    id: 2,
-    content: '댓글 내용 2',
-    replies: []
-  }
-])
+});
+
+const { data: comments } = await useAsyncData('comments',
+    () => $fetch(`/api/v1/posts/${props.postId}/comments`, {
+      params: {
+        postId: props.postId
+      }
+    })
+);
 </script>

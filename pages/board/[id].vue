@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <List :data="boards?.posts" />
+      <List :data="boards?.posts" :boardId="route.params.id" />
 
       <div class="btn-wrap">
         <NuxtLink to="/write" class="btn-s-fill-main">글 쓰기</NuxtLink>
@@ -47,41 +47,6 @@
       }
     })
   );
-
-  // const data = reactive([
-  //   {
-  //     POST_ID: '1',
-  //     TITLE: '자유게시판01',
-  //     CONTENT: '자유게시판 내용',
-  //     COUNT: {
-  //       COMMENT: '10',
-  //       VIEW: '10',
-  //       LIKE: '10'
-  //     },
-  //     USER_INFO: {
-  //       USER_PROFILE: '',
-  //       USER_NAME: '홍길동'
-  //     },
-  //     CREATE_DATE: '2024.06.19',
-  //     MODIFY_DATE: '2024.06.19'
-  //   },
-  //   {
-  //     POST_ID: '2',
-  //     TITLE: '자유게시판02',
-  //     CONTENT: '자유게시판 내용',
-  //     COUNT: {
-  //       COMMENT: '10',
-  //       VIEW: '10',
-  //       LIKE: '10'
-  //     },
-  //     USER_INFO: {
-  //       USER_PROFILE: '',
-  //       USER_NAME: '홍길동'
-  //     },
-  //     CREATE_DATE: '2024.06.19',
-  //     MODIFY_DATE: '2024.06.19'
-  //   }
-  // ])
 </script>
 
 <style lang="scss" scoped>

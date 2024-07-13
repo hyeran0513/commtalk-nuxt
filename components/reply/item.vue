@@ -7,7 +7,7 @@
 
       <div class="detail">
         <div class="flex-box">
-          <div class="user-name">홍길동</div>
+          <div class="user-name">{{ reply?.writer?.nickname }}</div>
           <div class="tooltip" ref="tooltipRef">
             <transition name="fade">
               <div class="tooltip-box" v-if="showActions">
@@ -42,7 +42,7 @@
 
         <div class="content">
           <template v-if="showEditForm">
-            <textarea v-html="reply.content" />
+            <textarea v-html="reply?.content" />
 
             <div class="btn-wrap">
               <button type="button" class="btn-s-line-main" @click="showEditForm = false">취소</button>
@@ -51,19 +51,19 @@
           </template>
 
           <template v-else>
-            {{ reply.content }}
+            {{ reply?.content }}
           </template>
         </div>
 
         <div class="flex-box">
-          <div class="date">2024.06.22</div>
+          <div class="date">{{ reply?.updatedAt }}</div>
           <button type="button" class="btn-reply" @click="toggleReplyForm"><i class="icon-corner-down-right" />답글 쓰기</button>
         </div>
       </div>
     </div>
 
     <ReplyForm v-if="showReplyForm" />
-    <ReplyList :replies="reply.replies" />
+    <ReplyList :replies="reply?.replies" />
   </div>
 
   <BaseModal ref="modal" id="modal">

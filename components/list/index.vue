@@ -1,7 +1,7 @@
 <template>
   <div class="list">
     <div class="list-item" v-for="(item, i) in data" :key="i">
-      <NuxtLink :to="`/post/${item?.postId}`">
+      <NuxtLink :to="`/post/${item?.postId}?boardId=${boardId}`">
         <div class="title">{{ item?.title }}</div>
         <div class="content">{{ item?.previewContent }}</div>
 
@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-  const props = defineProps(['data']);
+  const props = defineProps(['data', 'boardId']);
 </script>
 
 <style lang="scss" scoped>
