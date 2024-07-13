@@ -10,11 +10,13 @@ export default defineNuxtConfig({
       },
     },
   },
-  routeRules: {
-    '/api/**': { proxy: { to: "http://localhost:8080/**" } }
-  },
   nitro: {
     routeRules: {
+      "api/**": {
+        proxy: {
+          to: "http://localhost:8080/**"
+        }
+      },
       "/write": {
         ssr: false,
       }, 

@@ -31,7 +31,10 @@
 <script setup>
   const boardName = ref('자유게시판');
 
-  const { data: boards } = await useFetch('http://localhost:8080/api/v1/boards');
+  const route = useRoute();
+  const { data: boards } = await useAsyncData('boards',
+      () => $fetch(`/api/v1/boards/${route.params.id}`)
+  );
 
   // const data = reactive([
   //   {
