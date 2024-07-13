@@ -41,12 +41,12 @@
 
   // 게시판 목록 호출
   const { data: boards } = await useAsyncData('boards',
-      () => $fetch(`/api/v1/boards/${route.params.id}/posts`, {
-        params: {
-          boardId: route.params.id,
-          pageable: JSON.stringify(pageableParams)
-        }
-      })
+    () => $fetch(`/api/v1/boards/${route.params.id}/posts`, {
+      params: {
+        boardId: route.params.id,
+        pageable: JSON.stringify(pageableParams)
+      }
+    })
   );
 
   // const data = reactive([

@@ -35,7 +35,6 @@
 <script setup>
 import { ref } from 'vue';
 import { useSessionStorage } from '@vueuse/core';
-const { $auth } = useNuxtApp();
 
 const router = useRouter();
 

@@ -1,8 +1,9 @@
 <template>
   <div class="profile-box">
+    {{userInfo}} ??
     <div class="top-area">
       <div class="profile">
-        <div class="profile-img" v-if="userInfo.profile" :style="{background: `url(${ userInfo.PROFILE }) no-repeat center/auto 100%`}"></div>
+        <div class="profile-img" v-if="userInfo?.profile" :style="{background: `url(${ userInfo?.PROFILE }) no-repeat center/auto 100%`}"></div>
         <div class="profile-default" v-else></div>
 
         <NuxtLink to="/info" class="btn-setting">
@@ -11,8 +12,8 @@
       </div>
 
       <div class="user-info">
-        <div class="user-name">{{ userInfo.USER_NAME }}님</div>
-        <div class="user-id">{{ userInfo.USER_ID }}</div>
+        <div class="user-name">{{ userInfo?.username }}님</div>
+        <div class="user-id">{{ userInfo?.nickname }}</div>
       </div>
     </div>
 
@@ -25,11 +26,15 @@
 </template>
 
 <script setup>
-  const userInfo = reactive({
-    PROFILE: '',
-    USER_NAME: '홍길동',
-    USER_ID: '아이디'
-  });
+  // const userInfo = reactive({
+  //   PROFILE: '',
+  //   USER_NAME: '홍길동',
+  //   USER_ID: '아이디'
+  // });
+
+  const { data: userInfo } = await useAsyncData('userInfo',
+    () => $fetch(`/api/v1/members/me`)
+  );
 </script>
 
 <style lang="scss" scoped>
