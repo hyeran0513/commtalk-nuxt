@@ -21,13 +21,14 @@
       gap: 16px;
 
       &-item {
-        &.is-focus {
+        &.is-error {
           & > dt {
             color: var(--colorWheel10);
           }
 
           & > dd {
-            input {
+            input,
+            select {
               border: 1px solid var(--colorWheel10);
             }
           }
