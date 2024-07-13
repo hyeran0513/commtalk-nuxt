@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{list}}??
     <div class="btn-wrap">
       <button type="button" 
       class="btn-edit" 
@@ -12,28 +13,33 @@
       :list="list"
       class="drag-area"
       v-bind="dragOptions"
+      v-if="list?.length > 0"
     >
       <template #item="{ element: item, index }">
         <div class="item">
           <div class="title">
             <span class="txt">
-              <NuxtLink :to="`/board/${ item.BOARD_ID }`" :title="item.TITLE">{{ item.BOARD_NAME }}</NuxtLink>
+              <NuxtLink :to="`/board/${ item?.BOARD_ID }`" :title="item?.TITLE">{{ item?.BOARD_NAME }}</NuxtLink>
             </span>
 
             <i class="icon-more-vertical" />
           </div>
 
           <div class="list">
-            <div class="list-item" v-for="(item, i) in item.LIST" :key="i">
-              <NuxtLink :to="`/post/${ item.POST_ID }`" :title="item.TITLE">
-                <span class="title">{{ item.TITLE }}</span>
-                <span class="comment-count">{{ item.COMMENT_COUNT }}</span>
+            <div class="list-item" v-for="(item, i) in item?.LIST" :key="i">
+              <NuxtLink :to="`/post/${ item?.POST_ID }`" :title="item?.TITLE">
+                <span class="title">{{ item?.TITLE }}</span>
+                <span class="comment-count">{{ item?.COMMENT_COUNT }}</span>
               </NuxtLink>
             </div>
           </div>
         </div>
       </template>
     </draggable>
+
+    <template v-else>
+      <BaseNodata text="고정된 게시판이 없습니다." />
+    </template>
 
     <BaseModal ref="modal" id="modal">
       <template #title>게시판 노출 위치 편집</template>
@@ -48,7 +54,7 @@
           <div v-for="(item, i) in list" :key="i">
             <label class="checkbox-custom">
               <input type="checkbox" />
-              <span class="txt">{{ item.BOARD_NAME }}</span>
+              <span class="txt">{{ item?.BOARD_NAME }}</span>
             </label>
           </div>
         </div>
@@ -67,74 +73,78 @@ import draggable from 'vuedraggable';
 
 const modal = ref();
 
-const list = reactive([
-  { 
-    ID: '1', 
-    BOARD_NAME: '자유게시판', 
-    BOARD_ID: '1',
-    LIST: [
-      {
-        POST_ID: '1',
-        TITLE: '제목1',
-        COMMENT_COUNT: '10'
-      },
-      {
-        POST_ID: '2',
-        TITLE: '제목2',
-        COMMENT_COUNT: '10'
-      },
-      {
-        POST_ID: '3',
-        TITLE: '제목3',
-        COMMENT_COUNT: '10'
-      }
-    ]
-  },
-  { 
-    ID: '2', 
-    BOARD_NAME: '비밀게시판',
-    BOARD_ID: '2',
-    LIST: [
-      {
-        POST_ID: '1',
-        TITLE: '제목1',
-        COMMENT_COUNT: '10'
-      },
-      {
-        POST_ID: '2',
-        TITLE: '제목2',
-        COMMENT_COUNT: '10'
-      },
-      {
-        POST_ID: '3',
-        TITLE: '제목3',
-        COMMENT_COUNT: '10'
-      }
-    ]
-  },
-  { 
-    ID: '3', 
-    BOARD_NAME: '도도게시판', 
-    BOARD_ID: '3',
-    LIST: [
-      {
-        POST_ID: '1',
-        TITLE: '제목1',
-        COMMENT_COUNT: '10'
-      },
-      {
-        POST_ID: '2',
-        TITLE: '제목2',
-        COMMENT_COUNT: '10'
-      },
-      {
-        POST_ID: '3',
-        TITLE: '제목3',
-        COMMENT_COUNT: '10'
-      }
-    ]
-  }
-]);
+const { data: list } = await useAsyncData('list',
+    () => $fetch(`/api/v1/boards/pinned`)
+);
+
+// const list = reactive([
+//   {
+//     ID: '1',
+//     BOARD_NAME: '자유게시판',
+//     BOARD_ID: '1',
+//     LIST: [
+//       {
+//         POST_ID: '1',
+//         TITLE: '제목1',
+//         COMMENT_COUNT: '10'
+//       },
+//       {
+//         POST_ID: '2',
+//         TITLE: '제목2',
+//         COMMENT_COUNT: '10'
+//       },
+//       {
+//         POST_ID: '3',
+//         TITLE: '제목3',
+//         COMMENT_COUNT: '10'
+//       }
+//     ]
+//   },
+//   {
+//     ID: '2',
+//     BOARD_NAME: '비밀게시판',
+//     BOARD_ID: '2',
+//     LIST: [
+//       {
+//         POST_ID: '1',
+//         TITLE: '제목1',
+//         COMMENT_COUNT: '10'
+//       },
+//       {
+//         POST_ID: '2',
+//         TITLE: '제목2',
+//         COMMENT_COUNT: '10'
+//       },
+//       {
+//         POST_ID: '3',
+//         TITLE: '제목3',
+//         COMMENT_COUNT: '10'
+//       }
+//     ]
+//   },
+//   {
+//     ID: '3',
+//     BOARD_NAME: '도도게시판',
+//     BOARD_ID: '3',
+//     LIST: [
+//       {
+//         POST_ID: '1',
+//         TITLE: '제목1',
+//         COMMENT_COUNT: '10'
+//       },
+//       {
+//         POST_ID: '2',
+//         TITLE: '제목2',
+//         COMMENT_COUNT: '10'
+//       },
+//       {
+//         POST_ID: '3',
+//         TITLE: '제목3',
+//         COMMENT_COUNT: '10'
+//       }
+//     ]
+//   }
+// ]);
 
 const dragOptions = ref({
   animation: 200,

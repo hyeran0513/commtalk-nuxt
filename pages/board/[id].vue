@@ -3,9 +3,8 @@
     <div class="detail-inner">
       <div class="grid-top">
         <div class="title">
-          {{boards}}
           <div class="txt">{{ boardName.boardName }}</div>
-          <div class="count"><span class="point-color">{{ boards?.length }}</span>건</div>
+          <div class="count"><span class="point-color">{{ boards?.posts.length }}</span>건</div>
         </div>
 
         <div class="search small">
@@ -19,7 +18,7 @@
         </div>
       </div>
 
-      <List :data="boards" />
+      <List :data="boards?.posts" />
 
       <div class="btn-wrap">
         <NuxtLink to="/write" class="btn-s-fill-main">글 쓰기</NuxtLink>
