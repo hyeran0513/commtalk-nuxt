@@ -61,9 +61,6 @@
         </div>
       </div>
     </div>
-
-    <ReplyForm v-if="showReplyForm" />
-    <ReplyList :replies="reply?.replies" />
   </div>
 
   <BaseModal ref="modal" id="modal">

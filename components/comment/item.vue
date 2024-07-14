@@ -7,7 +7,7 @@
 
       <div class="detail">
         <div class="flex-box">
-          <div class="user-name">{{ comment?.writer?.nickname}}</div>
+          <div class="user-name">{{ comment?.writer?.nickname }}</div>
           <div class="tooltip" ref="tooltipRef">
             <transition name="fade">
               <div class="tooltip-box" v-if="showActions">
@@ -56,14 +56,14 @@
         </div>
 
         <div class="flex-box">
-          <div class="date">2024.06.22</div>
+          <div class="date">{{ comment?.updatedAt }}</div>
           <button type="button" class="btn-reply" @click="toggleReplyForm"><i class="icon-corner-down-right" />답글 쓰기</button>
         </div>
       </div>
     </div>
 
-    <ReplyForm v-if="showReplyForm" />
-    <ReplyList :replies="comment?.children" />
+    <CommentForm v-if="showReplyForm" :parentId="comment?.commentId" :postId="route.params.id" @refreshComments="$emit('refreshComments')" />
+    <ReplyList :replies="comment?.children" :postId="route.params.id" />
   </div>
 
   <BaseModal ref="modal" id="modal">
@@ -82,6 +82,7 @@
 <script setup>
 import { ref } from 'vue'
 import { onClickOutside } from "@vueuse/core";
+const route = useRoute();
 
 const modal = ref();
 
@@ -95,7 +96,7 @@ const showEditForm = ref(false);
 
 const props = defineProps({
   comment: Object
-})
+});
 
 const showActions = ref(false)
 const showReplyForm = ref(false)

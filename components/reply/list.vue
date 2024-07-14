@@ -1,13 +1,17 @@
 <template>
   <div>
-    <ReplyItem v-for="reply in replies" :key="reply.id" :reply="reply" />
+    <ReplyItem
+        v-for="reply in replies"
+        :key="reply?.commentId"
+        :reply="reply" />
   </div>
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
-
 const props = defineProps({
-  replies: Array
-})
+  replies: {
+    type: Array,
+    required: true
+  }
+});
 </script>
