@@ -34,12 +34,12 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useSessionStorage } from '@vueuse/core';
+import { useLocalStorage } from '@vueuse/core';
 
 const router = useRouter();
 
 // 토큰
-const token = useSessionStorage('token', '');
+const token = useLocalStorage('token', '');
 
 // 폼 데이터
 const formData = ref({
@@ -58,6 +58,8 @@ const submitForm = async () => {
   const { nickname, password } = formData.value;
   const formDataObj = { nickname, password };
 
+  console.log('Submitting form with token:', token.value);
+
   try {
     const response = await fetch('/api/v1/members/login', {
       method: 'POST',
@@ -68,16 +70,18 @@ const submitForm = async () => {
       body: JSON.stringify(formDataObj)
     });
 
+    console.log('Response headers:', response.headers);
+
     if (response.ok) {
       const data = await response.json();
-      const { code, message } = data;
+      const {code, message} = data;
 
       token.value = message;
 
       await router.push('/');
     } else {
       const errorData = await response.json();
-      const { code, message } = errorData;
+      const {code, message} = errorData;
 
       if (code === 'BAD_REQUEST') {
         Object.keys(message).forEach(key => {

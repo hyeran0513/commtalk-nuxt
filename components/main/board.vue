@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{list}}??
     <div class="btn-wrap">
       <button type="button" 
       class="btn-edit" 
@@ -19,17 +18,17 @@
         <div class="item">
           <div class="title">
             <span class="txt">
-              <NuxtLink :to="`/board/${ item?.BOARD_ID }`" :title="item?.TITLE">{{ item?.BOARD_NAME }}</NuxtLink>
+              <NuxtLink :to="`/board/${ item?.boardId }`" :title="item?.boardName">{{ item?.boardName }}</NuxtLink>
             </span>
 
             <i class="icon-more-vertical" />
           </div>
 
           <div class="list">
-            <div class="list-item" v-for="(item, i) in item?.LIST" :key="i">
-              <NuxtLink :to="`/post/${ item?.POST_ID }`" :title="item?.TITLE">
-                <span class="title">{{ item?.TITLE }}</span>
-                <span class="comment-count">{{ item?.COMMENT_COUNT }}</span>
+            <div class="list-item" v-for="(post, postId) in item?.posts" :key="postId">
+              <NuxtLink :to="`/post/${ post?.postId }`" :title="item?.TITLE">
+                <span class="title">{{ post?.title }}</span>
+                <span class="comment-count">{{ post?.commentCnt }}</span>
               </NuxtLink>
             </div>
           </div>
@@ -49,12 +48,12 @@
           <i class="icon-info" />
           <span>게시판 노출은 최대 6개까지 가능합니다.</span>
         </div>
-        
+
         <div class="checkbox-list">
           <div v-for="(item, i) in list" :key="i">
             <label class="checkbox-custom">
               <input type="checkbox" />
-              <span class="txt">{{ item?.BOARD_NAME }}</span>
+              <span class="txt">{{ item?.boardName }}</span>
             </label>
           </div>
         </div>
@@ -70,81 +69,20 @@
 <script setup>
 import { ref } from 'vue';
 import draggable from 'vuedraggable';
+import { useLocalStorage } from '@vueuse/core';
 
 const modal = ref();
 
-const { data: list } = await useAsyncData('list',
-    () => $fetch(`/api/v1/boards/pinned`)
-);
+const token = useLocalStorage('token', '');
 
-// const list = reactive([
-//   {
-//     ID: '1',
-//     BOARD_NAME: '자유게시판',
-//     BOARD_ID: '1',
-//     LIST: [
-//       {
-//         POST_ID: '1',
-//         TITLE: '제목1',
-//         COMMENT_COUNT: '10'
-//       },
-//       {
-//         POST_ID: '2',
-//         TITLE: '제목2',
-//         COMMENT_COUNT: '10'
-//       },
-//       {
-//         POST_ID: '3',
-//         TITLE: '제목3',
-//         COMMENT_COUNT: '10'
-//       }
-//     ]
-//   },
-//   {
-//     ID: '2',
-//     BOARD_NAME: '비밀게시판',
-//     BOARD_ID: '2',
-//     LIST: [
-//       {
-//         POST_ID: '1',
-//         TITLE: '제목1',
-//         COMMENT_COUNT: '10'
-//       },
-//       {
-//         POST_ID: '2',
-//         TITLE: '제목2',
-//         COMMENT_COUNT: '10'
-//       },
-//       {
-//         POST_ID: '3',
-//         TITLE: '제목3',
-//         COMMENT_COUNT: '10'
-//       }
-//     ]
-//   },
-//   {
-//     ID: '3',
-//     BOARD_NAME: '도도게시판',
-//     BOARD_ID: '3',
-//     LIST: [
-//       {
-//         POST_ID: '1',
-//         TITLE: '제목1',
-//         COMMENT_COUNT: '10'
-//       },
-//       {
-//         POST_ID: '2',
-//         TITLE: '제목2',
-//         COMMENT_COUNT: '10'
-//       },
-//       {
-//         POST_ID: '3',
-//         TITLE: '제목3',
-//         COMMENT_COUNT: '10'
-//       }
-//     ]
-//   }
-// ]);
+const { data: list } = await useAsyncData('list',
+  () => $fetch(`/api/v1/boards/pinned`, {
+    headers: {
+      'Authorization': `Bearer ${token.value}`,
+      'Content-Type': 'application/json'
+    }
+  })
+);
 
 const dragOptions = ref({
   animation: 200,

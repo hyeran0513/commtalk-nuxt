@@ -8,6 +8,19 @@
     flex-direction: column;
     gap: 10px;
 
+    &.is-error {
+      & > dt {
+        color: var(--colorWheel10);
+      }
+
+      & > dd {
+        input,
+        select {
+          border: 1px solid var(--colorWheel10);
+        }
+      }
+    }
+
     & > dt {
       font-size: 18px;
     }
@@ -41,6 +54,19 @@
         border: 1px solid #d7d7d7;
         border-radius: 4px;
       }
+    }
+  }
+
+  &-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+    color: var(--colorWheel10);
+
+    &:before {
+      content: "\e98a";
+      font-family: 'iconFont';
     }
   }
 }

@@ -1,6 +1,5 @@
 <template>
   <div class="profile-box">
-    {{userInfo}} ??
     <div class="top-area">
       <div class="profile">
         <div class="profile-img" v-if="userInfo?.profile" :style="{background: `url(${ userInfo?.PROFILE }) no-repeat center/auto 100%`}"></div>
@@ -26,15 +25,18 @@
 </template>
 
 <script setup>
-  // const userInfo = reactive({
-  //   PROFILE: '',
-  //   USER_NAME: '홍길동',
-  //   USER_ID: '아이디'
-  // });
+import { useLocalStorage } from "@vueuse/core";
 
-  const { data: userInfo } = await useAsyncData('userInfo',
-    () => $fetch(`/api/v1/members/me`)
-  );
+const token = useLocalStorage('token', '');
+
+const { data: userInfo } = await useAsyncData('userInfo',
+  () => $fetch(`/api/v1/members/me`, {
+    headers: {
+      'Authorization': `Bearer ${token.value}`,
+      'Content-Type': 'application/json'
+    }
+  })
+);
 </script>
 
 <style lang="scss" scoped>

@@ -5,14 +5,14 @@
 
       <div class="form">
         <div class="form-box">
-          <dl class="form-item" :class="{'is-error': errorMessage.username}">
+          <dl class="form-item" :class="{'is-error': errorMessage.nickname}">
             <dt>아이디</dt>
             <dd>
-              <input type="text" v-model="formData.username" placeholder="아이디를 입력해 주세요." />
+              <input type="text" v-model="formData.nickname" placeholder="아이디를 입력해 주세요." />
             </dd>
           </dl>
 
-          <div class="form-info" v-if="errorMessage.username">{{ errorMessage.username }}</div>
+          <div class="form-info" v-if="errorMessage.nickname">{{ errorMessage.nickname }}</div>
         </div>
 
         <div class="form-box">
@@ -28,14 +28,14 @@
         </div>
 
         <div class="form-box">
-          <dl class="form-item" :class="{'is-error': errorMessage.nickname}">
+          <dl class="form-item" :class="{'is-error': errorMessage.username}">
             <dt>이름</dt>
             <dd>
-              <input type="text" v-model="formData.nickname" placeholder="이름을 입력해 주세요." />
+              <input type="text" v-model="formData.username" placeholder="이름을 입력해 주세요." />
             </dd>
           </dl>
 
-          <div class="form-info" v-if="errorMessage.nickname">{{ errorMessage.nickname }}</div>
+          <div class="form-info" v-if="errorMessage.username">{{ errorMessage.username }}</div>
         </div>
 
         <div class="form-box">
