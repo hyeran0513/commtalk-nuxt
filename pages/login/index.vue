@@ -64,7 +64,6 @@ const submitForm = async () => {
     const response = await fetch('/api/v1/members/login', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${token.value}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(formDataObj)

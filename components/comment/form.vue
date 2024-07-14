@@ -1,12 +1,14 @@
 <template>
   <div class="write-box">
     <textarea class="write-input" v-model="formData.content" placeholder="댓글을 작성해 주세요."></textarea>
+
     <div class="checkbox-list">
       <label class="checkbox-custom">
         <input type="checkbox" v-model="formData.anonymousYN" />
         <span class="txt">익명</span>
       </label>
     </div>
+
     <button class="write-btn" type="submit" @click="submitForm()">등록</button>
   </div>
 </template>

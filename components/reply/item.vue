@@ -57,7 +57,6 @@
 
         <div class="flex-box">
           <div class="date">{{ reply?.updatedAt }}</div>
-          <button type="button" class="btn-reply" @click="toggleReplyForm"><i class="icon-corner-down-right" />답글 쓰기</button>
         </div>
       </div>
     </div>
@@ -99,10 +98,6 @@ const showReplyForm = ref(false)
 
 const toggleActions = () => {
   showActions.value = !showActions.value
-}
-
-const toggleReplyForm = () => {
-  showReplyForm.value = !showReplyForm.value
 }
 
 const editReply = () => {

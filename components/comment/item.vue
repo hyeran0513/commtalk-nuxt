@@ -20,7 +20,7 @@
                   </li>
 
                   <li class="item">
-                    <button type="button" class="has-icon" @click="editComment">
+                    <button type="button" class="has-icon" @click="editComment()">
                       <i class="icon-edit" />
                       <span class="txt">수정</span>
                     </button>
