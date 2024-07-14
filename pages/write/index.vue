@@ -76,7 +76,7 @@
     </template>
 
     <template #footer>
-      <button type="button" class="btn-main" @click="modal.modalClose()">확인</button>
+      <button type="button" class="btn-main" @click="alertModalClose()">확인</button>
     </template>
   </BaseModal>
 </template>
@@ -85,6 +85,7 @@
 import { ref } from 'vue';
 import {useLocalStorage} from "@vueuse/core";
 
+const route = useRoute();
 const router = useRouter();
 
 const token = useLocalStorage('token', '');
@@ -98,8 +99,13 @@ const getEditor = (_editor) => {
 
 const modal = ref();
 
+const alertModalClose = () => {
+  modal.value.modalClose();
+  router.go(-1);
+}
+
 const formData = ref({
-  boardId: null,
+  boardId: route.query.boardId,
   title: '',
   content: '',
   anonymousYN: false,
@@ -130,7 +136,6 @@ const submitForm = async () => {
 
     if (response.ok) {
       modal.value.modalOpen();
-      router.go(-1);
     } else {
       const errorData = await response.json();
       const {code, message} = errorData;
