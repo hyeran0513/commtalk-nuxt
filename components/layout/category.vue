@@ -57,13 +57,17 @@
 </template>
 
 <script setup>
-  const modal = ref();
+const modal = ref();
 
-  const isFold = ref(false);
+const isFold = ref(false);
 
-  const {data: categoryData} = await useAsyncData('categoryData',
-      () => $fetch(`/api/v1/boards`)
-  );
+const { data: categoryData, execute: exeCategoryData } = await useAsyncData('categoryData',
+    () => $fetch(`/api/v1/boards`)
+);
+
+onMounted(async () => {
+  await exeCategoryData();
+});
 </script>
 
 <style lang="scss" scoped>

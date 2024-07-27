@@ -29,7 +29,7 @@ import { useLocalStorage } from "@vueuse/core";
 
 const token = useLocalStorage('token', '');
 
-const { data: userInfo } = await useAsyncData('userInfo',
+const { data: userInfo, execute: exeUserInfo } = await useAsyncData('userInfo',
   () => $fetch(`/api/v1/members/me`, {
     headers: {
       'Authorization': `Bearer ${token.value}`,
@@ -37,6 +37,10 @@ const { data: userInfo } = await useAsyncData('userInfo',
     }
   })
 );
+
+onMounted(async () => {
+  await exeUserInfo();
+});
 </script>
 
 <style lang="scss" scoped>

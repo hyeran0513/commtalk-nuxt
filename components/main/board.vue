@@ -1,18 +1,19 @@
 <template>
   <div>
     <div class="btn-wrap">
-      <button type="button" 
-      class="btn-edit" 
-        @click="modal.modalOpen()">게시판 노출 위치 편집</button>
+      <button type="button"
+              class="btn-edit"
+              @click="modal.modalOpen()">게시판 노출 위치 편집</button>
     </div>
 
     <draggable
-      handle=".icon-more-vertical"
-      tag="div"
-      :list="list"
-      class="drag-area"
-      v-bind="dragOptions"
-      v-if="list?.length > 0"
+        handle=".icon-more-vertical"
+        tag="div"
+        :list="newLists"
+        class="drag-area"
+        v-bind="dragOptions"
+        v-if="newLists?.length > 0"
+        @end="onEnd"
     >
       <template #item="{ element: item, index }">
         <div class="item">
@@ -50,9 +51,12 @@
         </div>
 
         <div class="checkbox-list">
-          <div v-for="(item, i) in list" :key="i">
+          <div v-for="(item, i) in checkedBoards" :key="i">
             <label class="checkbox-custom">
-              <input type="checkbox" />
+              <input type="checkbox"
+                     :checked="item.checked"
+                     @change="changeCheckedBoards($event, item)"
+              />
               <span class="txt">{{ item?.boardName }}</span>
             </label>
           </div>
@@ -60,35 +64,130 @@
       </template>
 
       <template #footer>
-        <button type="button" class="btn-main" @click="modal.modalClose('modal')">저장</button>
+        <button type="button" class="btn-main" @click="modifyPinnedBoard()">저장</button>
       </template>
     </BaseModal>
   </div>
 </template>
 
+
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import draggable from 'vuedraggable';
 import { useLocalStorage } from '@vueuse/core';
 
 const modal = ref();
-
 const token = useLocalStorage('token', '');
 
-const { data: list } = await useAsyncData('list',
-  () => $fetch(`/api/v1/boards/pinned`, {
-    headers: {
-      'Authorization': `Bearer ${token.value}`,
-      'Content-Type': 'application/json'
-    }
-  })
+// 전체 게시판 목록과 고정된 게시판 목록을 가져오기
+const { data: categoryData, execute: exeCategoryData } = await useAsyncData('categoryData',
+    () => $fetch(`/api/v1/boards`)
 );
 
+const { data: pinnedBoards, execute: exePinnedBoards } = await useAsyncData('pinnedBoards',
+    () => $fetch(`/api/v1/boards/pinned`, {
+      headers: {
+        'Authorization': `Bearer ${token.value}`,
+        'Content-Type': 'application/json'
+      }
+    })
+);
+
+// 핀고정 게시판 리스트에 order 추가
+const addPinnedBoardOrder = () => {
+  if (pinnedBoards.value) {
+    newLists.value = pinnedBoards.value.map((item, index) => ({
+      ...item,
+      order: index
+    }));
+  }
+}
+
+const newLists = ref([]);
+const checkedBoards = ref([]);
+
+onMounted(async () => {
+  await exeCategoryData();
+  await exePinnedBoards();
+  addPinnedBoardOrder();
+
+  // 전체 게시판과 고정된 게시판을 비교하여 체크 상태 설정
+  if (categoryData.value && pinnedBoards.value) {
+    const pinnedBoardIds = new Set(pinnedBoards.value.map(board => board.boardId));
+    checkedBoards.value = categoryData.value.map(board => ({
+      ...board,
+      checked: pinnedBoardIds.has(board.boardId)
+    }));
+  }
+});
+
+// 드래그 옵션
 const dragOptions = ref({
   animation: 200,
   group: 'description'
 });
+
+// 드래그 끝날 때 실행 이벤트
+const onEnd = async () => {
+  let orders = newLists.value.map(board => board.order);
+
+  const response = await fetch('/api/v1/boards/pinned/reorder', {
+    method: 'PATCH',
+    headers: {
+      'Authorization': `Bearer ${token.value}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(orders)
+  });
+
+  if (response.ok) {
+    console.log("성공");
+  }
+}
+
+// 체크박스 상태 관리
+const modifyPinnedBoard = async () => {
+  const selectedBoards = checkedBoards.value
+      .filter(board => board.checked)
+      .map(board => ({
+        pinnedBoardId: 0,
+        boardId: board.boardId
+      }));
+
+  try {
+    const response = await fetch(`/api/v1/boards/pinned`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token.value}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(selectedBoards)
+    });
+
+    if (response.ok) {
+      modal.value.modalClose();
+      await exePinnedBoards();
+      addPinnedBoardOrder();
+    } else {
+      console.log("성공X");
+    }
+  } catch (error) {
+    console.error('에러:', error);
+  }
+};
+
+// 핀고정 및 해제 체크박스
+const changeCheckedBoards = (event, item) => {
+  const checked = event.target.checked;
+
+  checkedBoards.value = checkedBoards.value.map(board =>
+      board.boardId === item.boardId ? { ...board, checked } : board
+  );
+}
 </script>
+
+
+
 
 <style lang="scss" scoped>
   @import url('~/assets/scss/components/main/board.scss');

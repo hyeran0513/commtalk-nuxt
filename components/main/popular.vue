@@ -8,7 +8,7 @@
 
         <div class="info">
           <div class="title">
-            <NuxtLink :to="`/post/${ popular?.postId }`">
+            <NuxtLink :to="`/post/${popular?.postId}?boardId=${popular?.boardId}`">
               <span class="txt">{{ popular?.title }}</span>
             </NuxtLink>
             
@@ -30,9 +30,13 @@
 </template>
 
 <script setup>
-const { data: popularList } = await useAsyncData('popularList',
+const { data: popularList, execute: exePopularList } = await useAsyncData('popularList',
   () => $fetch(`/api/v1/posts/popular`)
 );
+
+onMounted(async () => {
+  await exePopularList();
+});
 </script>
 
 <style lang="scss" scoped>

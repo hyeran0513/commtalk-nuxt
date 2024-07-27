@@ -53,7 +53,7 @@ const isScrap = ref(false);
 const route = useRoute();
 
 // 게시판
-const { data: boardData } = await useAsyncData('boardData',
+const { data: boardData, execute: exeBoardData } = await useAsyncData('boardData',
   () => $fetch(`/api/v1/boards/${route.params.id}/posts/${route.query.boardId}`, {
     params: {
       boardId: route.query.boardId,
@@ -63,7 +63,7 @@ const { data: boardData } = await useAsyncData('boardData',
 );
 
 // 댓글
-const { data: comments, execute: fetchComments, refresh: refreshComments } = await useAsyncData('comments',
+const { data: comments, execute: exeComments, refresh: refreshComments } = await useAsyncData('comments',
   () => $fetch(`/api/v1/posts/${route.params.id}/comments`, {
     headers: {
       'Authorization': `Bearer ${token.value}`,
@@ -75,8 +75,11 @@ const { data: comments, execute: fetchComments, refresh: refreshComments } = awa
   })
 );
 
-onMounted(() => {
-  fetchComments();
+onMounted(async () => {
+  await exeBoardData();
+  await exeComments();
+
+  console.log(boardData.value);
 });
 </script>
 

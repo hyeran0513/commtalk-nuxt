@@ -56,7 +56,7 @@ import { ref, onMounted } from 'vue';
 const route = useRoute();
 
 // 게시판 이름 호출
-const { data: boardName } = await useAsyncData('boardName',
+const { data: boardName, execute:exeBoardName } = await useAsyncData('boardName',
   () => $fetch(`/api/v1/boards/${route.params.id}`)
 );
 
@@ -83,6 +83,7 @@ const loadPage = async (num) => {
 
 onMounted(async () => {
   await executeBoards();
+  await exeBoardName();
 });
 </script>
 
