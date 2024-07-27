@@ -34,8 +34,15 @@
       </div>
 
       <template v-if="boardData?.commentableYN">
-        <CommentForm :postId="route.params.id" v-if="showComment" @refreshComments="refreshComments" />
-        <CommentList v-if="showComment" :comments="comments" @refreshComments="refreshComments" />
+        <CommentForm
+            :postId="route.params.id"
+            v-if="showComment"
+            @refreshComments="refreshComments" />
+
+        <CommentList
+            v-if="showComment"
+            :comments="comments"
+            @refreshComments="refreshComments" />
       </template>
     </div>
   </div>

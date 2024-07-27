@@ -7,7 +7,11 @@
 
       <div class="detail">
         <div class="flex-box">
-          <div class="user-name">{{ comment?.writer?.nickname }}</div>
+          <div class="user-name">
+            <template v-if="comment?.anonymousYN">익명</template>
+            <template v-else>{{ comment?.writer?.nickname }}</template>
+          </div>
+
           <div class="tooltip" ref="tooltipRef">
             <transition name="fade">
               <div class="tooltip-box" v-if="showActions">
@@ -20,14 +24,14 @@
                   </li>
 
                   <li class="item">
-                    <button type="button" class="has-icon" @click="editComment()">
+                    <button type="button" class="has-icon" @click="showEditForm = true">
                       <i class="icon-edit" />
                       <span class="txt">수정</span>
                     </button>
                   </li>
                   
                   <li class="item">
-                    <button type="button" class="has-icon" @click="deleteComment">
+                    <button type="button" class="has-icon" @click="deleteComment()">
                       <i class="icon-trash-2" />
                       <span class="txt">삭제</span>
                     </button>
@@ -44,9 +48,16 @@
           <template v-if="showEditForm">
             <textarea v-html="comment?.content" />
 
+            <div class="checkbox-list">
+              <label class="checkbox-custom">
+                <input type="checkbox" v-model="comment.anonymousYN" />
+                <span class="txt">익명</span>
+              </label>
+            </div>
+
             <div class="btn-wrap">
               <button type="button" class="btn-s-line-main" @click="showEditForm = false">취소</button>
-              <button type="button" class="btn-s-fill-main">수정</button>
+              <button type="button" class="btn-s-fill-main" @click="editComment(comment.content, comment.anonymousYN)">수정</button>
             </div>
           </template>
 
@@ -81,8 +92,10 @@
 
 <script setup>
 import { ref } from 'vue'
-import { onClickOutside } from "@vueuse/core";
+import {onClickOutside, useLocalStorage} from "@vueuse/core";
 const route = useRoute();
+
+const token = useLocalStorage('token', '');
 
 const modal = ref();
 
@@ -98,6 +111,12 @@ const props = defineProps({
   comment: Object
 });
 
+const emits = defineEmits(['refreshComments']);
+
+const refreshComments = () => {
+  emits('refreshComments');
+}
+
 const showActions = ref(false)
 const showReplyForm = ref(false)
 
@@ -109,11 +128,50 @@ const toggleReplyForm = () => {
   showReplyForm.value = !showReplyForm.value
 }
 
-const editComment = () => {
-  showEditForm.value = true;
+const editComment = async (content, anonymousYN) => {
+  const body = {
+    content,
+    anonymousYN
+  };
+
+  try {
+    const response = await fetch(`/api/v1/posts/${route.params.id}/comments/${props.comment.commentId}`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${token.value}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+
+    if (response.ok) {
+      refreshComments();
+    } else {
+      console.log("성공X");
+    }
+  } catch (error) {
+    console.error('에러:', error);
+  }
 }
 
-const deleteComment = () => {
+const deleteComment = async () => {
+  try {
+    const response = await fetch(`/api/v1/posts/${route.params.id}/comments/${props.comment.commentId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token.value}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      refreshComments();
+    } else {
+      console.log("성공X");
+    }
+  } catch (error) {
+    console.error('에러:', error);
+  }
 }
 
 const reportComment = () => {
