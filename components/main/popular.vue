@@ -16,7 +16,7 @@
           </div>
 
           <div class="detail">
-            <div class="board-name">(카테고리 이름 추가 필요)</div>
+            <div class="board-name">{{ popular?.boardName }}</div>
 
             <div class="count">
               <span class="count-view">{{ popular?.viewCnt }}</span>
