@@ -46,7 +46,7 @@
 
         <div class="content">
           <template v-if="showEditForm">
-            <textarea v-html="comment?.content" />
+            <textarea v-model="comment.content" />
 
             <div class="checkbox-list">
               <label class="checkbox-custom">
@@ -146,11 +146,15 @@ const editComment = async (content, anonymousYN) => {
 
     if (response.ok) {
       refreshComments();
+      console.log("성공");
+      showEditForm.value = false;
     } else {
-      console.log("성공X");
+      console.error("Error: ", response.status, response.statusText);
+      const errorData = await response.json();
+      console.error("Error details: ", errorData);
     }
   } catch (error) {
-    console.error('에러:', error);
+    console.error("Fetch error: ", error);
   }
 }
 
@@ -166,11 +170,14 @@ const deleteComment = async () => {
 
     if (response.ok) {
       refreshComments();
+      console.log("성공");
     } else {
-      console.log("성공X");
+      console.error("Error: ", response.status, response.statusText);
+      const errorData = await response.json();
+      console.error("Error details: ", errorData);
     }
   } catch (error) {
-    console.error('에러:', error);
+    console.error("Fetch error: ", error);
   }
 }
 

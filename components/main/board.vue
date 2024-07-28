@@ -133,17 +133,25 @@ const dragOptions = ref({
 const onEnd = async () => {
   let orders = newLists.value.map(board => board.order);
 
-  const response = await fetch('/api/v1/boards/pinned/reorder', {
-    method: 'PATCH',
-    headers: {
-      'Authorization': `Bearer ${token.value}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(orders)
-  });
+  try {
+    const response = await fetch('/api/v1/boards/pinned/reorder', {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${token.value}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(orders)
+    });
 
-  if (response.ok) {
-    console.log("성공");
+    if (response.ok) {
+      console.log("성공");
+    } else {
+      console.error("Error: ", response.status, response.statusText);
+      const errorData = await response.json();
+      console.error("Error details: ", errorData);
+    }
+  } catch (error) {
+    console.error("Fetch error: ", error);
   }
 }
 
