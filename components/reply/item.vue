@@ -56,7 +56,7 @@
             </div>
 
             <div class="btn-wrap">
-              <button type="button" class="btn-s-line-main" @click="showEditForm = false">취소</button>
+              <button type="button" class="btn-s-line-main" @click="closeEditReply()">취소</button>
               <button type="button" class="btn-s-fill-main" @click="editReply(reply.content, reply.anonymousYN)">수정</button>
             </div>
           </template>
@@ -117,6 +117,11 @@ const showActions = ref(false)
 
 const toggleActions = () => {
   showActions.value = !showActions.value
+}
+
+const closeEditReply = () => {
+  refreshComments();
+  showEditForm.value = false;
 }
 
 const editReply = async (content, anonymousYN) => {
