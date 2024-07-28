@@ -22,16 +22,6 @@
   </div>  
 </template>
 
-<script setup>
-import { useSessionStorage } from '@vueuse/core';
-
-const token = useSessionStorage('token', '');
-
-const isLogin = computed(() => {
-  return !!token.value;
-});
-</script>
-
 <style lang="scss" scoped>
 @import url('~/assets/scss/pages/index.scss');
 </style>

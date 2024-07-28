@@ -85,8 +85,6 @@ const { data: comments, execute: exeComments, refresh: refreshComments } = await
 onMounted(async () => {
   await exeBoardData();
   await exeComments();
-
-  console.log(boardData.value);
 });
 </script>
 
