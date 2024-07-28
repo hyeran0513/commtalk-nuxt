@@ -189,6 +189,10 @@ const submitForm = async () => {
     console.error('에러:', error);
   }
 };
+
+definePageMeta({
+  layout: 'gate'
+});
 </script>
 
 <style lang="scss" scoped>
