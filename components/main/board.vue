@@ -9,10 +9,10 @@
     <draggable
         handle=".icon-more-vertical"
         tag="div"
-        :list="newLists"
+        :list="pinnedBoards"
         class="drag-area"
         v-bind="dragOptions"
-        v-if="newLists?.length > 0"
+        v-if="pinnedBoards?.length > 0"
         @end="onEnd"
     >
       <template #item="{ element: item, index }">
@@ -93,23 +93,11 @@ const { data: pinnedBoards, execute: exePinnedBoards } = await useAsyncData('pin
     })
 );
 
-// 핀고정 게시판 리스트에 order 추가
-const addPinnedBoardOrder = () => {
-  if (pinnedBoards.value) {
-    newLists.value = pinnedBoards.value.map((item, index) => ({
-      ...item,
-      order: index
-    }));
-  }
-}
-
-const newLists = ref([]);
 const checkedBoards = ref([]);
 
 onMounted(async () => {
   await exeCategoryData();
   await exePinnedBoards();
-  addPinnedBoardOrder();
 
   // 전체 게시판과 고정된 게시판을 비교하여 체크 상태 설정
   if (categoryData.value && pinnedBoards.value) {
@@ -131,9 +119,7 @@ const dragOptions = ref({
 
 // 드래그 끝날 때 실행 이벤트
 const onEnd = async () => {
-  let orders = newLists.value.map(board => board.order);
-
-  console.log("order: " + orders);
+  let orders = pinnedBoards.value.map(board => board.boardId);
 
   try {
     const response = await fetch('/api/v1/boards/pinned/reorder', {
@@ -179,7 +165,6 @@ const modifyPinnedBoard = async () => {
     if (response.ok) {
       modal.value.modalClose();
       await exePinnedBoards();
-      addPinnedBoardOrder();
     } else {
       console.log("성공X");
     }
