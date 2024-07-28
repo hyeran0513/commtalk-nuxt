@@ -69,7 +69,7 @@ const { data: boards, refresh: refreshBoards, execute: executeBoards } = await u
   () => $fetch(`/api/v1/boards/${route.params.id}/posts`, {
     params: {
       boardId: route.params.id,
-      pageable: JSON.stringify(pageableParams.value)
+      page: JSON.stringify(pageableParams.value.page)
     }
   })
 );
@@ -77,6 +77,8 @@ const { data: boards, refresh: refreshBoards, execute: executeBoards } = await u
 // 게시판 목록 로드
 const loadPage = async (num) => {
   pageableParams.value.page = num;
+
+  console.log(pageableParams.value.page);
 
   await refreshBoards();
 };
