@@ -56,6 +56,9 @@ const submitForm = async () => {
     if (response.ok) {
       emit('closeForm');
       emit('refreshComments');
+
+      formData.value.content = '';
+      formData.value.anonymousYN = false;
     } else {
       console.log("성공X");
     }

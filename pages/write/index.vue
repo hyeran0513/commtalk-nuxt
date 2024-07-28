@@ -149,10 +149,14 @@ const submitForm = async () => {
   }
 };
 
-const { data: categoryData } = await useAsyncData('categoryData', async () => {
+const { data: categoryData, execute: exeCategoryData } = await useAsyncData('categoryData', async () => {
   const response = await fetch(`/api/v1/boards`);
   return response.json();
 });
+
+onMounted(async () => {
+  await exeCategoryData();
+})
 </script>
 
 <style lang="scss" scoped>

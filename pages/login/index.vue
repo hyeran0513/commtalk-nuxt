@@ -58,8 +58,6 @@ const submitForm = async () => {
   const { nickname, password } = formData.value;
   const formDataObj = { nickname, password };
 
-  console.log('Submitting form with token:', token.value);
-
   try {
     const response = await fetch('/api/v1/members/login', {
       method: 'POST',
@@ -68,8 +66,6 @@ const submitForm = async () => {
       },
       body: JSON.stringify(formDataObj)
     });
-
-    console.log('Response headers:', response.headers);
 
     if (response.ok) {
       const data = await response.json();
