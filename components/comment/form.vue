@@ -30,7 +30,7 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['refreshComments']);
+const emit = defineEmits(['refreshComments', 'closeForm']);
 
 // 폼 데이터
 const formData = ref({
@@ -54,6 +54,7 @@ const submitForm = async () => {
     });
 
     if (response.ok) {
+      emit('closeForm');
       emit('refreshComments');
     } else {
       console.log("성공X");

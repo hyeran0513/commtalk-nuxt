@@ -73,7 +73,11 @@
       </div>
     </div>
 
-    <CommentForm v-if="showReplyForm" :parentId="comment?.commentId" :postId="route.params.id" @refreshComments="$emit('refreshComments')" />
+    <CommentForm v-if="showReplyForm"
+                 :parentId="comment?.commentId"
+                 :postId="route.params.id"
+                 @refreshComments="$emit('refreshComments')"
+                 @closeForm="showReplyForm = false" />
     <ReplyList :replies="comment?.children" :postId="route.params.id" />
   </div>
 

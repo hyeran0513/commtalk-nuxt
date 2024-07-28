@@ -133,6 +133,8 @@ const dragOptions = ref({
 const onEnd = async () => {
   let orders = newLists.value.map(board => board.order);
 
+  console.log("order: " + orders);
+
   try {
     const response = await fetch('/api/v1/boards/pinned/reorder', {
       method: 'PATCH',
