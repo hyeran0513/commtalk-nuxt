@@ -72,7 +72,7 @@
 
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted } from 'vue';
 import draggable from 'vuedraggable';
 import { useLocalStorage } from '@vueuse/core';
 
@@ -113,10 +113,12 @@ onMounted(async () => {
 
   // 전체 게시판과 고정된 게시판을 비교하여 체크 상태 설정
   if (categoryData.value && pinnedBoards.value) {
-    const pinnedBoardIds = new Set(pinnedBoards.value.map(board => board.boardId));
+    const pinnedBoardMap = new Map(pinnedBoards.value.map(board => [board.boardId, board.pinnedBoardId]));
+
     checkedBoards.value = categoryData.value.map(board => ({
       ...board,
-      checked: pinnedBoardIds.has(board.boardId)
+      pinnedBoardId: pinnedBoardMap.get(board.boardId) || '',
+      checked: pinnedBoardMap.has(board.boardId),
     }));
   }
 });
@@ -150,7 +152,7 @@ const modifyPinnedBoard = async () => {
   const selectedBoards = checkedBoards.value
       .filter(board => board.checked)
       .map(board => ({
-        pinnedBoardId: 0,
+        pinnedBoardId: board.pinnedBoardId,
         boardId: board.boardId
       }));
 
@@ -183,11 +185,8 @@ const changeCheckedBoards = (event, item) => {
   checkedBoards.value = checkedBoards.value.map(board =>
       board.boardId === item.boardId ? { ...board, checked } : board
   );
-}
+};
 </script>
-
-
-
 
 <style lang="scss" scoped>
   @import url('~/assets/scss/components/main/board.scss');

@@ -8,7 +8,7 @@
 
         <div class="info">
           <div class="title">
-            <NuxtLink :to="`/post/${popular?.postId}?boardId=${popular?.boardId}`">
+            <NuxtLink :to="`/post/${popular?.postId}?boardId=${popular?.board?.boardId}`">
               <span class="txt">{{ popular?.title }}</span>
             </NuxtLink>
             
@@ -16,7 +16,7 @@
           </div>
 
           <div class="detail">
-            <div class="board-name">{{ popular?.boardName }}</div>
+            <div class="board-name">{{ popular?.board?.boardName }}</div>
 
             <div class="count">
               <span class="count-view">{{ popular?.viewCnt }}</span>
