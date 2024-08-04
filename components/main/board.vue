@@ -166,8 +166,7 @@ const modifyPinnedBoard = async () => {
     if (response.ok) {
       console.log("성공");
       modal.value.modalClose();
-      await exeBoards();
-      await exePinnedBoards();
+      await loadBoardData();
     } else {
       console.error("성공X: ", response.status, response.statusText);
       const errorData = await response.json();
