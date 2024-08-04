@@ -51,15 +51,15 @@
         </div>
 
         <div class="checkbox-list">
-          <div v-for="(item, i) in checkedBoards" :key="i">
+          <div v-for="(item, i) in withCheckedBoards" :key="i">
             <label class="checkbox-custom">
               <input type="checkbox"
-                     :checked="item.checked"
-                     @change="changeCheckedBoards($event, item)"
+                     v-model="item.checked"
               />
               <span class="txt">{{ item?.boardName }}</span>
             </label>
           </div>
+
         </div>
       </template>
 
@@ -78,37 +78,41 @@ import { useLocalStorage } from '@vueuse/core';
 
 const modal = ref();
 const token = useLocalStorage('token', '');
+const withCheckedBoards = ref();
 
-// 전체 게시판 목록과 고정된 게시판 목록을 가져오기
-const { data: categoryData, execute: exeCategoryData } = await useAsyncData('categoryData',
-    () => $fetch(`/api/v1/boards`)
+// 전체 게시판 조회
+const { data: boards, execute: exeBoards } = await useAsyncData('Boards',
+  () => $fetch(`/api/v1/boards/with-pin`, {
+    headers: {
+      'Authorization': `Bearer ${token.value}`,
+      'Content-Type': 'application/json'
+    }
+  })
 );
 
+// 게시판 핀고정 및 해제
 const { data: pinnedBoards, execute: exePinnedBoards } = await useAsyncData('pinnedBoards',
-    () => $fetch(`/api/v1/boards/pinned`, {
-      headers: {
-        'Authorization': `Bearer ${token.value}`,
-        'Content-Type': 'application/json'
-      }
-    })
+  () => $fetch(`/api/v1/boards/pinned`, {
+    headers: {
+      'Authorization': `Bearer ${token.value}`,
+      'Content-Type': 'application/json'
+    }
+  })
 );
 
-const checkedBoards = ref([]);
-
-onMounted(async () => {
-  await exeCategoryData();
+// 게시판 데이터 및 핀 데이터 조회
+const loadBoardData = async () => {
+  await exeBoards();
   await exePinnedBoards();
 
-  // 전체 게시판과 고정된 게시판을 비교하여 체크 상태 설정
-  if (categoryData.value && pinnedBoards.value) {
-    const pinnedBoardMap = new Map(pinnedBoards.value.map(board => [board.boardId, board.pinnedBoardId]));
+  withCheckedBoards.value = boards.value.map(board => ({
+    ...board,
+    checked: (board.pinnedBoardId !== 0)
+  }))
+}
 
-    checkedBoards.value = categoryData.value.map(board => ({
-      ...board,
-      pinnedBoardId: pinnedBoardMap.get(board.boardId) || '',
-      checked: pinnedBoardMap.has(board.boardId),
-    }));
-  }
+onMounted(async () => {
+  await loadBoardData();
 });
 
 // 드래그 옵션
@@ -134,52 +138,44 @@ const onEnd = async () => {
     if (response.ok) {
       console.log("성공");
     } else {
-      console.error("Error: ", response.status, response.statusText);
+      console.error("성공X: ", response.status, response.statusText);
       const errorData = await response.json();
-      console.error("Error details: ", errorData);
+      console.error("상세내용: ", errorData);
     }
   } catch (error) {
-    console.error("Fetch error: ", error);
+    console.error("에러: ", error);
   }
 }
 
 // 체크박스 상태 관리
+const checkedBoards = ref();
+
 const modifyPinnedBoard = async () => {
-  const selectedBoards = checkedBoards.value
-      .filter(board => board.checked)
-      .map(board => ({
-        pinnedBoardId: board.pinnedBoardId,
-        boardId: board.boardId
-      }));
+  checkedBoards.value = withCheckedBoards.value.filter(item => item.checked);
 
   try {
-    const response = await fetch(`/api/v1/boards/pinned`, {
+    const response = await fetch('/api/v1/boards/pinned', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token.value}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(selectedBoards)
+      body: JSON.stringify(checkedBoards.value)
     });
 
     if (response.ok) {
+      console.log("성공");
       modal.value.modalClose();
+      await exeBoards();
       await exePinnedBoards();
     } else {
-      console.log("성공X");
+      console.error("성공X: ", response.status, response.statusText);
+      const errorData = await response.json();
+      console.error("상세내용: ", errorData);
     }
   } catch (error) {
-    console.error('에러:', error);
+    console.error("에러: ", error);
   }
-};
-
-// 핀고정 및 해제 체크박스
-const changeCheckedBoards = (event, item) => {
-  const checked = event.target.checked;
-
-  checkedBoards.value = checkedBoards.value.map(board =>
-      board.boardId === item.boardId ? { ...board, checked } : board
-  );
 };
 </script>
 
