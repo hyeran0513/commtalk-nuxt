@@ -25,9 +25,30 @@
             </template>
           </button>
 
-          <button type="button" class="btn-like" :class="{'is-active': isLike}" @click="isLike = !isLike">좋아요 {{ boardData?.likeCnt}}</button>
-          <button type="button" class="btn-scrap" :class="{'is-active': isScrap}" @click="isScrap = !isScrap">스크랩 {{ boardData.scrapCnt }}</button>
-          <button type="button" class="btn-view" disabled>조회수 {{ boardData?.viewCnt }}</button>
+          <button
+              type="button"
+              class="btn-like"
+              :class="{'is-active': boardData?.likeYN}"
+              @click="handleLike"
+          >
+            좋아요 {{ boardData?.likeCnt }}
+          </button>
+
+          <button
+              type="button"
+              class="btn-scrap"
+              :class="{'is-active': scrapYN}"
+              @click="handleScrap"
+          >
+            스크랩 {{ boardData.scrapCnt }}
+          </button>
+
+          <button
+              type="button"
+              class="btn-view"
+              disabled>
+            조회수 {{ boardData?.viewCnt }}
+          </button>
         </div>
 
         <NuxtLink to="/board/1" class="btn-s-fill-main" title="목록으로">목록으로</NuxtLink>
@@ -55,8 +76,6 @@ import {useLocalStorage} from "@vueuse/core";
 const token = useLocalStorage('token', '');
 
 const showComment = ref(true);
-const isLike = ref(false);
-const isScrap = ref(false);
 const route = useRoute();
 
 // 게시판
@@ -82,10 +101,58 @@ const { data: comments, execute: exeComments, refresh: refreshComments } = await
   })
 );
 
-onMounted(async () => {
+// 게시글 좋아요
+const handleLike = async () => {
+  try {
+    const response = await fetch(`/api/v1/boards/${route.query.boardId}/posts/${route.params.id}/like`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token.value}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      console.log("성공");
+      await loadData();
+    } else {
+      console.log("성공X");
+    }
+  } catch (error) {
+    console.error('에러:', error);
+  }
+}
+
+// 게시글 스크랩
+const handleScrap = async () => {
+  try {
+    const response = await fetch(`/api/v1/boards/${route.query.boardId}/posts/${route.params.id}/scrap`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token.value}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      console.log("성공");
+      await loadData();
+    } else {
+      console.log("성공X");
+    }
+  } catch (error) {
+    console.error('에러:', error);
+  }
+}
+
+onMounted(() => {
+  loadData();
+});
+
+const loadData = async () => {
   await exeBoardData();
   await exeComments();
-});
+}
 </script>
 
 <style lang="scss" scoped>

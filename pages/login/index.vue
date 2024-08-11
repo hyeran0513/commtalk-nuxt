@@ -3,31 +3,39 @@
     <div class="gate-box">
       <div class="title">로그인</div>
 
-      <div class="form">
-        <div class="form-box">
-          <dl class="form-item" :class="{'is-error': errorMessage.nickname}">
-            <dt>아이디</dt>
-            <dd>
-              <input type="text" placeholder="아이디를 입력해 주세요." v-model="formData.nickname" />
-            </dd>
-          </dl>
+      <form @submit.prevent="submitForm">
+        <div class="form">
+          <div class="form-box">
+            <dl class="form-item" :class="{'is-error': errorMessage.nickname}">
+              <dt>아이디</dt>
+              <dd>
+                <input type="text" placeholder="아이디를 입력해 주세요." v-model="formData.nickname" />
+              </dd>
+            </dl>
 
-          <div class="form-info" v-if="errorMessage.nickname">{{ errorMessage.nickname }}</div>
+            <div class="form-info" v-if="errorMessage.nickname">{{ errorMessage.nickname }}</div>
+          </div>
+
+          <div class="form-box">
+            <dl class="form-item" :class="{'is-error': errorMessage.password}">
+              <dt>비밀번호</dt>
+              <dd>
+                <input type="password" placeholder="비밀번호를 입력해 주세요." v-model="formData.password" />
+              </dd>
+            </dl>
+
+            <div class="form-info" v-if="errorMessage.password">{{ errorMessage.password }}</div>
+          </div>
         </div>
 
-        <div class="form-box">
-          <dl class="form-item" :class="{'is-error': errorMessage.password}">
-            <dt>비밀번호</dt>
-            <dd>
-              <input type="password" placeholder="비밀번호를 입력해 주세요." v-model="formData.password" />
-            </dd>
-          </dl>
-
-          <div class="form-info" v-if="errorMessage.password">{{ errorMessage.password }}</div>
-        </div>
-      </div>
-
-      <button type="submit" class="btn-f-fill-main btn-submit" title="로그인" @click="submitForm">로그인</button>
+        <button
+            type="submit"
+            class="btn-f-fill-main btn-submit"
+            title="로그인"
+        >
+          로그인
+        </button>
+      </form>
     </div>
   </div>
 </template>

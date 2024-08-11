@@ -12,6 +12,15 @@
             <template v-else>{{ comment?.writer?.nickname }}</template>
           </div>
 
+          <button
+              type="button"
+              class="btn-like"
+              :class="{'is-active': comment?.likeYN}"
+              @click="handleLike"
+          >
+            좋아요 {{ comment?.likeCount }}
+          </button>
+
           <div class="tooltip" ref="tooltipRef">
             <transition name="fade">
               <div class="tooltip-box" v-if="showActions">
@@ -40,7 +49,12 @@
               </div>
             </transition>
 
-            <button type="button" class="btn-dots tooltip-btn" @click="toggleActions"><span class="icon-more-vertical" /></button>
+            <button
+                type="button"
+                class="btn-dots tooltip-btn"
+                @click="toggleActions">
+              <span class="icon-more-vertical" />
+            </button>
           </div>
         </div>
 
@@ -192,6 +206,28 @@ const deleteComment = async () => {
 
 const reportComment = () => {
   modal.value.modalOpen();
+}
+
+// 게시글 댓글 좋아요
+const handleLike = async () => {
+  try {
+    const response = await fetch(`/api/v1/posts/${route.params.id}/comments/${props.comment.commentId}/like`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token.value}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      console.log("성공");
+      refreshComments();
+    } else {
+      console.log("성공X");
+    }
+  } catch (error) {
+    console.error('에러:', error);
+  }
 }
 </script>
 

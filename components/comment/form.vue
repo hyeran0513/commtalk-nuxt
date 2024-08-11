@@ -1,5 +1,5 @@
 <template>
-  <div class="write-box">
+  <div class="write-box" :class="{'reply': parentId}">
     <textarea class="write-input" v-model="formData.content" placeholder="댓글을 작성해 주세요."></textarea>
 
     <div class="checkbox-list">

@@ -45,7 +45,7 @@ button {
 .btn-f {
   &-line {
     &-main {
-      @include btn-type(var(--primary-color), white, darken(#4876ef, 10%), darken(#4876ef, 10%));
+      @include btn-type(var(--primary-color), white);
     }
 
     &-gray {
