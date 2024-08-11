@@ -27,7 +27,7 @@
 
           <div class="list">
             <div class="list-item" v-for="(post, postId) in item?.posts" :key="postId">
-              <NuxtLink :to="`/post/${ post?.postId }`" :title="item?.TITLE">
+              <NuxtLink :to="`/post/${ post?.postId }?boardId=${item?.boardId}`" :title="item?.TITLE">
                 <span class="title">{{ post?.title }}</span>
                 <span class="comment-count">{{ post?.commentCnt }}</span>
               </NuxtLink>

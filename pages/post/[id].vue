@@ -80,7 +80,7 @@ const route = useRoute();
 
 // 게시판
 const { data: boardData, execute: exeBoardData } = await useAsyncData('boardData',
-  () => $fetch(`/api/v1/boards/${route.params.id}/posts/${route.query.boardId}`, {
+  () => $fetch(`/api/v1/boards/${route.query.boardId}/posts/${route.params.id}`, {
     params: {
       boardId: route.query.boardId,
       postId: route.params.id
