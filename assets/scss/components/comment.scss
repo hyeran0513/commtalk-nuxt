@@ -2,7 +2,7 @@
   &-box {
     display: flex;
     height: 120px;
-    border: 2px solid var(--primary-color);
+    border: 2px solid var(--colorMain);
     border-radius: 12px;
     overflow: hidden;
 
@@ -24,7 +24,7 @@
 
   &-btn {
     width: 100px;
-    background: var(--primary-color);
+    background: var(--colorMain);
     color: #FFF;
   }
 }

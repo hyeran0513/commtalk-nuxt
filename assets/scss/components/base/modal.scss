@@ -47,6 +47,21 @@
     overflow: hidden;
     overflow-y: auto;
 
+    &::-webkit-scrollbar {
+      width: 6px;
+      cursor: pointer;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(238, 238, 238, 1);
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-track,
+    &::-webkit-scrollbar-track-piece {
+      background-color: rgba(0, 0, 0, 0);
+    }
+
     &::v-deep(.alert) {
       overflow: hidden;
 
@@ -55,7 +70,7 @@
         justify-content: center;
         margin-bottom: 10px;
         font-size: 54px;
-        color: var(--primary-color);
+        color: var(--colorMain);
       }
 
       .txt {
@@ -81,7 +96,7 @@
       }
 
       &[class*=main] {
-        background: var(--primary-color);
+        background: var(--colorMain);
         color: #FFF;
       }
     }

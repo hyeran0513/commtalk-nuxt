@@ -45,17 +45,17 @@ button {
 .btn-f {
   &-line {
     &-main {
-      @include btn-type(var(--primary-color), white);
+      @include btn-type(var(--colorMain), white, var(--colorMain), var(--colorMainClear));
     }
 
     &-gray {
-      @include btn-type(#999, white, darken(#999, 10%), darken(#999, 10%));
+      @include btn-type(#999, white, var(--colorMainClear), var(--colorMainClear));
     }
   }
 
   &-fill {
     &-main {
-      @include btn-type-fill(var(--primary-color), white, darken(#4876ef, 10%));
+      @include btn-type-fill(var(--colorMain), white, var(--colorMainDark));
     }
 
     &-gray {
@@ -70,7 +70,7 @@ button {
   margin-bottom: 20px;
   
   .count {
-    color: var(--primary-color);
+    color: var(--colorMain);
     font-weight: bold;
   }
 }
@@ -203,8 +203,8 @@ button {
       & + .txt {
         &:before {
           color: #FFF;
-          background: var(--primary-color);
-          border: 1px solid var(--primary-color);
+          background: var(--colorMain);
+          border: 1px solid var(--colorMain);
         }
       }
     }
@@ -352,8 +352,8 @@ select {
 .search {
   padding: 8px 20px;
   width: 500px;
-  border: 2px solid var(--primary-color);
-  border-radius: 6px;
+  border: 1px solid var(--colorMain);
+  border-radius: 30px;
 
   &.small {
     width: 300px;
@@ -372,7 +372,7 @@ select {
 
     .icon-search {
       font-size: 20px;
-      color: var(--primary-color);
+      color: var(--colorMain);
     }
   }
 }
@@ -398,7 +398,7 @@ select {
       transition: all ease .2s;
 
       &:hover {
-        color: var(--primary-color);
+        color: var(--colorMainDark);
       }
     }
   }

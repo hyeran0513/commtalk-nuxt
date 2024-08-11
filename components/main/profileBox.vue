@@ -1,19 +1,24 @@
 <template>
   <div class="profile-box">
     <div class="top-area">
-      <div class="profile">
-        <div class="profile-img" v-if="userInfo?.profile" :style="{background: `url(${ userInfo?.PROFILE }) no-repeat center/auto 100%`}"></div>
-        <div class="profile-default" v-else></div>
+      <template v-if="userInfo">
+        <div class="profile">
+          <div class="profile-img" v-if="userInfo?.profile" :style="{background: `url(${ userInfo?.PROFILE }) no-repeat center/auto 100%`}"></div>
+          <div class="profile-default" v-else></div>
 
-        <NuxtLink to="/info" class="btn-setting">
-          <i class="icon-settings" />
-        </NuxtLink>
-      </div>
+          <NuxtLink to="/info" class="btn-setting">
+            <i class="icon-settings" />
+          </NuxtLink>
+        </div>
 
-      <div class="user-info">
-        <div class="user-name">{{ userInfo?.username }}님</div>
-        <div class="user-id">{{ userInfo?.nickname }}</div>
-      </div>
+        <div class="user-info">
+          <div class="user-name">{{ userInfo?.username }}님</div>
+          <div class="user-id">{{ userInfo?.nickname }}</div>
+        </div>
+      </template>
+      <template v-else>
+        로그인이 필요한 서비스입니다.
+      </template>
     </div>
 
     <div class="btn-wrap">

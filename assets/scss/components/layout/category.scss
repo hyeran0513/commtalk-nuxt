@@ -10,13 +10,13 @@
     width: 40px;
     height: 24px;
     line-height: 22px;
-    background: #f7fafe;
+    background: var(--colorMainClear);
     border-radius: 0 0 8px 8px;
   }
 
   &-box {
     padding: 40px 0;
-    background: #f7fafe;
+    background: var(--colorMainClear);
 
     &-inner {
       margin: 0 auto;
@@ -33,13 +33,13 @@
           align-items: center;
           gap: 8px;
           padding: 4px 8px;
-          border: 1px dashed var(--primary-color);
+          border: 1px dashed var(--colorMain);
           border-radius: 4px;
-          color: var(--primary-color);
+          color: var(--colorMain);
           transition: all ease .2s;
 
           &:hover {
-            background: darken(#f7fafe, 3%);
+            background: var(--colorMainDark);
           }
         }
 
@@ -49,7 +49,7 @@
           transition: all ease .2s;
 
           &:hover {
-            color: darken(#4876ef, 10%);
+            color: var(--colorMainDark);
           }
         }
       }

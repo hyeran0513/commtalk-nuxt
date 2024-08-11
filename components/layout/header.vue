@@ -13,7 +13,7 @@
         </div>
       </div>
 
-      <NuxtLink to="/mypage" class="btn-mypage" title="마이페이지" v-if="!isGate">
+      <NuxtLink to="/mypage" class="btn-mypage" title="마이페이지" v-if="!isGate && token">
         <i class="icon-user" />
       </NuxtLink>
     </div>
@@ -21,6 +21,9 @@
 </template>
 
 <script setup>
+import {useLocalStorage} from "@vueuse/core";
+
+const token = useLocalStorage('token', '');
 const props = defineProps(['isGate']);
 </script>
 

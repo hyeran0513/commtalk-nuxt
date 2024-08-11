@@ -24,7 +24,7 @@
           color: #333;
 
           .point-color {
-            color: var(--primary-color);
+            color: var(--colorMain);
           }
         }
       }
@@ -44,7 +44,7 @@
         text-align: center;
 
         &.is-active {
-          color: var(--primary-color);
+          color: var(--colorMain);
         }
       }
 
