@@ -10,7 +10,7 @@
               </NuxtLink>
             </div>
             
-            <button type="button" class="btn-add" @click="modal.modalOpen()">
+            <button type="button" class="btn-s-line-main" @click="modal.modalOpen()">
               <i class="icon-plus" />
               <span class="txt">게시판 추가</span>
             </button>

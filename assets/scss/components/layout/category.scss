@@ -28,21 +28,6 @@
         flex-wrap: wrap;
         height: 140px;
 
-        .btn-add {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          padding: 4px 8px;
-          border: 1px dashed var(--colorMain);
-          border-radius: 4px;
-          color: var(--colorMain);
-          transition: all ease .2s;
-
-          &:hover {
-            background: var(--colorMainDark);
-          }
-        }
-
         &-item {
           padding: 4px 8px;
           min-width: 140px;
