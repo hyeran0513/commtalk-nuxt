@@ -14,7 +14,7 @@
     background: #FFF;
   }
 
-  .content {
+  & > .content {
     flex: 1;
     padding-bottom: 80px;
   }
