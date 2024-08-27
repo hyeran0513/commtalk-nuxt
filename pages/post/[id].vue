@@ -13,6 +13,11 @@
         <div class="date">{{ boardData?.updatedAt }}</div>
       </div>
 
+      <div class="file-img">
+        <template v-for="(fileImg, fileImgIdx) in fileList?.message">
+          <div class="file-img-item" :style="{background: `#f8f8f8 url(${ fileImg }) no-repeat center/auto 100%`}"></div>
+        </template>
+      </div>
 
       <div class="btn-wrap">
         <div class="btn-group">
@@ -145,8 +150,19 @@ const handleScrap = async () => {
   }
 }
 
+// 게시글 파일 URL 리스트 조회
+const { data: fileList, execute: exeFileList } = await useAsyncData('fileList',
+    () => $fetch(`/api/v1/files/post/${route.params.id}`, {
+      headers: {
+        'Authorization': `Bearer ${token.value}`,
+        'Content-Type': 'application/json'
+      }
+    })
+);
+
 onMounted(() => {
   loadData();
+  exeFileList();
 });
 
 const loadData = async () => {
