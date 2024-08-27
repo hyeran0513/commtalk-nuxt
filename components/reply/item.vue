@@ -12,6 +12,16 @@
             <template v-else>{{ reply?.writer?.nickname }}</template>
           </div>
 
+
+          <button
+              type="button"
+              class="btn-like"
+              :class="{'is-active': reply?.likeYN}"
+              @click="handleLike"
+          >
+            좋아요 {{ reply?.likeCount }}
+          </button>
+
           <div class="tooltip" ref="tooltipRef">
             <transition name="fade">
               <div class="tooltip-box" v-if="showActions">
@@ -180,6 +190,28 @@ const deleteReply = async () => {
 
 const reportReply = () => {
   modal.value.modalOpen();
+}
+
+// 게시글 댓글 좋아요
+const handleLike = async () => {
+  try {
+    const response = await fetch(`/api/v1/posts/${route.params.id}/comments/${props.reply.commentId}/like`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token.value}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      console.log("성공");
+      refreshComments();
+    } else {
+      console.log("성공X");
+    }
+  } catch (error) {
+    console.error('에러:', error);
+  }
 }
 </script>
 

@@ -3,7 +3,7 @@
     <div class="top-area">
       <template v-if="userInfo">
         <div class="profile">
-          <div class="profile-img" v-if="userInfo?.profile" :style="{background: `url(${ userInfo?.PROFILE }) no-repeat center/auto 100%`}"></div>
+          <div class="profile-img" v-if="profile?.message" :style="{background: `url(${ profile?.message }) no-repeat center/auto 100%`}"></div>
           <div class="profile-default" v-else></div>
 
           <NuxtLink to="/info" class="btn-setting">
@@ -43,8 +43,19 @@ const { data: userInfo, execute: exeUserInfo } = await useAsyncData('userInfo',
   })
 );
 
+// 회원 프로필 사진 조회
+const { data: profile, execute: exeProfile } = await useAsyncData('profile',
+    () => $fetch(`/api/v1/files/profile`, {
+      headers: {
+        'Authorization': `Bearer ${token.value}`,
+        'Content-Type': 'application/json'
+      }
+    })
+);
+
 onMounted(async () => {
   await exeUserInfo();
+  await exeProfile();
 });
 </script>
 

@@ -5,7 +5,7 @@
     </div>
 
     <div class="profile">
-      <div class="profile-img" :style="{background: `#f8f8f8 url(${ profile?.fileUrl }) no-repeat center/auto 100%`}"></div>
+      <div class="profile-img" :style="{background: `#f8f8f8 url(${ profile?.message }) no-repeat center/auto 100%`}"></div>
 
       <button
           type="button"
@@ -121,9 +121,7 @@ const uploadProfile = async (event) => {
     });
 
     if (response.ok) {
-      console.log('성공');
-      const result = await response.json();
-      console.log(result);
+      await refreshProfile();
     } else {
       console.log('성공X');
     }
@@ -134,7 +132,7 @@ const uploadProfile = async (event) => {
 /* END: 회원 프로필 사진 업로드 */
 
 // 회원 프로필 사진 조회
-const { data: profile, execute: exeProfile } = await useAsyncData('profile',
+const { data: profile, execute: exeProfile, refresh: refreshProfile } = await useAsyncData('profile',
   () => $fetch(`/api/v1/files/profile`, {
     headers: {
       'Authorization': `Bearer ${token.value}`,
