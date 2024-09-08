@@ -13,9 +13,9 @@
         <div class="date">{{ boardData?.updatedAt }}</div>
       </div>
 
-      <div class="file-img">
-        <template v-for="(fileImg, fileImgIdx) in fileList?.message">
-          <div class="file-img-item" :style="{background: `#f8f8f8 url(${ fileImg }) no-repeat center/auto 100%`}"></div>
+      <div class="file-img" v-if="fileList">
+        <template v-for="(fileImg, fileImgIdx) in fileList">
+          <div class="file-img-item" :style="{background: `#f8f8f8 url(${ fileImg?.fileUrl }) no-repeat center/auto 100%`}"></div>
         </template>
       </div>
 

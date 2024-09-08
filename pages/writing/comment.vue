@@ -1,52 +1,54 @@
 <template>
   <section>
-   <div class="section-title">댓글 단 글</div>
- 
-   <div class="section-content">
-     <div class="section-content-inner">
-       <List :data="data" />
-     </div>
-   </div>
- </section>
+    <div class="section-title">댓글 단 글</div>
+
+    <div class="section-content">
+      <div class="section-content-inner">
+        <List
+            :data="comments"
+            @load-page="loadPage"
+            :hasPagination="true"
+        />
+      </div>
+    </div>
+  </section>
 </template>
 
 <script setup>
- const data = reactive([
-   {
-     POST_ID: '1',
-     TITLE: '자유게시판01',
-     CONTENT: '자유게시판 내용',
-     COUNT: {
-       COMMENT: '10',
-       VIEW: '10',
-       LIKE: '10'
-     },
-     USER_INFO: {
-       USER_PROFILE: '',
-       USER_NAME: '홍길동'
-     },
-     CREATE_DATE: '2024.06.19',
-     MODIFY_DATE: '2024.06.19'
-   },
-   {
-     POST_ID: '2',
-     TITLE: '자유게시판02',
-     CONTENT: '자유게시판 내용',
-     COUNT: {
-       COMMENT: '10',
-       VIEW: '10',
-       LIKE: '10'
-     },
-     USER_INFO: {
-       USER_PROFILE: '',
-       USER_NAME: '홍길동'
-     },
-     CREATE_DATE: '2024.06.19',
-     MODIFY_DATE: '2024.06.19'
-   }
- ])
+import {ref} from "vue";
+import { useLocalStorage } from '@vueuse/core';
 
- definePageMeta({
-   layout: 'mypage'
- })
+const token = useLocalStorage('token', '');
+
+const pageableParams = ref({
+  page: 0
+});
+
+// 회원 댓글 작성 게시글 목록 조회
+const { data: comments, refresh: refreshComments, execute: executeComments } = await useAsyncData('comments',
+    () => $fetch(`/api/v1/posts/me/commented`, {
+      headers: {
+        'Authorization': `Bearer ${token.value}`,
+        'Content-Type': 'application/json'
+      },
+      params: {
+        page: JSON.stringify(pageableParams.value.page)
+      }
+    })
+);
+
+// 게시판 목록 로드
+const loadPage = async (num) => {
+  pageableParams.value.page = num;
+
+  await refreshComments();
+};
+
+onMounted(async () => {
+  await executeComments();
+});
+
+definePageMeta({
+  layout: 'mypage'
+})
 </script>

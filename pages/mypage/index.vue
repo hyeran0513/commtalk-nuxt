@@ -8,7 +8,7 @@
         </div>
         
         <div class="content">
-          <List :data="data" />
+          <List :data="posts" />
         </div>
       </div>
 
@@ -19,7 +19,7 @@
         </div>
         
         <div class="content">
-          <List :data="data" />
+          <List :data="comments" />
         </div>
       </div>
 
@@ -30,7 +30,7 @@
         </div>
         
         <div class="content">
-          <List :data="data" />
+          <List :data="likes" />
         </div>
       </div>
 
@@ -41,63 +41,89 @@
         </div>
         
         <div class="content">
-          <List :data="data" />
+          <List :data="scraps" />
         </div>
       </div>
 
-      <div class="widget-item">
-        <div class="title">
-          <span class="txt">신고</span>
-          <NuxtLink to="/activity/report" class="btn-more"><i class="icon-plus" /></NuxtLink>
-        </div>
-        
-        <div class="content">
-          <List :data="data" />
-        </div>
-      </div>
+<!--      <div class="widget-item">-->
+<!--        <div class="title">-->
+<!--          <span class="txt">신고</span>-->
+<!--          <NuxtLink to="/activity/report" class="btn-more"><i class="icon-plus" /></NuxtLink>-->
+<!--        </div>-->
+<!--        -->
+<!--        <div class="content">-->
+<!--          <List :data="data" />-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
   </section>
 </template>
 
 <script setup>
- const data = reactive([
-   {
-     POST_ID: '1',
-     TITLE: '자유게시판01',
-     CONTENT: '자유게시판 내용',
-     COUNT: {
-       COMMENT: '10',
-       VIEW: '10',
-       LIKE: '10'
-     },
-     USER_INFO: {
-       USER_PROFILE: '',
-       USER_NAME: '홍길동'
-     },
-     CREATE_DATE: '2024.06.19',
-     MODIFY_DATE: '2024.06.19'
-   },
-   {
-     POST_ID: '2',
-     TITLE: '자유게시판02',
-     CONTENT: '자유게시판 내용',
-     COUNT: {
-       COMMENT: '10',
-       VIEW: '10',
-       LIKE: '10'
-     },
-     USER_INFO: {
-       USER_PROFILE: '',
-       USER_NAME: '홍길동'
-     },
-     CREATE_DATE: '2024.06.19',
-     MODIFY_DATE: '2024.06.19'
-   }
- ])
+import {ref} from "vue";
+import { useLocalStorage } from '@vueuse/core';
 
-  definePageMeta({
-    layout: 'mypage'
+const token = useLocalStorage('token', '');
+
+const pageableParams = ref({
+  page: 0
+});
+
+// 회원 작성 게시글 목록 조회
+const { data: posts, refresh: refreshPosts, execute: executePosts } = await useAsyncData('posts',
+    () => $fetch(`/api/v1/posts/me/posted`, {
+      headers: {
+        'Authorization': `Bearer ${token.value}`,
+        'Content-Type': 'application/json'
+      },
+      params: {
+        page: JSON.stringify(pageableParams.value.page)
+      }
+    })
+);
+
+// 회원 댓글 작성 게시글 목록 조회
+const { data: comments, refresh: refreshComments, execute: executeComments } = await useAsyncData('comments',
+  () => $fetch(`/api/v1/posts/me/commented`, {
+    headers: {
+      'Authorization': `Bearer ${token.value}`,
+      'Content-Type': 'application/json'
+    },
+    params: {
+      page: JSON.stringify(pageableParams.value.page)
+    }
   })
+);
+
+// 회원 좋아요 게시글 목록 조회
+const { data: likes, refresh: refreshLikes, execute: executeLikes } = await useAsyncData('likes',
+  () => $fetch(`/api/v1/posts/me/liked`, {
+    headers: {
+      'Authorization': `Bearer ${token.value}`,
+      'Content-Type': 'application/json'
+    },
+    params: {
+      page: JSON.stringify(pageableParams.value.page)
+    }
+  })
+);
+
+// 회원 스크랩 게시글 목록 조회
+const { data: scraps, refresh: refreshScraps, execute: executeScraps } = await useAsyncData('scraps',
+  () => $fetch(`/api/v1/posts/me/scrapped`, {
+    headers: {
+      'Authorization': `Bearer ${token.value}`,
+      'Content-Type': 'application/json'
+    },
+    params: {
+      page: JSON.stringify(pageableParams.value.page)
+    }
+  })
+);
+
+definePageMeta({
+  layout: 'mypage'
+})
 </script>
 
 <style lang="scss" scoped>

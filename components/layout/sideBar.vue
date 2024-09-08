@@ -82,10 +82,10 @@ const menuItems = ref([
           title: '스크랩',
           link: '/activity/scrap'
         },
-        {
-          title: '신고',
-          link: '/activity/report'
-        }
+        // {
+        //   title: '신고',
+        //   link: '/activity/report'
+        // }
       ]
     }
 ])
