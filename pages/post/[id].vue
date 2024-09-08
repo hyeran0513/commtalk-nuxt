@@ -42,10 +42,10 @@
           <button
               type="button"
               class="btn-scrap"
-              :class="{'is-active': scrapYN}"
+              :class="{'is-active': boardData?.scrapYN}"
               @click="handleScrap"
           >
-            스크랩 {{ boardData.scrapCnt }}
+            스크랩 {{ boardData?.scrapCnt }}
           </button>
 
           <button
@@ -119,7 +119,10 @@ const handleLike = async () => {
 
     if (response.ok) {
       console.log("성공");
-      await loadData();
+      const data = await response.json();
+
+      boardData.value.likeCnt = data.likeCnt;
+      boardData.value.likeYN = data.likeYN;
     } else {
       console.log("성공X");
     }
@@ -141,7 +144,10 @@ const handleScrap = async () => {
 
     if (response.ok) {
       console.log("성공");
-      await loadData();
+      const data = await response.json();
+
+      boardData.value.scrapCnt = data.scrapCnt;
+      boardData.value.scrapYN = data.scrapYN;
     } else {
       console.log("성공X");
     }
