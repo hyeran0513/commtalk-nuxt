@@ -5,7 +5,7 @@
     </div>
 
     <div class="profile">
-      <div class="profile-img" :style="{background: `#f8f8f8 url(${ profile?.message }) no-repeat center/auto 100%`}"></div>
+      <div class="profile-img" v-if="profile?.fileUrl" :style="{background: `#f8f8f8 url(${ profile?.fileUrl }) no-repeat center/auto 100%`}"></div>
 
       <button
           type="button"

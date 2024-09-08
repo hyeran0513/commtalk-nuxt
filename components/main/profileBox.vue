@@ -3,7 +3,7 @@
     <div class="top-area">
       <template v-if="userInfo">
         <div class="profile">
-          <div class="profile-img" v-if="profile?.message" :style="{background: `url(${ profile?.message }) no-repeat center/auto 100%`}"></div>
+          <div class="profile-img" v-if="profile?.fileUrl" :style="{background: `url(${ profile?.fileUrl }) no-repeat center/auto 100%`}"></div>
           <div class="profile-default" v-else></div>
 
           <NuxtLink to="/info" class="btn-setting">
