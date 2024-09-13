@@ -36,30 +36,45 @@
   </div>
 
   <div class="category mob-type">
-    <swiper
-        :slidesPerView="'auto'"
-        :spaceBetween="10"
-        :observer="true"
-        :observe-parents="true"
-        :grabCursor="true"
-    >
-      <swiper-slide
-          v-for="(board, boardIdx) in categoryData"
-          :key="boardIdx"
+    <div class="swiper-wrap">
+      <button type="button" title="검색" class="search-btn" @click="showSearchBtn = !showSearchBtn">
+        <template v-if="showSearchBtn">
+          <i class="icon-close" />
+        </template>
+
+        <template v-else>
+          <i class="icon-search" />
+        </template>
+      </button>
+
+      <swiper
+          :slidesPerView="'auto'"
+          :spaceBetween="10"
+          :observer="true"
+          :observe-parents="true"
+          :grabCursor="true"
       >
-        <div class="item">
-          <NuxtLink
-              :to="`/board/${board?.boardId}`"
-              :title="board?.boardName"
-          >
-            {{ board?.boardName }}
-          </NuxtLink>
-        </div>
-      </swiper-slide>
-    </swiper>
+        <swiper-slide
+            v-for="(board, boardIdx) in categoryData"
+            :key="boardIdx"
+        >
+          <div class="item">
+            <NuxtLink
+                :to="`/board/${board?.boardId}`"
+                :title="board?.boardName"
+            >
+              {{ board?.boardName }}
+            </NuxtLink>
+          </div>
+        </swiper-slide>
+      </swiper>
+    </div>
+
+    <transition name="fade">
+      <LayoutSearch v-if="showSearchBtn" />
+    </transition>
   </div>
 
-  
   <BaseModal ref="modal" id="modal">
       <template #title>게시판 요청</template>
 
@@ -120,6 +135,8 @@ const { data: categoryData, execute: exeCategoryData } = await useAsyncData('cat
 onMounted(async () => {
   await exeCategoryData();
 });
+
+const showSearchBtn = ref(false);
 </script>
 
 <style lang="scss" scoped>

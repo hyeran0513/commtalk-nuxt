@@ -3,11 +3,19 @@
     <div class="detail-inner">
       <div class="grid-top">
         <div class="title">
-          <div class="txt">{{ boardName?.boardName }}</div>
+          <div class="txt">
+            <template v-if="route.query.keyword">
+              전체
+            </template>
+
+            <template v-else>
+            {{ boardName?.boardName }}
+            </template>
+          </div>
           <div class="count"><span class="point-color">{{ boards?.posts.length }}</span>건</div>
         </div>
 
-        <div class="search small">
+        <div class="search small" v-if="!route.query.keyword">
           <div class="search-inner">
             <input
                 type="text"
@@ -50,13 +58,20 @@ const pageableParams = ref({
 
 // 게시판 목록 호출
 const { data: boards, refresh: refreshBoards, execute: executeBoards } = await useAsyncData('boards',
-  () => $fetch(`/api/v1/boards/${route.params.id}/posts`, {
+  () => $fetch(route.query.keyword ? `/api/v1/posts` : `/api/v1/boards/${route.params.id}/posts`, {
     params: {
       boardId: route.params.id,
       page: JSON.stringify(pageableParams.value.page),
-      keyword: keyword.value
+      keyword: route.query.keyword ? route.query.keyword : keyword.value
     }
   })
+);
+
+watch(
+    () => route.query.keyword,
+    async (newKeyword) => {
+      await refreshBoards();
+    }
 );
 
 // 게시판 목록 로드
@@ -74,6 +89,7 @@ onMounted(async () => {
 // 검색
 const search = async () => {
   await refreshBoards();
+  keyword.value = '';
 }
 </script>
 

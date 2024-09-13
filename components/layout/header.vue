@@ -13,18 +13,7 @@
 
       <NuxtLink to="/" class="logo"></NuxtLink>
 
-      <div class="search" v-if="!isGate">
-        <div class="search-inner">
-          <input
-              type="text"
-              placeholder="검색어를 입력해 주세요."
-          />
-
-          <button type="button" title="검색">
-            <i class="icon-search" />
-          </button>
-        </div>
-      </div>
+      <LayoutSearch v-if="!isGate" />
 
       <div class="btn-wrap">
         <button
@@ -60,6 +49,7 @@
 import {useLocalStorage} from "@vueuse/core";
 import { useMenuStore } from '@/stores/menu';
 import MobileNav from "~/components/layout/mobileNav.vue";
+import {ref} from "vue";
 
 const token = useLocalStorage('token', '');
 const props = defineProps(['isGate']);
