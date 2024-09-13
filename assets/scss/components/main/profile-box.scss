@@ -111,21 +111,15 @@
       border-radius: 0;
 
       .top-area {
+        padding: 0 16px;
+
         .profile {
           @include size(80px);
-        }
-
-        .user {
-          &-name {
-          }
-
-          &-id {
-          }
         }
       }
 
       .btn-wrap {
-        margin: 14px 20px 0;
+        margin: 14px 16px 0;
         border: 0;
         border-radius: 8px;
         background: #FFF;

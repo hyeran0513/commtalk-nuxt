@@ -1,16 +1,17 @@
 <template>
-  <div class="layout bg-white">
-    <LayoutSubHeader />
-    <LayoutHeader />
-    <LayoutCategory />
+  <div class="wrapper">
+    <div class="layout bg-white">
+      <LayoutSubHeader />
+      <LayoutHeader />
+      <LayoutCategory />
+      <LayoutBackButton />
+      <LayoutQuickButton />
 
-    <LayoutBackButton />
-    <LayoutQuickButton />
+      <div class="content">
+        <slot />
+      </div>
 
-    <div class="content">
-      <slot />
+      <LayoutFooter />
     </div>
-
-    <LayoutFooter />
   </div>
 </template>

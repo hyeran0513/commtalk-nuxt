@@ -6,6 +6,7 @@
           type="button"
           title="뒤로 가기"
           @click="goBack"
+          v-if="route.path !== '/'"
       >
         <i class="icon-chevron-left" />
       </button>
@@ -26,6 +27,15 @@
       </div>
 
       <div class="btn-wrap">
+        <button
+            type="button"
+            class="btn-menu"
+            title="햄버거 메뉴"
+            @click="mobNavMove('open')"
+        >
+          <i class="icon-menu" />
+        </button>
+
         <NuxtLink
             to="/mypage"
             class="btn-mypage"
@@ -35,6 +45,13 @@
           <i class="icon-user" />
         </NuxtLink>
       </div>
+
+      <transition name="slide-left">
+        <MobileNav
+            v-if="mobNavShow"
+            @mobNavMove="mobNavMove"
+        />
+      </transition>
     </div>
   </header>
 </template>
@@ -42,6 +59,7 @@
 <script setup>
 import {useLocalStorage} from "@vueuse/core";
 import { useMenuStore } from '@/stores/menu';
+import MobileNav from "~/components/layout/mobileNav.vue";
 
 const token = useLocalStorage('token', '');
 const props = defineProps(['isGate']);
@@ -60,6 +78,18 @@ const goBack = () => {
     router.back();
   }
 };
+
+const mobNavShow = ref(false);
+
+const mobNavMove = (type) => {
+  if (type === 'open') {
+    document.querySelector('body').classList.add('is-fixed');
+    mobNavShow.value = true;
+  } else {
+    document.querySelector('body').classList.remove('is-fixed');
+    mobNavShow.value = false;
+  }
+}
 </script>
 
 <style lang="scss" scoped>

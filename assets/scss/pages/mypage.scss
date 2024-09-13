@@ -73,7 +73,8 @@ section {
 
 @include respond-to(phone) {
   section {
-    margin: 0 20px;
+    padding: 0 16px;
+    background: #FFF;
 
     .widget {
       grid-template-columns: 1fr;
@@ -86,7 +87,7 @@ section {
           margin-bottom: 14px;
 
           .txt {
-            font-size: 18px;
+            font-size: 16px;
           }
         }
 

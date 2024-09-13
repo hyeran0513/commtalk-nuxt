@@ -23,7 +23,7 @@
       </template>
 
       <template v-else>
-        로그인이 필요한 서비스입니다.
+        <strong>로그인이 필요한 서비스입니다.</strong>
       </template>
     </div>
 

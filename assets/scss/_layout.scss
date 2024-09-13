@@ -1,6 +1,149 @@
 .wrapper {
   display: flex;
   background: #f8f8f8;
+
+  .mobile-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 16px;
+      height: 48px;
+      min-height: 48px;
+    }
+
+    .info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0 16px 10px;
+      padding-bottom: 30px;
+      height: 46px;
+      border-bottom: 2px solid #f4f6fa;
+
+      &-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+
+        .profile {
+          @include size(50px);
+          border-radius: 50%;
+
+          &-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+          }
+
+          &-default {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #f8f8f8;
+          }
+        }
+
+        .name {
+          font-size: 15px;
+          font-weight: bold;
+          letter-spacing: -0.02em;
+        }
+      }
+
+      .btn-wrap {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-left: auto;
+
+        [class*=btn] {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 24px;
+          padding: 0 10px;
+          border-radius: 12px;
+          border: 1px solid #d7d7d7;
+          font-size: 12px;
+          color: #666;
+          letter-spacing: -0.05em;
+        }
+      }
+    }
+
+    .scroll-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      & > .menu {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 16px;
+        padding: 0 24px;
+
+        .menu-item {
+          width: calc(50% - 4px);
+          height: 84px;
+          background: #f6f6f6;
+          border-radius: 15px;
+
+          a {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            @include size(100%);
+            border-radius: inherit;
+
+            .icon {
+              & > i {
+                font-size: 24px;
+              }
+            }
+
+            .txt {
+              font-size: 14px;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+
+      .gnb {
+        padding: 0 16px;
+
+        &-item {
+          a {
+            height: 40px;
+            line-height: 38px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
 }
 
 .layout {
@@ -19,6 +162,7 @@
     padding-bottom: 80px;
   }
 
+  // 퀵 버튼
   .quick-buttons {
     position: fixed;
     right: 100px;
@@ -41,13 +185,16 @@
       }
     }
 
-    .write-btn {
+    .write-btn,
+    .mypage-btn {
       display: flex;
       justify-content: center;
       align-items: center;
       @include size(70px);
       box-shadow: 2px 0 10px rgba(0, 0, 0, .1);
       border-radius: 50%;
+      background: #666;
+      color: #FFF;
 
       & > i {
         font-size: 24px;
@@ -55,6 +202,7 @@
     }
   }
 
+  // 푸터
   footer {
     flex-shrink: 0;
     padding: 50px 0;
@@ -74,7 +222,8 @@
       gap: 8px;
 
       .top-btn,
-      .write-btn {
+      .write-btn,
+      .mypage-btn {
         @include size(50px);
 
         & > i {

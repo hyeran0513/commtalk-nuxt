@@ -20,6 +20,7 @@
 
     .txt {
       font-size: 18px;
+      color: #999;
     }
   }
 }
@@ -27,5 +28,16 @@
 @include respond-to(phone) {
   .nodata {
     margin: 0 16px;
+    border-radius: 8px;
+
+    &-inner {
+      & > i {
+        font-size: 30px;
+      }
+
+      .txt {
+        font-size: 14px;
+      }
+    }
   }
 }

@@ -48,6 +48,10 @@
     }
   }
 
+  .user-info {
+    display: none;
+  }
+
   .menu {
     &-title {
       display: block;
@@ -69,10 +73,31 @@
 
 @include respond-to(phone) {
   .sidebar {
+    padding: 20px 0;
     width: 100%;
 
     .logo-wrap {
       display: none;
+    }
+
+    .profile {
+      margin-bottom: 4px;
+      @include size(100px);
+    }
+
+    .user-info {
+      display: block;
+      text-align: center;
+
+      .user-name {
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      .user-id {
+        font-size: 12px;
+        color: #999;
+      }
     }
 
     .menu {

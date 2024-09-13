@@ -1,0 +1,39 @@
+.container {
+  .font-icon {
+    &:after {
+      content: "";
+      display: block;
+      clear: both;
+      visibility: hidden;
+    }
+
+    &-item {
+      float: left;
+      width: calc(100% / 8);
+      padding: 5px;
+      text-align: center;
+
+      i {
+        font-size: 50px;
+      }
+
+      p {
+        &:first-child {
+          padding: 10px 0;
+        }
+
+        &:last-child {
+          min-height: calc(2em + 10px);
+          padding-bottom: 10px;
+        }
+      }
+
+      &:hover {
+        p {
+          cursor: pointer;
+          background: var(--colorMainClear);
+        }
+      }
+    }
+  }
+}

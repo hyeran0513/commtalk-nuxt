@@ -524,6 +524,20 @@ section {
 }
 
 @include respond-to(phone) {
+  [class*="btn-s-"] {
+    font-size: 14px;
+  }
+
+  /* 셀렉트박스 커스텀 */
+  select {
+    padding: 0 0 0 10px;
+    min-width: 120px;
+    height: 34px;
+    line-height: 32px;
+    font-size: 14px;
+  }
+  /* END: 셀렉트박스 커스텀 */
+
   .write {
     &-box {
       border-radius: 8px;
@@ -551,6 +565,19 @@ section {
     &-btn {
       width: 80px;
       font-size: 14px;
+    }
+  }
+
+  section {
+    .section {
+      &-title {
+        padding: 0 16px 10px;
+        font-size: 16px;
+      }
+
+      &-content {
+        padding: 0 0 20px 0;
+      }
     }
   }
 }

@@ -1,5 +1,6 @@
 header {
   height: 80px;
+  background: #FFF;
 
   .header-inner {
     display: flex;
@@ -23,7 +24,11 @@ header {
     }
 
     .btn-wrap {
-      .btn-mypage {
+      display: flex;
+      gap: 10px;
+      margin-left: auto;
+
+      [class^=btn] {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -38,13 +43,17 @@ header {
           background: darken(#FFF, 3%);
         }
       }
+
+      .btn-menu {
+        display: none;
+      }
     }
   }
 }
 
 @include respond-to(phone) {
   header {
-    padding: 0 20px;
+    padding: 0 16px;
     height: 50px;
 
     .header-inner {
@@ -67,12 +76,20 @@ header {
       .btn-wrap {
         flex-grow: 1;
 
-        .btn-mypage {
+        [class^=btn] {
           @include size(34px);
 
           & > i {
             font-size: 16px;
           }
+        }
+
+        .btn-menu {
+          display: block;
+        }
+
+        .btn-mypage {
+          display: none;
         }
       }
     }

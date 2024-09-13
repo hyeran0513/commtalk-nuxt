@@ -7,7 +7,6 @@ export const useMenuStore = defineStore('menu', {
   }),
   actions: {
     updateButtons(route) {
-      console.log(route.params.id);
       this.showWriteButton = route.path.startsWith('/board');
       this.backButtonConfig = this.getBackButtonForRoute(route);
     },

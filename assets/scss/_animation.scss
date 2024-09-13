@@ -73,3 +73,20 @@
 .bounce-leave-to {
   transform: scale(0.5);
 }
+
+// 좌우슬라이드
+.slide-left-enter-from, .slide-left-leave-to {
+  transform: translateX(100%);
+}
+
+.slide-left-enter-to, .slide-left-leave-from {
+  transform: translateX(0);
+}
+
+.slide-left-enter-active {
+  transition: transform 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-left-leave-active {
+  transition: transform 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
