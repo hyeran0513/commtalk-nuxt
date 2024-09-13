@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  max-width: 100%;
   min-height: 300px;
   border: 1px solid #d7d7d7;
   border-radius: 12px;
@@ -21,5 +21,11 @@
     .txt {
       font-size: 18px;
     }
+  }
+}
+
+@include respond-to(phone) {
+  .nodata {
+    margin: 0 16px;
   }
 }

@@ -354,6 +354,7 @@ select {
   width: 500px;
   border: 1px solid var(--colorMain);
   border-radius: 30px;
+  background: #FFF;
 
   &.small {
     width: 300px;
@@ -378,6 +379,38 @@ select {
 }
 /* END: 검색창 */
 
+/* 페이지네이션 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin-top: 20px;
+
+  .page {
+    width: 40px;
+    height: 40px;
+    line-height: 38px;
+    text-align: center;
+
+    &.is-active {
+      color: var(--colorMain);
+    }
+  }
+
+  .btn-prev,
+  .btn-next {
+    width: 40px;
+    height: 40px;
+    line-height: 38px;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid #d7d7d7;
+  }
+}
+/* END: 페이지네이션 */
+
+/* 툴팁 */
 .tooltip {
   position: relative;
 
@@ -403,6 +436,7 @@ select {
     }
   }
 }
+/* END: 툴팁 */
 
 section {
   margin: 0 auto;
@@ -457,5 +491,66 @@ section {
   &::-webkit-scrollbar-track-piece {
     background-color: #eee;
     border-radius: 3px;
+  }
+}
+
+.write {
+  &-box {
+    border: 1px solid #d7d7d7;
+    border-radius: 10px;
+    overflow: hidden;
+
+    textarea {
+      padding: 20px;
+      width: 100%;
+      border: 0;
+    }
+  }
+
+  &-tool {
+    display: flex;
+    padding: 0  0 0 20px;
+    height: 48px;
+    line-height: 46px;
+    border-top: 1px solid #d7d7d7;
+  }
+
+  &-btn {
+    margin-left: auto;
+    width: 100px;
+    background: #666;
+    color: #FFF;
+  }
+}
+
+@include respond-to(phone) {
+  .write {
+    &-box {
+      border-radius: 8px;
+
+      textarea {
+        padding: 10px;
+        font-size: 14px;
+      }
+    }
+
+    &-tool {
+      padding: 0 0 0 10px;
+      height: 34px;
+      line-height: 32px;
+
+      .checkbox-custom {
+        input[type=checkbox] {
+          & + .txt {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+
+    &-btn {
+      width: 80px;
+      font-size: 14px;
+    }
   }
 }

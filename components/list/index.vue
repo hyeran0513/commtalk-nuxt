@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="list">
-      <div class="list-item" v-for="(item, i) in data?.posts" :key="i">
+      <div
+          class="list-item"
+          v-for="(item, i) in data?.posts"
+          :key="i"
+      >
         <NuxtLink :to="`/post/${item?.postId}?boardId=${boardId}`">
           <div class="title">{{ item?.title }}</div>
           <div class="content">{{ item?.previewContent }}</div>
@@ -15,7 +19,11 @@
 
             <div class="user-info">
               <div class="user-profile">
-                <div class="user-profile-img" v-if="item?.USER_INFO?.USER_PROFILE"></div>
+                <div
+                    class="user-profile-img"
+                    v-if="item?.USER_INFO?.USER_PROFILE"
+                />
+
                 <div class="user-profile-default"></div>
               </div>
 
@@ -29,24 +37,32 @@
     </div>
 
     <div class="pagination" v-if="hasPagination">
-      <button type="button"
-              class="btn-prev"
-              v-if="data?.pageNumber > 0"
-              @click="loadPage(data?.pageNumber - 1)">
+      <button
+          type="button"
+          class="btn-prev"
+          v-if="data?.pageNumber > 0"
+          @click="loadPage(data?.pageNumber - 1)"
+      >
         <i class="icon-chevron-left" />
       </button>
 
-      <button type="button" class="page" v-for="page in data?.totalPages"
-              :key="page - 1"
-              :class="{ 'is-active': page - 1 === data?.pageNumber }"
-              @click="loadPage(page - 1)">
+      <button
+          type="button"
+          class="page"
+          v-for="page in data?.totalPages"
+          :key="page - 1"
+          :class="{ 'is-active': page - 1 === data?.pageNumber }"
+          @click="loadPage(page - 1)"
+      >
         {{ page }}
       </button>
 
-      <button type="button"
-              class="btn-next"
-              v-if="data?.pageNumber + 1 < data?.totalPages"
-              @click="loadPage(data?.pageNumber + 1)">
+      <button
+          type="button"
+          class="btn-next"
+          v-if="data?.pageNumber + 1 < data?.totalPages"
+          @click="loadPage(data?.pageNumber + 1)"
+      >
         <i class="icon-chevron-right" />
       </button>
     </div>

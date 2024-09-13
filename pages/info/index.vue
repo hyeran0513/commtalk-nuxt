@@ -10,7 +10,12 @@
               <dl class="form-item">
                 <dt>아이디</dt>
                 <dd>
-                  <input type="text" placeholder="아이디를 입력해 주세요." v-model="formData.nickname" disabled />
+                  <input
+                      type="text"
+                      placeholder="아이디를 입력해 주세요."
+                      v-model="formData.nickname"
+                      disabled
+                  />
                 </dd>
               </dl>
             </div>
@@ -19,7 +24,13 @@
               <dl class="form-item">
                 <dt>비밀번호</dt>
                 <dd>
-                  <button type="button" class="btn-s-fill-main" @click="showChangePwd = !showChangePwd">비밀번호 변경</button>
+                  <button
+                      type="button"
+                      class="btn-s-fill-main"
+                      @click="showChangePwd = !showChangePwd"
+                  >
+                    비밀번호 변경
+                  </button>
                 </dd>
               </dl>
             </div>
@@ -28,9 +39,23 @@
               <dl class="form-item">
                 <dt>비밀번호 변경</dt>
                 <dd class="change-pwd">
-                  <input type="password" placeholder="기존 비밀번호를 입력해 주세요." v-model="formData.currentPassword" />
-                  <input type="password" placeholder="새 비밀번호를 입력해 주세요." v-model="formData.newPassword" />
-                  <input type="password" placeholder="새 비밀번호를 한번 더 입력해 주세요." v-model="formData.confirmPassword" />
+                  <input
+                      type="password"
+                      placeholder="기존 비밀번호를 입력해 주세요."
+                      v-model="formData.currentPassword"
+                  />
+
+                  <input
+                      type="password"
+                      placeholder="새 비밀번호를 입력해 주세요."
+                      v-model="formData.newPassword"
+                  />
+
+                  <input
+                      type="password"
+                      placeholder="새 비밀번호를 한번 더 입력해 주세요."
+                      v-model="formData.confirmPassword"
+                  />
                 </dd>
               </dl>
             </div>
@@ -39,7 +64,11 @@
               <dl class="form-item" :class="{'is-error': errorMessage.username}">
                 <dt>이름</dt>
                 <dd>
-                  <input type="text" placeholder="이름을 입력해 주세요." v-model="formData.username" />
+                  <input
+                      type="text"
+                      placeholder="이름을 입력해 주세요."
+                      v-model="formData.username"
+                  />
                 </dd>
               </dl>
 
@@ -51,9 +80,19 @@
                 <dt>이메일</dt>
                 <dd class="email">
                   <div class="flex-box">
-                    <input type="text" placeholder="example" v-model="formData.emailPrefix" />
+                    <input
+                        type="text"
+                        placeholder="example"
+                        v-model="formData.emailPrefix"
+                    />
+
                     <span>@</span>
-                    <input type="text" placeholder="example.com" v-model="formData.emailDomain" />
+
+                    <input
+                        type="text"
+                        placeholder="example.com"
+                        v-model="formData.emailDomain"
+                    />
                   </div>
 
                   <select v-model="formData.selectedDomain" @change="handleDomainChange">
@@ -109,7 +148,13 @@
     </template>
 
     <template #footer>
-      <button type="button" class="btn-main" @click="modal.modalClose()">확인</button>
+      <button
+          type="button"
+          class="btn-main"
+          @click="modal.modalClose()"
+      >
+        확인
+      </button>
     </template>
   </BaseModal>
 </template>

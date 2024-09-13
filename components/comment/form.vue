@@ -1,15 +1,28 @@
 <template>
   <div class="write-box" :class="{'reply': parentId}">
-    <textarea class="write-input" v-model="formData.content" placeholder="댓글을 작성해 주세요."></textarea>
+    <textarea
+        class="write-input"
+        v-model="formData.content"
+        placeholder="댓글을 작성해 주세요."
+    />
 
-    <div class="checkbox-list">
-      <label class="checkbox-custom">
-        <input type="checkbox" v-model="formData.anonymousYN" />
-        <span class="txt">익명</span>
-      </label>
+    <div class="write-tool">
+      <div class="checkbox-list">
+        <label class="checkbox-custom">
+          <input type="checkbox" v-model="formData.anonymousYN" />
+          <span class="txt">익명</span>
+        </label>
+      </div>
+
+      <button
+          class="write-btn"
+          type="submit"
+          @click="submitForm()"
+          title="등록"
+      >
+        등록
+      </button>
     </div>
-
-    <button class="write-btn" type="submit" @click="submitForm()">등록</button>
   </div>
 </template>
 

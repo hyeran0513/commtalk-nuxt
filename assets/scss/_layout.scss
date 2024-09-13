@@ -26,3 +26,9 @@
     background: #62666b;
   }
 }
+
+@include respond-to(phone) {
+  .wrapper {
+    flex-direction: column;
+  }
+}

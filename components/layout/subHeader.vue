@@ -5,20 +5,31 @@
         <!-- 로그인일 경우 -->
         <template v-if="isLogin">
           <li class="gnb-item">
-            <button type="button" title="로그아웃" @click="logout()">로그아웃</button>
+            <button
+                type="button"
+                title="로그아웃"
+                @click="logout()"
+            >
+              로그아웃
+            </button>
           </li>
         </template>
         <!-- // 로그인일 경우 -->
 
         <!-- 비로그인일 경우 -->
         <template v-else>
-        <li class="gnb-item">
-          <NuxtLink to="/login" title="로그인">로그인</NuxtLink>
-        </li>
-        
-        <li class="gnb-item">
-          <NuxtLink to="/join" title="회원가입">회원가입</NuxtLink>
-        </li>
+          <li
+              class="gnb-item"
+              v-for="(gnb, gnbIdx) in gnbList"
+              :key="gnbIdx"
+          >
+            <NuxtLink
+                :to="gnb?.link"
+                :title="gnb?.txt"
+            >
+              {{ gnb?.txt }}
+            </NuxtLink>
+          </li>
         </template>
         <!-- // 비로그인일 경우 -->
       </ul>
@@ -43,6 +54,11 @@ const logout = () => {
   token.value = '';
   router.push('/login');
 };
+
+const gnbList = ref([
+  { txt: '로그인', link: '/login' },
+  { txt: '회원가입', link: '/join' }
+]);
 </script>
 
 <style lang="scss" scoped>

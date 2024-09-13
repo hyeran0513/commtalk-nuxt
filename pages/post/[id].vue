@@ -1,17 +1,23 @@
 <template>
   <div class="post">
     <div class="post-inner">
-      <div class="title">{{ boardData?.title }}</div>
-      <div class="content">{{ boardData?.content }}</div>
-      <div class="user-info">
-        <div class="profile">
-          <div class="profile-img" v-if="boardData?.PROFILE"></div>
-          <div class="profile-default" v-else></div>
+      <div class="top-area">
+        <div class="user-info">
+          <div class="profile">
+            <div class="profile-img" v-if="boardData?.PROFILE"></div>
+            <div class="profile-default" v-else></div>
+          </div>
+
+          <div class="info">
+            <div class="user-name">{{ boardData?.author?.nickname }}</div>
+            <div class="date">{{ boardData?.updatedAt }}</div>
+          </div>
         </div>
 
-        <div class="user-name">{{ boardData?.author?.nickname }}</div>
-        <div class="date">{{ boardData?.updatedAt }}</div>
+        <div class="title">{{ boardData?.title }}</div>
       </div>
+
+      <div class="content" v-html="boardData?.content"></div>
 
       <div class="file-img" v-if="fileList">
         <template v-for="(fileImg, fileImgIdx) in fileList">
@@ -21,12 +27,22 @@
 
       <div class="btn-wrap">
         <div class="btn-group">
-          <button type="button" class="btn-comment" @click="showComment = !showComment">
-            <span class="txt">댓글 {{ boardData?.commentCnt }}</span>
-
+          <button
+              type="button"
+              class="btn-comment"
+              @click="showComment = !showComment"
+          >
             <template v-if="boardData?.commentableYN">
-              <i class="icon-chevron-down" v-if="showComment" />
-              <i class="icon-chevron-up" v-else />
+              <span class="txt">댓글</span>
+              <span class="count">{{ boardData?.commentCnt }}</span>
+
+              <template v-if="boardData?.commentableYN">
+                <i class="icon-chevron-down" v-if="showComment" />
+                <i class="icon-chevron-up" v-else />
+              </template>
+            </template>
+            <template v-else>
+              <span class="txt">댓글 거부</span>
             </template>
           </button>
 
@@ -36,7 +52,8 @@
               :class="{'is-active': boardData?.likeYN}"
               @click="handleLike"
           >
-            좋아요 {{ boardData?.likeCnt }}
+            <span class="txt">공감</span>
+            <span class="count">{{ boardData?.likeCnt }}</span>
           </button>
 
           <button
@@ -45,18 +62,26 @@
               :class="{'is-active': boardData?.scrapYN}"
               @click="handleScrap"
           >
-            스크랩 {{ boardData?.scrapCnt }}
+            <span class="txt">스크랩</span>
+            <span class="count">{{ boardData?.scrapCnt }}</span>
           </button>
 
           <button
               type="button"
               class="btn-view"
               disabled>
-            조회수 {{ boardData?.viewCnt }}
+            <span class="txt">조회수</span>
+            <span class="count">{{ boardData?.viewCnt }}</span>
           </button>
         </div>
 
-        <NuxtLink to="/board/1" class="btn-s-fill-main" title="목록으로">목록으로</NuxtLink>
+        <NuxtLink
+            to="/board/1"
+            class="btn-s-fill-main btn-list"
+            title="목록으로"
+        >
+          목록으로
+        </NuxtLink>
       </div>
 
       <template v-if="boardData?.commentableYN">

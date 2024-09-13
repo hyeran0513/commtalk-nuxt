@@ -5,7 +5,11 @@
     </div>
 
     <div class="profile">
-      <div class="profile-img" v-if="profile?.fileUrl" :style="{background: `#f8f8f8 url(${ profile?.fileUrl }) no-repeat center/auto 100%`}"></div>
+      <div
+          class="profile-img"
+          v-if="profile?.fileUrl"
+          :style="{background: `#f8f8f8 url(${ profile?.fileUrl }) no-repeat center/auto 100%`}"
+      />
 
       <button
           type="button"
@@ -24,18 +28,35 @@
     </div>
 
     <div class="menu">
-      <div v-for="(item, index) in menuItems" :key="index" class="menu-item">
-        <NuxtLink :to="item.link"
-                  class="menu-title"
-                  @click="toggle(index)"
-                  :class="{'is-active': activeIndex === index}">
+      <div
+          v-for="(item, index) in menuItems"
+          :key="index"
+          class="menu-item"
+      >
+        <NuxtLink
+            :to="item.link"
+            class="menu-title"
+            @click="toggle(index)"
+            :class="{'is-active': activeIndex === index}"
+        >
           {{ item.title }}
         </NuxtLink>
 
-        <div v-show="activeIndex === index" class="submenu">
-          <div v-for="(subItem, subIndex) in item.submenu" :key="subIndex" class="submenu-item">
-           <NuxtLink :to="subItem.link"
-                      class="submenu-title">{{ subItem.title }}</NuxtLink>
+        <div
+            v-show="activeIndex === index"
+            class="submenu"
+        >
+          <div
+              v-for="(subItem, subIndex) in item.submenu"
+              :key="subIndex"
+              class="submenu-item"
+          >
+           <NuxtLink
+               :to="subItem.link"
+               class="submenu-title"
+           >
+             {{ subItem.title }}
+           </NuxtLink>
           </div>
         </div>
       </div>

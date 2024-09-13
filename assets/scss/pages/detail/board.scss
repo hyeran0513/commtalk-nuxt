@@ -30,37 +30,46 @@
       }
     }
 
-    .pagination {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 4px;
-      margin-top: 20px;
-
-      .page {
-        width: 40px;
-        height: 40px;
-        line-height: 38px;
-        text-align: center;
-
-        &.is-active {
-          color: var(--colorMain);
-        }
-      }
-
-      .btn-prev,
-      .btn-next {
-        width: 40px;
-        height: 40px;
-        line-height: 38px;
-        text-align: center;
-        border-radius: 50%;
-        border: 1px solid #d7d7d7;
-      }
-    }
-
     .btn-wrap {
       margin-top: 40px;
+    }
+  }
+}
+
+@include respond-to(phone) {
+  .detail {
+    &-inner {
+      .grid-top {
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 0 20px 20px;
+
+        .title {
+          margin: 20px 0 10px;
+
+          .txt {
+            font-size: 18px;
+          }
+
+          .count {
+            font-size: 14px;
+          }
+        }
+
+        .search {
+          padding: 6px 10px;
+          width: 100%;
+          border-radius: 6px;
+
+          &-inner {
+            font-size: 14px;
+
+            .icon-search {
+              font-size: 16px;
+            }
+          }
+        }
+      }
     }
   }
 }

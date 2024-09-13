@@ -31,7 +31,12 @@
       />
 
       <div class="btn-wrap">
-        <NuxtLink :to="{ path: '/write', query: { boardId: $route.params.id }}" class="btn-s-fill-main">글 쓰기</NuxtLink>
+        <NuxtLink
+            :to="{ path: '/write', query: { boardId: $route.params.id }}"
+            class="btn-s-fill-main"
+        >
+          글 쓰기
+        </NuxtLink>
       </div>
     </div>
   </div>

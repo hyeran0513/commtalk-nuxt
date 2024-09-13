@@ -24,3 +24,9 @@
     }
   }
 }
+
+@include respond-to(phone) {
+  .sub-header {
+    display: none;
+  }
+}

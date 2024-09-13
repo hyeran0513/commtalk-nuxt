@@ -5,7 +5,10 @@
 
       <div class="search" v-if="!isGate">
         <div class="search-inner">
-          <input type="text" placeholder="검색어를 입력해 주세요." />
+          <input
+              type="text"
+              placeholder="검색어를 입력해 주세요."
+          />
 
           <button type="button" title="검색">
             <i class="icon-search" />
@@ -13,7 +16,12 @@
         </div>
       </div>
 
-      <NuxtLink to="/mypage" class="btn-mypage" title="마이페이지" v-if="!isGate && token">
+      <NuxtLink
+          to="/mypage"
+          class="btn-mypage"
+          title="마이페이지"
+          v-if="!isGate && token"
+      >
         <i class="icon-user" />
       </NuxtLink>
     </div>

@@ -2,6 +2,7 @@
   padding: 30px;
   border: 1px solid #d7d7d7;
   border-radius: 12px;
+  background: #FFF;
 
   & > .title {
     margin-bottom: 20px;
@@ -13,6 +14,7 @@
     display: flex;
     align-items: center;
     gap: 14px;
+    background: #FFF;
 
     &:not(:first-child) {
       margin-top: 10px;
@@ -24,22 +26,19 @@
     }
 
     .info {
+      flex: 1;
+
       .title {
         display: flex;
         align-items: center;
 
         .txt {
           margin-right: 8px;
-          
+
           &:hover {
             text-decoration: underline;
             text-underline-offset: 0.12em;
           }
-        }
-
-        .count-comment {
-          font-size: 14px;
-          color: var(--colorMain);
         }
       }
 
@@ -52,23 +51,94 @@
         }
 
         .count {
-          &-view {
-            margin-left: 4px;
+          margin-left: auto;
+
+          &-comment {
+            margin-left: 10px;
             font-size: 14px;
 
             &:before {
-              content: "\e966";
+              margin-right: 4px;
+              content: "\e9a1";
               font-family: 'iconFont';
             }
           }
 
           &-like {
-            margin-left: 4px;
+            margin-left: 10px;
             font-size: 14px;
-            
+
             &:before {
+              margin-right: 4px;
               content: "\e906";
               font-family: 'iconFont';
+            }
+          }
+
+          &-view {
+            margin-left: 4px;
+            font-size: 14px;
+
+            &:before {
+              margin-right: 4px;
+              content: "\e966";
+              font-family: 'iconFont';
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include respond-to(phone) {
+  .list {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+
+    & > .title {
+      margin: 0 16px 10px;
+      font-size: 16px;
+    }
+
+    &-item {
+      margin: 0 16px;
+      padding: 14px 20px;
+      border-radius: 16px;
+      background: #FAF9FE;
+
+      &:not(:first-child) {
+        margin-top: 6px;
+      }
+
+      .num {
+        display: none;
+      }
+
+      .info {
+        width: 100%;
+
+        .title {
+          .txt {
+            font-size: 14px;
+            font-weight: bold;
+          }
+        }
+
+        .detail {
+          justify-content: space-between;
+
+          .board-name {
+            font-size: 12px;
+          }
+          
+          .count {
+            &-comment,
+            &-like,
+            &-view {
+              font-size: 12px;
             }
           }
         }

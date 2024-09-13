@@ -6,10 +6,17 @@
       <form @submit.prevent="submitForm">
         <div class="form">
           <div class="form-box">
-            <dl class="form-item" :class="{'is-error': errorMessage.nickname}">
+            <dl
+                class="form-item"
+                :class="{'is-error': errorMessage.nickname}"
+            >
               <dt>아이디</dt>
               <dd>
-                <input type="text" v-model="formData.nickname" placeholder="아이디를 입력해 주세요." />
+                <input
+                    type="text"
+                    v-model="formData.nickname"
+                    placeholder="아이디를 입력해 주세요."
+                />
               </dd>
             </dl>
 
@@ -17,7 +24,10 @@
           </div>
 
           <div class="form-box">
-            <dl class="form-item" :class="{'is-error': errorMessage.password}">
+            <dl
+                class="form-item"
+                :class="{'is-error': errorMessage.password}"
+            >
               <dt>비밀번호</dt>
               <dd class="col">
                 <input type="password" v-model="formData.password" placeholder="비밀번호를 입력해 주세요." />
@@ -29,10 +39,17 @@
           </div>
 
           <div class="form-box">
-            <dl class="form-item" :class="{'is-error': errorMessage.username}">
+            <dl
+                class="form-item"
+                :class="{'is-error': errorMessage.username}"
+            >
               <dt>이름</dt>
               <dd>
-                <input type="text" v-model="formData.username" placeholder="이름을 입력해 주세요." />
+                <input
+                    type="text"
+                    v-model="formData.username"
+                    placeholder="이름을 입력해 주세요."
+                />
               </dd>
             </dl>
 
@@ -40,13 +57,27 @@
           </div>
 
           <div class="form-box">
-            <dl class="form-item" :class="{'is-error': errorMessage.email}">
+            <dl
+                class="form-item"
+                :class="{'is-error': errorMessage.email}"
+            >
               <dt>이메일</dt>
               <dd class="email">
                 <div class="flex-box">
-                  <input type="text" placeholder="example" v-model="formData.emailPrefix" />
+                  <input
+                      type="text"
+                      placeholder="example"
+                      v-model="formData.emailPrefix"
+                  />
+
                   <span>@</span>
-                  <input type="text" placeholder="example.com" v-model="formData.emailDomain" :disabled="formData.selectedDomain !== '직접입력'" />
+
+                  <input
+                      type="text"
+                      placeholder="example.com"
+                      v-model="formData.emailDomain"
+                      :disabled="formData.selectedDomain !== '직접입력'"
+                  />
                 </div>
 
                 <select v-model="formData.selectedDomain" @change="handleDomainChange">
@@ -63,10 +94,18 @@
           </div>
 
           <div class="form-box">
-            <dl class="form-item" :class="{'is-error': errorMessage.phone}">
+            <dl
+                class="form-item"
+                :class="{'is-error': errorMessage.phone}"
+            >
               <dt>연락처</dt>
               <dd>
-                <input type="tel" v-model="formData.phone" placeholder="연락처를 입력해 주세요." @input="formatPhoneNumber()" />
+                <input
+                    type="tel"
+                    v-model="formData.phone"
+                    placeholder="연락처를 입력해 주세요."
+                    @input="formatPhoneNumber()"
+                />
               </dd>
             </dl>
           </div>

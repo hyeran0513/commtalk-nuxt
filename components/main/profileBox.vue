@@ -3,8 +3,13 @@
     <div class="top-area">
       <template v-if="userInfo">
         <div class="profile">
-          <div class="profile-img" v-if="profile?.fileUrl" :style="{background: `url(${ profile?.fileUrl }) no-repeat center/auto 100%`}"></div>
-          <div class="profile-default" v-else></div>
+          <div
+              class="profile-img"
+              v-if="profile?.fileUrl"
+              :style="{background: `url(${ profile?.fileUrl }) no-repeat center/auto 100%`}"
+          />
+
+          <div class="profile-default" v-else />
 
           <NuxtLink to="/info" class="btn-setting">
             <i class="icon-settings" />
@@ -16,6 +21,7 @@
           <div class="user-id">{{ userInfo?.nickname }}</div>
         </div>
       </template>
+
       <template v-else>
         로그인이 필요한 서비스입니다.
       </template>

@@ -2,10 +2,6 @@
   <div class="main">
     <div class="main-left">
       <div class="main-left-item">
-        <MainBanner />
-      </div>
-
-      <div class="main-left-item">
         <MainBoard />
       </div>
     </div>

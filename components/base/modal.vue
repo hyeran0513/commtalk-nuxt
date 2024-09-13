@@ -2,8 +2,17 @@
   <div class="modal" v-if="modalShow">
     <div class="modal-container">
       <div class="modal-head">
-        <p class="title"><slot name="title" /></p>
-        <button type="button" class="btn-close" @click="modalClose"><i class="icon-x" /></button>
+        <p class="title">
+          <slot name="title" />
+        </p>
+
+        <button
+            type="button"
+            class="btn-close"
+            @click="modalClose"
+        >
+          <i class="icon-x" />
+        </button>
       </div>
 
       <div class="modal-body">

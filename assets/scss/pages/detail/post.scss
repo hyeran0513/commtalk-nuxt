@@ -3,49 +3,60 @@
     margin: 0 auto;
     max-width: 1200px;
 
-    & > .user-info {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      margin-top: 20px;
-       
-      .profile {
-        margin-right: 10px;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        overflow: hidden;
+    .top-area {
+      margin-bottom: 20px;
 
-        &-default {
-          position: relative;
-          width: 100%;
-          height: 100%;
-          background: #eaeaea;
+      & > .user-info {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
 
-          &:before {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            content: "\ea07";
-            font-family: 'iconFont';
-            color: #FFF;
-            font-size: 24px;
+        .profile {
+          margin-right: 10px;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          overflow: hidden;
+
+          &-default {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #eaeaea;
+
+            &:before {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              content: "\ea07";
+              font-family: 'iconFont';
+              color: #FFF;
+              font-size: 24px;
+            }
+          }
+        }
+
+        .info {
+          .date {
+            font-size: 14px;
+            color: #999;
+          }
+
+          .user-name {
+            margin-right: 8px;
+            font-size: 14px;
+            font-weight: bold;
           }
         }
       }
 
-      .user-name,
-      .date {
-        font-size: 14px;
-        color: #999;
-      }
-
-      .user-name {
-        margin-right: 8px;
+      & > .title {
+        margin-bottom: 10px;
+        font-size: 24px;
+        font-weight: bold;
       }
     }
-
     .file-img {
       display: flex;
       align-items: center;
@@ -59,14 +70,8 @@
       }
     }
 
-    & > .title {
-      margin-bottom: 10px;
-      font-size: 24px;
-      font-weight: bold;
-    }
-
     .content {
-      margin-top: -0.13em;
+      margin: -0.13em 0 20px;
       line-height: 1.3;
     }
 
@@ -85,24 +90,34 @@
       .btn {
         &-comment {
           padding: 0 10px;
-          height: 40px;
-          line-height: 38px;
-          border: 1px solid #d7d7d7;
+          height: 34px;
+          line-height: 32px;
           border-radius: 4px;
+          background: #f4f6fa;
+          font-size: 14px;
 
           &:before {
             margin-right: 4px;
             content: "\e9a1";
             font-family: 'iconFont';
           }
+
+          .count {
+            margin-left: 4px;
+          }
+
+          & > i {
+            margin-left: 4px;
+          }
         }
 
         &-like {
           padding: 0 10px;
-          height: 40px;
-          line-height: 38px;
-          border: 1px solid #d7d7d7;
+          height: 34px;
+          line-height: 32px;
           border-radius: 4px;
+          background: #f4f6fa;
+          font-size: 14px;
 
           &:before {
             margin-right: 4px;
@@ -117,14 +132,19 @@
               color: var(--colorWheel10);
             }
           }
+
+          .count {
+            margin-left: 4px;
+          }
         }
 
         &-scrap {
           padding: 0 10px;
-          height: 40px;
-          line-height: 38px;
-          border: 1px solid #d7d7d7;
+          height: 34px;
+          line-height: 32px;
           border-radius: 4px;
+          background: #f4f6fa;
+          font-size: 14px;
 
           &:before {
             margin-right: 4px;
@@ -139,21 +159,124 @@
               color: var(--colorWheel8);
             }
           }
+
+          .count {
+            margin-left: 4px;
+          }
         }
 
         &-view {
           padding: 0 10px;
-          height: 40px;
-          line-height: 38px;
-          border: 1px solid #d7d7d7;
+          height: 34px;
+          line-height: 32px;
           border-radius: 4px;
+          background: #f4f6fa;
+          font-size: 14px;
 
           &:before {
             margin-right: 4px;
             content: "\e966";
             font-family: 'iconFont';
           }
+
+          .count {
+            margin-left: 4px;
+          }
         }
+      }
+    }
+  }
+}
+
+@include respond-to(phone) {
+  .post {
+    &-inner {
+      padding: 20px 20px 0;
+
+      .top-area {
+        margin-bottom: 0;
+
+        & > .user-info {
+          justify-content: flex-start;
+          margin-bottom: 10px;
+
+          .profile {
+            @include size(34px);
+
+            &-default {
+              &:before {
+                font-size: 16px;
+              }
+            }
+          }
+
+          .info {
+            .user-name,
+            .date {
+              font-size: 12px;
+            }
+          }
+        }
+
+        & > .title {
+          margin-bottom: 6px;
+          font-size: 18px;
+        }
+      }
+
+      .file-img {
+        margin-top: 20px;
+
+        &-item {
+          @include size(80px);
+        }
+      }
+
+      .content {
+        font-size: 14px;
+      }
+
+      .btn-wrap {
+        margin: 20px 0;
+
+        .btn-group {
+          width: 100%;
+
+          [class^=btn] {
+            font-size: 12px;
+          }
+        }
+
+        .btn {
+          &-comment,
+          &-like,
+          &-scrap,
+          &-view {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            height: 30px;
+            line-height: 28px;
+
+            &:before {
+              margin: 0;
+              font-size: 12px;
+            }
+          }
+
+          &-view {
+            display: none;
+          }
+        }
+
+        .btn-s-fill-main {
+          margin-top: 20px;
+          width: 100%;
+        }
+      }
+
+      .btn-list {
+        display: none;
       }
     }
   }

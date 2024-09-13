@@ -3,7 +3,11 @@
     <div class="list">
       <div class="title">실시간 인기글</div>
 
-      <div class="list-item" v-for="(popular, popularIdx) in popularList" :key="popularIdx">
+      <div
+          class="list-item"
+          v-for="(popular, popularIdx) in popularList"
+          :key="popularIdx"
+      >
         <div class="num">{{ popularIdx + 1 }}</div>
 
         <div class="info">
@@ -11,16 +15,15 @@
             <NuxtLink :to="`/post/${popular?.postId}?boardId=${popular?.board?.boardId}`">
               <span class="txt">{{ popular?.title }}</span>
             </NuxtLink>
-            
-            <span class="count-comment">[{{ popular?.commentCnt }}]</span>
           </div>
 
           <div class="detail">
             <div class="board-name">{{ popular?.board?.boardName }}</div>
 
             <div class="count">
-              <span class="count-view">{{ popular?.viewCnt }}</span>
+              <span class="count-comment">{{ popular?.commentCnt }}</span>
               <span class="count-like">{{ popular?.likeCnt }}</span>
+              <span class="count-view">{{ popular?.viewCnt }}</span>
             </div>
           </div>
         </div>

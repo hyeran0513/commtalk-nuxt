@@ -1,4 +1,10 @@
 // 미디어 쿼리
+
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
 @mixin respond-to($breakpoint) {
   @if $breakpoint == 'phone' {
     @media (max-width: 600px) { @content; }

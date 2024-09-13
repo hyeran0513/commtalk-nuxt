@@ -1,9 +1,16 @@
 <template>
   <div>
     <div class="btn-wrap">
-      <button type="button"
-              class="btn-edit"
-              @click="modal.modalOpen()">게시판 노출 위치 편집</button>
+      <p class="title">고정된 게시판</p>
+
+      <button
+          type="button"
+          class="btn-edit"
+          @click="modal.modalOpen()"
+          title="게시판 위치 편집"
+      >
+        게시판 위치 편집
+      </button>
     </div>
 
     <draggable
@@ -19,15 +26,27 @@
         <div class="item">
           <div class="title">
             <span class="txt">
-              <NuxtLink :to="`/board/${ item?.boardId }`" :title="item?.boardName">{{ item?.boardName }}</NuxtLink>
+              <NuxtLink
+                  :to="`/board/${ item?.boardId }`"
+                  :title="item?.boardName"
+              >
+                {{ item?.boardName }}
+              </NuxtLink>
             </span>
 
             <i class="icon-more-vertical" />
           </div>
 
           <div class="list">
-            <div class="list-item" v-for="(post, postId) in item?.posts" :key="postId">
-              <NuxtLink :to="`/post/${ post?.postId }?boardId=${item?.boardId}`" :title="item?.TITLE">
+            <div
+                class="list-item"
+                v-for="(post, postId) in item?.posts"
+                :key="postId"
+            >
+              <NuxtLink
+                  :to="`/post/${ post?.postId }?boardId=${item?.boardId}`"
+                  :title="item?.TITLE"
+              >
                 <span class="title">{{ post?.title }}</span>
                 <span class="comment-count">{{ post?.commentCnt }}</span>
               </NuxtLink>
@@ -53,8 +72,9 @@
         <div class="checkbox-list">
           <div v-for="(item, i) in withCheckedBoards" :key="i">
             <label class="checkbox-custom">
-              <input type="checkbox"
-                     v-model="item.checked"
+              <input
+                  type="checkbox"
+                  v-model="item.checked"
               />
               <span class="txt">{{ item?.boardName }}</span>
             </label>
@@ -64,7 +84,13 @@
       </template>
 
       <template #footer>
-        <button type="button" class="btn-main" @click="modifyPinnedBoard()">저장</button>
+        <button
+            type="button"
+            class="btn-main"
+            @click="modifyPinnedBoard()"
+        >
+          저장
+        </button>
       </template>
     </BaseModal>
   </div>

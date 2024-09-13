@@ -1,6 +1,7 @@
 .list {
   &-item {
     padding: 20px 0;
+    background: #FFF;
 
     .title {
       font-size: 22px;
@@ -26,6 +27,7 @@
       .count {
         display: flex;
         gap: 10px;
+
         &-comment {
           font-size: 14px;
 
@@ -94,6 +96,75 @@
 
         .date {
           font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+@include respond-to(phone) {
+  .list {
+    display: grid;
+    gap: 4px;
+
+    &-item {
+      margin: 0 16px;
+      padding: 14px 20px;
+      border-radius: 16px;
+      background: #FAF9FE;
+
+      .title {
+        font-size: 14px;
+      }
+
+      .content {
+        font-size: 14px;
+      }
+
+      .bottom-area {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        margin-top: 14px;
+
+        .count {
+          width: 100%;
+          justify-content: flex-end;
+          gap: 8px;
+
+          &-comment {
+            font-size: 12px;
+          }
+
+          &-view {
+            font-size: 12px;
+          }
+
+          &-like {
+            font-size: 12px;
+          }
+        }
+
+        .user-info {
+          width: 100%;
+
+          .user-profile {
+            @include size(34px);
+
+            &-default {
+              &:before {
+                font-size: 16px;
+              }
+            }
+          }
+
+          .user-name {
+            font-size: 12px;
+          }
+
+          .date {
+            margin-left: auto;
+            font-size: 12px;
+          }
         }
       }
     }

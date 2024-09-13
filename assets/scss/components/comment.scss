@@ -1,73 +1,15 @@
-.write {
-  &-box {
-    display: flex;
-    height: 120px;
-    border: 2px solid var(--colorMain);
-    border-radius: 12px;
-    overflow: hidden;
-
-    &.reply {
-      border-color: #d7d7d7;
-      border-radius: 8px;
-
-      .write-btn {
-        background: #d7d7d7;
-      }
-    }
-  }
-
-  &-input {
-    flex: 1;
-    margin: 20px;
-    border: transparent;
-  }
-
-  &-btn {
-    width: 100px;
-    background: var(--colorMain);
-    color: #FFF;
-  }
-}
-
 .comment {
   &-item {
-
     &.reply {
+      background: #f8f8f8;
+
       & > .item {
         padding: 20px 30px 20px 50px;
-        background: #f8f8f8;
       }
     }
   
     & > .item {
-      display: flex;
-      gap: 10px;
       padding: 20px 0;
-
-      .profile {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        overflow: hidden;
-
-        &-default {
-          position: relative;
-          width: 100%;
-          height: 100%;
-          background: #eaeaea;
-        
-          &:before {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            content: "\ea07";
-            font-family: 'iconFont';
-            color: #FFF;
-            font-size: 24px;
-          }
-        }
-      }
 
       .content {
         margin: 10px 0;
@@ -90,29 +32,85 @@
 
       .detail {
         flex: 1;
+
+        .top-area {
+          position: relative;
+
+          .user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .profile {
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              overflow: hidden;
+
+              &-default {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                background: #eaeaea;
+
+                &:before {
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  content: "\ea07";
+                  font-family: 'iconFont';
+                  color: #FFF;
+                  font-size: 24px;
+                }
+              }
+            }
+
+            .info {
+              display: flex;
+              flex-direction: column;
+
+              .user-name {
+                font-size: 14px;
+                font-weight: bold;
+              }
+
+              .date {
+                font-size: 14px;
+                color: #999;
+              }
+            }
+          }
+
+          .tooltip {
+            position: absolute;
+            top: 0;
+            right: 0;
+          }
+        }
         
         .flex-box {
           display: flex;
-          justify-content: space-between;
-        
-          .user-name {
-            height: 40px;
-            line-height: 38px;
-          }
+          align-items: center;
+          gap: 8px;
 
-          .date,
           .btn-reply {
             color: #999;
             font-size: 14px;
           }
+
+          .btn-reply {
+            &:before {
+              margin-right: 4px;
+              content: "\e9a1";
+              font-family: 'iconFont';
+              transition: all ease .2s;
+            }
+          }
         }
 
         .btn-like {
-          padding: 0 10px;
-          height: 40px;
-          line-height: 38px;
-          border: 1px solid #d7d7d7;
-          border-radius: 4px;
+          font-size: 14px;
 
           &:before {
             margin-right: 4px;
@@ -126,6 +124,61 @@
               content: "\e904";
               color: var(--colorWheel10);
             }
+          }
+        }
+
+        .tooltip {
+          margin-left: auto;
+        }
+      }
+    }
+  }
+}
+
+@include respond-to(phone) {
+  .comment {
+    &-item {
+      margin: 0 -20px;
+      padding: 0 20px;
+
+      &.reply {
+        & > .item {
+          padding: 20px 0;
+        }
+      }
+
+      & > .item {
+        gap: 8px;
+
+        .profile {
+          @include size(34px);
+
+          &-default {
+            &:before {
+              font-size: 16px;
+            }
+          }
+        }
+
+        .detail {
+          .flex-box {
+            .user-name {
+              font-size: 12px;
+              font-weight: bold;
+            }
+
+            .date,
+            .btn-reply {
+              font-size: 12px;
+            }
+          }
+
+          .btn-like {
+            font-size: 12px;
+          }
+
+          .content {
+            font-size: 14px;
           }
         }
       }

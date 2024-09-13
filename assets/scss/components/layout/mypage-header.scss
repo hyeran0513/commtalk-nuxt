@@ -45,3 +45,9 @@ header {
     }
   }
 }
+
+@include respond-to(phone) {
+  header {
+    display: none;
+  }
+}

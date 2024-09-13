@@ -24,3 +24,31 @@
     }
   }
 }
+
+@include respond-to(phone) {
+  .main {
+    gap: 4px;
+    margin: 0 auto;
+    flex-direction: column-reverse;
+
+    &-left {
+      &-item {
+        padding: 20px 0;
+        background: #FFF;
+      }
+    }
+
+    &-right {
+      width: 100%;
+
+      &-item {
+        padding: 20px 0;
+        background: #FFF;
+
+        &:not(:first-child) {
+          margin-top: 4px;
+        }
+      }
+    }
+  }
+}

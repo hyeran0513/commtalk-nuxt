@@ -66,3 +66,17 @@
     }
   }
 }
+
+@include respond-to(phone) {
+  .sidebar {
+    width: 100%;
+
+    .logo-wrap {
+      display: none;
+    }
+
+    .menu {
+      display: none;
+    }
+  }
+}

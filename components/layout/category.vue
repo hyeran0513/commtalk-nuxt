@@ -1,16 +1,27 @@
 <template>
   <div class="category">
-    <transition name="slide-up">
+    <transition name="slide">
       <div class="category-box" v-if="!isFold">
         <div class="category-box-inner">
           <div class="list">
-            <div class="list-item" v-for="(board, boardIdx) in categoryData" :key="boardIdx">
-              <NuxtLink :to="`/board/${board?.boardId}`" :title="board?.boardName">
+            <div
+                class="list-item"
+                v-for="(board, boardIdx) in categoryData"
+                :key="boardIdx"
+            >
+              <NuxtLink
+                  :to="`/board/${board?.boardId}`"
+                  :title="board?.boardName"
+              >
                 {{ board?.boardName }}
               </NuxtLink>
             </div>
             
-            <button type="button" class="btn-s-line-main" @click="modal.modalOpen()">
+            <button
+                type="button"
+                class="btn-s-line-main"
+                @click="modal.modalOpen()"
+            >
               <i class="icon-plus" />
               <span class="txt">게시판 추가</span>
             </button>
@@ -34,7 +45,10 @@
             <dl class="form-box">
               <dt>게시판 이름</dt>
               <dd>
-                <input type="text" placeholder="게시판 이름을 작성해 주세요." />
+                <input
+                    type="text"
+                    placeholder="게시판 이름을 작성해 주세요."
+                />
               </dd>
             </dl>
           </div>
@@ -43,7 +57,10 @@
             <dl class="form-box">
               <dt>게시판 설명</dt>
               <dd>
-                <textarea class="textarea-custom" placeholder="게시판 설명을 작성해 주세요." />
+                <textarea
+                    class="textarea-custom"
+                    placeholder="게시판 설명을 작성해 주세요."
+                />
               </dd>
             </dl>
           </div>
@@ -51,7 +68,14 @@
       </template>
 
       <template #footer>
-        <button type="button" class="btn-main" @click="modal.modalClose()">제출</button>
+        <button
+            type="button"
+            class="btn-main"
+            @click="modal.modalClose()"
+            title="제출"
+        >
+          제출
+        </button>
       </template>
     </BaseModal>
 </template>

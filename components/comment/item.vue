@@ -1,46 +1,55 @@
 <template>
   <div class="comment-item">
     <div class="item">
-      <div class="profile">
-        <div class="profile-default"></div>
-      </div>
-
       <div class="detail">
-        <div class="flex-box">
-          <div class="user-name">
-            <template v-if="comment?.anonymousYN">익명</template>
-            <template v-else>{{ comment?.writer?.nickname }}</template>
-          </div>
+        <div class="top-area">
+          <div class="user-info">
+            <div class="profile">
+              <div class="profile-default"></div>
+            </div>
 
-          <button
-              type="button"
-              class="btn-like"
-              :class="{'is-active': comment?.likeYN}"
-              @click="handleLike"
-          >
-            좋아요 {{ comment?.likeCount }}
-          </button>
+            <div class="info">
+              <div class="user-name">
+                <template v-if="comment?.anonymousYN">익명</template>
+                <template v-else>{{ comment?.writer?.nickname }}</template>
+              </div>
+
+              <div class="date">{{ comment?.updatedAt }}</div>
+            </div>
+          </div>
 
           <div class="tooltip" ref="tooltipRef">
             <transition name="fade">
               <div class="tooltip-box" v-if="showActions">
                 <ul class="tooltip-list">
                   <li class="item">
-                    <button type="button" class="has-icon" @click="reportComment">
+                    <button
+                        type="button"
+                        class="has-icon"
+                        @click="reportComment"
+                    >
                       <i class="icon-alert-triangle" />
                       <span class="txt">신고</span>
                     </button>
                   </li>
 
                   <li class="item">
-                    <button type="button" class="has-icon" @click="showEditForm = true">
+                    <button
+                        type="button"
+                        class="has-icon"
+                        @click="showEditForm = true"
+                    >
                       <i class="icon-edit" />
                       <span class="txt">수정</span>
                     </button>
                   </li>
                   
                   <li class="item">
-                    <button type="button" class="has-icon" @click="deleteComment()">
+                    <button
+                        type="button"
+                        class="has-icon"
+                        @click="deleteComment()"
+                    >
                       <i class="icon-trash-2" />
                       <span class="txt">삭제</span>
                     </button>
@@ -70,8 +79,21 @@
             </div>
 
             <div class="btn-wrap">
-              <button type="button" class="btn-s-line-main" @click="closeEditComment()">취소</button>
-              <button type="button" class="btn-s-fill-main" @click="editComment(comment.content, comment.anonymousYN)">수정</button>
+              <button
+                  type="button"
+                  class="btn-s-line-main"
+                  @click="closeEditComment()"
+              >
+                취소
+              </button>
+
+              <button
+                  type="button"
+                  class="btn-s-fill-main"
+                  @click="editComment(comment.content, comment.anonymousYN)"
+              >
+                수정
+              </button>
             </div>
           </template>
 
@@ -81,29 +103,58 @@
         </div>
 
         <div class="flex-box">
-          <div class="date">{{ comment?.updatedAt }}</div>
-          <button type="button" class="btn-reply" @click="toggleReplyForm"><i class="icon-corner-down-right" />답글 쓰기</button>
+          <button
+              type="button"
+              class="btn-like"
+              :class="{'is-active': comment?.likeYN}"
+              @click="handleLike"
+          >
+            공감 {{ comment?.likeCount }}
+          </button>
+
+          <button
+              type="button"
+              class="btn-reply"
+              @click="toggleReplyForm"
+          >
+            <span class="txt">답글</span>
+          </button>
         </div>
       </div>
     </div>
 
-    <CommentForm v-if="showReplyForm"
-                 :parentId="comment?.commentId"
-                 :postId="route.params.id"
-                 @refreshComments="$emit('refreshComments')"
-                 @closeForm="showReplyForm = false" />
-    <ReplyList :replies="comment?.children" :postId="route.params.id" />
+    <CommentForm
+        v-if="showReplyForm"
+        :parentId="comment?.commentId"
+        :postId="route.params.id"
+        @refreshComments="$emit('refreshComments')"
+        @closeForm="showReplyForm = false"
+    />
+
+    <ReplyList
+        :replies="comment?.children"
+        :postId="route.params.id"
+    />
   </div>
 
   <BaseModal ref="modal" id="modal">
     <template #title>신고 요청</template>
 
     <template #default>
-      <textarea class="textarea-custom" placeholder="신고 요청 내용을 입력해 주세요." />
+      <textarea
+          class="textarea-custom"
+          placeholder="신고 요청 내용을 입력해 주세요."
+      />
     </template>
 
     <template #footer>
-      <button type="button" class="btn-main" @click="modal.modalClose()">제출</button>
+      <button
+          type="button"
+          class="btn-main"
+          @click="modal.modalClose()"
+      >
+        제출
+      </button>
     </template>
   </BaseModal>
 </template>
