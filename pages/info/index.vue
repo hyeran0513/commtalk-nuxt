@@ -118,14 +118,19 @@
             </div>
           </div>
 
-          <button type="button" class="btn-f-fill-main btn-save" @click="saveUserInfo()">저장</button>
+          <div class="btn-wrap">
+            <button type="button" class="btn-f-fill-main btn-save" @click="saveUserInfo()">저장</button>
+          </div>
         </template>
 
         <template v-else>
           <div class="form">
             <div class="form-box">
               <dl class="form-item">
-                <dt>개인정보보호를 위해 본인확인을 진행하겠습니다.</dt>
+                <dt class="alert">
+                  <i class="icon-info" />
+                  <span class="txt">개인정보보호를 위해 본인확인을 진행하겠습니다.</span>
+                </dt>
                 <dd>
                   <input type="text" placeholder="비밀번호를 입력해 주세요." v-model="identityVerification" />
                 </dd>
@@ -133,7 +138,9 @@
             </div>
           </div>
 
-          <button type="button" class="btn-f-fill-main btn-save" @click="confirmPassword()">본인 확인</button>
+          <div class="btn-wrap">
+            <button type="button" class="btn-f-fill-main btn-save" @click="confirmPassword()">본인 확인</button>
+          </div>
         </template>
       </div>
     </div>

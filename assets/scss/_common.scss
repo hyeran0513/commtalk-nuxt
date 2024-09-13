@@ -528,6 +528,12 @@ section {
     font-size: 14px;
   }
 
+  [class*="btn-f-"] {
+    height: 40px;
+    line-height: 38px;
+    font-size: 14px;
+  }
+
   /* 셀렉트박스 커스텀 */
   select {
     padding: 0 0 0 10px;

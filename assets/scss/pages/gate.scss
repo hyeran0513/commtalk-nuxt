@@ -112,6 +112,15 @@
               line-height: 32px;
               font-size: 14px;
             }
+
+            &.email {
+              flex-wrap: wrap;
+
+              select {
+                flex: none;
+                width: 100%;
+              }
+            }
           }
         }
       }

@@ -60,6 +60,14 @@
           font-weight: bold;
           letter-spacing: -0.02em;
         }
+
+        .btn-setting {
+          margin-left: -4px;
+
+          & > i {
+            font-size: 14px;
+          }
+        }
       }
 
       .btn-wrap {

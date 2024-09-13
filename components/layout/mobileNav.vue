@@ -27,12 +27,22 @@
 
           <p class="name">{{ userInfo?.username }}님</p>
 
+          <NuxtLink
+              to="/info"
+              class="btn-setting"
+              @click="mobNavClose"
+              title="개인정보 변경"
+              v-if="isLogin"
+          >
+            <i class="icon-settings" />
+          </NuxtLink>
+
           <div class="btn-wrap">
             <button
                 type="button"
                 class="logout-btn"
                 title="로그아웃"
-                @click="[mobNavClose(), logout()]"
+                @click="logout()"
             >
               로그아웃
             </button>
@@ -78,7 +88,7 @@
     </template>
 
     <div class="scroll-area">
-      <ul class="menu">
+      <ul class="menu" v-if="isLogin">
         <li class="menu-item" v-for="(menu, menuIdx) in menuList">
           <NuxtLink
               :to="menu?.link"
@@ -125,6 +135,8 @@ const isLogin = computed(() => {
 const logout = () => {
   token.value = '';
   router.push('/login');
+
+  mobNavClose();
 };
 
 // gnb
