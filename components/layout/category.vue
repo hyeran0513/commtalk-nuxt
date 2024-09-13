@@ -35,6 +35,30 @@
     </button>
   </div>
 
+  <div class="category mob-type">
+    <swiper
+        :slidesPerView="'auto'"
+        :spaceBetween="10"
+        :observer="true"
+        :observe-parents="true"
+        :grabCursor="true"
+    >
+      <swiper-slide
+          v-for="(board, boardIdx) in categoryData"
+          :key="boardIdx"
+      >
+        <div class="item">
+          <NuxtLink
+              :to="`/board/${board?.boardId}`"
+              :title="board?.boardName"
+          >
+            {{ board?.boardName }}
+          </NuxtLink>
+        </div>
+      </swiper-slide>
+    </swiper>
+  </div>
+
   
   <BaseModal ref="modal" id="modal">
       <template #title>게시판 요청</template>
@@ -81,6 +105,10 @@
 </template>
 
 <script setup>
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import 'swiper/css/navigation';
+
 const modal = ref();
 
 const isFold = ref(false);

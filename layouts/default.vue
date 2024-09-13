@@ -4,6 +4,9 @@
     <LayoutHeader />
     <LayoutCategory />
 
+    <LayoutBackButton />
+    <LayoutQuickButton />
+
     <div class="content">
       <slot />
     </div>

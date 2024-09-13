@@ -19,6 +19,42 @@
     padding-bottom: 80px;
   }
 
+  .quick-buttons {
+    position: fixed;
+    right: 100px;
+    bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    .top-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @include size(70px);
+      background: #FFF;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, .1);
+      border-radius: 50%;
+
+      & > i {
+        font-size: 24px;
+      }
+    }
+
+    .write-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @include size(70px);
+      box-shadow: 2px 0 10px rgba(0, 0, 0, .1);
+      border-radius: 50%;
+
+      & > i {
+        font-size: 24px;
+      }
+    }
+  }
+
   footer {
     flex-shrink: 0;
     padding: 50px 0;
@@ -30,5 +66,21 @@
 @include respond-to(phone) {
   .wrapper {
     flex-direction: column;
+  }
+
+  .layout {
+    .quick-buttons {
+      right: 16px;
+      gap: 8px;
+
+      .top-btn,
+      .write-btn {
+        @include size(50px);
+
+        & > i {
+          font-size: 20px;
+        }
+      }
+    }
   }
 }

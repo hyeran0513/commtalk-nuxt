@@ -10,13 +10,16 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.5.4",
     "@toast-ui/editor": "^3.2.2",
     "@vueuse/core": "^10.11.0",
     "axios": "^1.7.2",
     "nuxt": "^3.12.2",
     "nuxt-font-loader": "^2.3.5",
+    "pinia": "^2.2.2",
     "sass": "^1.77.6",
     "sass-loader": "^14.2.1",
+    "swiper": "^11.1.14",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3",
     "vuedraggable": "^4.1.0"

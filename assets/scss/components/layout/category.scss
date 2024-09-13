@@ -2,6 +2,25 @@
   position: relative;
   margin-bottom: 50px;
 
+  &.mob-type {
+    display: none;
+
+    .swiper {
+      &-slide {
+        width: auto;
+      }
+
+      .item {
+        padding: 0 10px;
+        height: 30px;
+        line-height: 28px;
+        border-radius: 6px;
+        font-size: 14px;
+        background: #f4f6fa;
+      }
+    }
+  }
+
   .btn-fold {
     position: absolute;
     left: 50%;
@@ -68,5 +87,11 @@
 @include respond-to(phone) {
   .category {
     display: none;
+
+    &.mob-type {
+      display: block;
+      margin-bottom: 0;
+      padding: 0 16px;
+    }
   }
 }

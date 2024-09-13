@@ -8,6 +8,12 @@ header {
     max-width: 1200px;
     height: 100%;
 
+    .back-btn {
+      display: none;
+      @include size(34px);
+      font-size: 24px;
+    }
+
     .logo {
       display: inline-block;
       margin-right: 40px;
@@ -16,19 +22,21 @@ header {
       background: url('@/assets/images/logo.png') no-repeat center/auto 100%;
     }
 
-    .btn-mypage {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-left: auto;
-      width: 40px;
-      height: 40px;
-      border: 1px solid #d7d7d7;
-      border-radius: 4px;
-      transition: all ease .2;
+    .btn-wrap {
+      .btn-mypage {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        width: 40px;
+        height: 40px;
+        border: 1px solid #d7d7d7;
+        border-radius: 4px;
+        transition: all ease .2;
 
-      &:hover {
-        background: darken(#FFF, 3%);
+        &:hover {
+          background: darken(#FFF, 3%);
+        }
       }
     }
   }
@@ -40,7 +48,15 @@ header {
     height: 50px;
 
     .header-inner {
+      .back-btn {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-grow: 1;
+      }
+
       .logo {
+        margin: 0 auto;
         @include size(78px, 20px);
       }
 
@@ -48,11 +64,15 @@ header {
         display: none;
       }
 
-      .btn-mypage {
-        @include size(34px);
+      .btn-wrap {
+        flex-grow: 1;
 
-        & > i {
-          font-size: 16px;
+        .btn-mypage {
+          @include size(34px);
+
+          & > i {
+            font-size: 16px;
+          }
         }
       }
     }
