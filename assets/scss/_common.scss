@@ -445,6 +445,10 @@ section {
   background: #FFF;
   border-radius: 30px;
 
+  &.full-width {
+    max-width: 100%;
+  }
+
   &.bg-transparency {
     background: transparent;
   }
@@ -575,6 +579,10 @@ section {
   }
 
   section {
+    &.full-width {
+      border-radius: 0;
+    }
+
     .section {
       &-title {
         padding: 0 16px 10px;

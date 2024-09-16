@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="full-width">
     <div class="section-title">내가 쓴 글</div>
 
     <div class="section-content">

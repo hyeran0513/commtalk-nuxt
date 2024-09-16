@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="full-width">
    <div class="section-title">신고</div>
  
    <div class="section-content">

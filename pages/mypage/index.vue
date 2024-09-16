@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-transparency">
+  <section class="bg-transparency full-width">
     <div class="widget">
       <div class="widget-item">
         <div class="title">

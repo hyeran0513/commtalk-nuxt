@@ -1,7 +1,4 @@
 section {
-  margin: 0 auto;
-  max-width: 1200px;
-
   .widget {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -73,7 +70,7 @@ section {
 
 @include respond-to(phone) {
   section {
-    padding: 0 16px;
+    padding: 20px;
     background: #FFF;
 
     .widget {

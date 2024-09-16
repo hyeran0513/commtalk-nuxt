@@ -161,6 +161,14 @@
   min-height: 100vh;
   flex: 1;
 
+  &.mypage {
+    margin: 0 20px 0 40px;
+
+    & > .content {
+      padding-bottom: 0;
+    }
+  }
+
   &.bg-white {
     background: #FFF;
   }
@@ -225,6 +233,10 @@
   }
 
   .layout {
+    &.mypage {
+      margin: 0;
+    }
+
     .quick-buttons {
       right: 16px;
       gap: 8px;

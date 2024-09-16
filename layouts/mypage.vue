@@ -3,7 +3,7 @@
     <LayoutHeader v-if="mobileVersion" />
     <LayoutMypageSideBar />
 
-    <div class="layout">
+    <div class="layout mypage">
       <LayoutMypageHeader />
       <LayoutMypageQuickButton />
 

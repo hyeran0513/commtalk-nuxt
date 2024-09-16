@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="full-width">
     <div class="section-title">개인정보 변경</div>
 
     <div class="section-content">

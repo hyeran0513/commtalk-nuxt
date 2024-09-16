@@ -1,67 +1,71 @@
 <template>
   <div class="sidebar">
-    <div class="logo-wrap">
-      <NuxtLink to="/" class="logo"></NuxtLink>
-    </div>
+    <div class="sidebar-inner">
+      <div class="logo-wrap">
+        <NuxtLink to="/" class="logo"></NuxtLink>
+      </div>
 
-    <div class="profile">
-      <div
-          class="profile-img"
-          v-if="profile?.fileUrl"
-          :style="{background: `#f8f8f8 url(${ profile?.fileUrl }) no-repeat center/auto 100%`}"
-      />
-
-      <button
-          type="button"
-          class="btn-setting"
-          @click.prevent="triggerFileInput"
-      >
-        <i class="icon-settings" />
-      </button>
-
-      <input
-          type="file"
-          ref="fileInput"
-          style="display: none"
-          @change="uploadProfile"
-      />
-    </div>
-
-    <div class="user-info">
-      <p class="user-name">{{ userInfo?.username }}님</p>
-      <p class="user-id">{{ userInfo?.nickname }}</p>
-    </div>
-
-    <div class="menu">
-      <div
-          v-for="(item, index) in menuItems"
-          :key="index"
-          class="menu-item"
-      >
-        <NuxtLink
-            :to="item?.link"
-            class="menu-title"
-            @click="toggle(index)"
-            :class="{'is-active': activeIndex === index}"
-        >
-          {{ item?.title }}
-        </NuxtLink>
-
+      <div class="profile">
         <div
-            v-show="activeIndex === index"
-            class="submenu"
+            class="profile-img"
+            v-if="profile?.fileUrl"
+            :style="{background: `#f8f8f8 url(${ profile?.fileUrl }) no-repeat center/auto 100%`}"
+        />
+
+        <button
+            type="button"
+            class="btn-setting"
+            @click.prevent="triggerFileInput"
         >
-          <div
-              v-for="(subItem, subIndex) in item.submenu"
-              :key="subIndex"
-              class="submenu-item"
+          <i class="icon-settings" />
+        </button>
+
+        <input
+            type="file"
+            ref="fileInput"
+            style="display: none"
+            @change="uploadProfile"
+        />
+      </div>
+
+      <div class="user-info">
+        <p class="user-name">{{ userInfo?.username }}님</p>
+        <p class="user-id">{{ userInfo?.nickname }}</p>
+      </div>
+
+      <div class="menu">
+        <div
+            v-for="(item, index) in menuItems"
+            :key="index"
+            class="menu-item"
+        >
+          <NuxtLink
+              :to="item?.link"
+              class="menu-title"
+              @click="toggle(index)"
+              :class="{'is-active': activeIndex === index}"
           >
-            <NuxtLink
-                :to="subItem.link"
-                class="submenu-title"
+            {{ item?.title }}
+          </NuxtLink>
+
+          <div
+              v-show="activeIndex === index"
+              class="submenu"
+          >
+            <div
+                v-for="(subItem, subIndex) in item.submenu"
+                :key="subIndex"
+                class="submenu-item"
             >
-              {{ subItem.title }}
-            </NuxtLink>
+              <NuxtLink
+                  :to="subItem.link"
+                  class="submenu-title"
+                  @click="setActiveSubIndex(subIndex)"
+                  :class="{'is-active': activeSubIndex === subIndex}"
+              >
+                {{ subItem.title }}
+              </NuxtLink>
+            </div>
           </div>
         </div>
       </div>
@@ -116,10 +120,16 @@ const menuItems = ref([
   }
 ])
 
-const activeIndex = ref(null)
+const activeIndex = ref(0);
+const activeSubIndex = ref();
 
 const toggle = (index) => {
-  activeIndex.value = activeIndex.value === index ? null : index
+  activeSubIndex.value = '';
+  activeIndex.value = activeIndex.value === index ? '' : index
+}
+
+const setActiveSubIndex = (subIndex) => {
+  activeSubIndex.value = subIndex;
 }
 
 /* 회원 프로필 사진 업로드 */
