@@ -14,7 +14,7 @@
     </div>
 
     <draggable
-        handle=".icon-more-vertical"
+        handle=".icon-draggable"
         tag="div"
         :list="pinnedBoards"
         class="drag-area"
@@ -34,7 +34,7 @@
               </NuxtLink>
             </span>
 
-            <i class="icon-more-vertical" />
+            <i class="icon-draggable" />
           </div>
 
           <div class="list">

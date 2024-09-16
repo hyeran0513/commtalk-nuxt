@@ -25,7 +25,7 @@ export default defineNuxtConfig({
   css : [
     "@/assets/scss/main.scss"
   ],
-  modules: ['nuxt-font-loader'],
+  modules: ['nuxt-font-loader', '@pinia/nuxt'],
   fontLoader: {
     local: [
       {

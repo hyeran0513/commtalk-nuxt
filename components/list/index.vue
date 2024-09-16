@@ -6,7 +6,8 @@
           v-for="(item, i) in data?.posts"
           :key="i"
       >
-        <NuxtLink :to="`/post/${item?.postId}?boardId=${boardId}`">
+        <NuxtLink :to="`/post/${item?.postId}?boardId=${item?.board?.boardId}`">
+          <div class="board-name">{{ item?.board?.boardName }}</div>
           <div class="title">{{ item?.title }}</div>
           <div class="content">{{ item?.previewContent }}</div>
 
@@ -70,7 +71,7 @@
 </template>
 
 <script setup>
-  const props = defineProps(['data', 'boardId', 'hasPagination']);
+  const props = defineProps(['data', 'hasPagination']);
   const emits = defineEmits(['load-page']);
 
   const loadPage = async (num) => {

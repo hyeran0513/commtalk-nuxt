@@ -11,7 +11,7 @@
     & > .item {
       padding: 20px 0;
 
-      .content {
+      .cont {
         margin: 10px 0;
 
         textarea {
@@ -20,6 +20,11 @@
           min-height: 120px;
           border: 1px solid #d7d7d7;
           border-radius: 8px;
+          white-space: pre-wrap;
+        }
+
+        .content {
+          white-space: pre-wrap;
         }
 
         .btn-wrap {

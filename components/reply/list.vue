@@ -3,7 +3,9 @@
     <ReplyItem
         v-for="reply in replies"
         :key="reply?.commentId"
-        :reply="reply" />
+        :reply="reply"
+        @refreshComments="$emit('refreshComments')"
+    />
   </div>
 </template>
 
@@ -14,4 +16,6 @@ const props = defineProps({
     required: true
   }
 });
+
+const emits = defineEmits(['refreshComments']);
 </script>

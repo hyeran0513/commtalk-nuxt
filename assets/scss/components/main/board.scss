@@ -48,7 +48,10 @@
         font-weight: bold;
       }
 
-      & > i {
+      [class^=icon] {
+        display: inline-block;
+        @include size(8px, 16px);
+        background: url('@/assets/images/icon/icon-draggable.png') no-repeat center/auto 100%;
         cursor: grab;
       }
     }

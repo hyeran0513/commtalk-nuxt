@@ -37,7 +37,7 @@
                     <button
                         type="button"
                         class="has-icon"
-                        @click="showEditForm = true"
+                        @click="showEditReply()"
                     >
                       <i class="icon-edit" />
                       <span class="txt">수정</span>
@@ -68,9 +68,9 @@
           </div>
         </div>
 
-        <div class="content">
+        <div class="cont">
           <template v-if="showEditForm">
-            <textarea v-model="reply.content" />
+            <textarea v-model="replyContent" />
 
             <div class="checkbox-list">
               <label class="checkbox-custom">
@@ -91,7 +91,7 @@
               <button
                   type="button"
                   class="btn-s-fill-main"
-                  @click="editReply(reply.content, reply.anonymousYN)"
+                  @click="editReply(replyContent, reply.anonymousYN)"
               >
                 수정
               </button>
@@ -99,7 +99,7 @@
           </template>
 
           <template v-else>
-            {{ reply?.content }}
+            <p class="content"> {{ reply?.content }}</p>
           </template>
         </div>
 
@@ -162,6 +162,8 @@ const props = defineProps({
 
 const emits = defineEmits(['refreshComments']);
 
+const replyContent = ref();
+
 const refreshComments = () => {
   emits('refreshComments');
 }
@@ -172,11 +174,19 @@ const toggleActions = () => {
   showActions.value = !showActions.value
 }
 
+const prevReplyContent = ref();
+
+const showEditReply = () => {
+  showEditForm.value = true;
+  prevReplyContent.value = props.reply.content;
+}
+
 const closeEditReply = () => {
-  refreshComments();
+  replyContent.value = prevReplyContent.value;
   showEditForm.value = false;
 }
 
+// 게시글 댓글 수정
 const editReply = async (content, anonymousYN) => {
   const body = {
     content,
@@ -194,9 +204,9 @@ const editReply = async (content, anonymousYN) => {
     });
 
     if (response.ok) {
+      showEditForm.value = false;
       refreshComments();
       console.log("성공");
-      showEditForm.value = false;
     } else {
       console.error("Error: ", response.status, response.statusText);
       const errorData = await response.json();
@@ -207,6 +217,7 @@ const editReply = async (content, anonymousYN) => {
   }
 }
 
+// 게시글 댓글 삭제
 const deleteReply = async () => {
   try {
     const response = await fetch(`/api/v1/posts/${route.params.id}/comments/${props.reply.commentId}`, {
@@ -256,6 +267,10 @@ const handleLike = async () => {
     console.error('에러:', error);
   }
 }
+
+onMounted( () => {
+  replyContent.value = props.reply.content;
+});
 </script>
 
 <style lang="scss" scoped>

@@ -4,7 +4,8 @@
         v-for="comment in comments"
         :key="comment?.commentId"
         :comment="comment"
-        @refreshComments="$emit('refreshComments')" />
+        @refreshComments="$emit('refreshComments')"
+    />
   </div>
 </template>
 

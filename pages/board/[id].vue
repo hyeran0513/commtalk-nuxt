@@ -33,7 +33,6 @@
 
       <List
           :data="boards"
-          :boardId="route.params.id"
           @load-page="loadPage"
           :hasPagination="true"
       />
