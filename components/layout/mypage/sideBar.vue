@@ -86,18 +86,18 @@ const menuItems = ref([
   },
   {
     title: '개인정보 변경',
-    link: '/info'
+    link: '/mypage/info'
   },
   {
     title: '글',
     submenu: [
       {
         title: '내가 쓴 글',
-        link: '/writing/post'
+        link: '/mypage/writing/post'
       },
       {
         title: '댓글 단 글',
-        link: '/writing/comment'
+        link: '/mypage/writing/comment'
       }
     ]
   },
@@ -106,16 +106,29 @@ const menuItems = ref([
     submenu: [
       {
         title: '공감',
-        link: '/activity/like'
+        link: '/mypage/activity/like'
       },
       {
         title: '스크랩',
-        link: '/activity/scrap'
+        link: '/mypage/activity/scrap'
       },
       // {
       //   title: '신고',
-      //   link: '/activity/report'
+      //   link: '/mypage/activity/report'
       // }
+    ]
+  },
+  {
+    title: '게시판',
+    submenu: [
+      {
+        title: '게시판 요청',
+        link: '/mypage/board/add'
+      },
+      {
+        title: '게시판 요청 목록',
+        link: '/mypage/board/list'
+      }
     ]
   }
 ])

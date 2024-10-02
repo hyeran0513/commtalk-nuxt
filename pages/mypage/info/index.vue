@@ -139,7 +139,14 @@
           </div>
 
           <div class="btn-wrap">
-            <button type="button" class="btn-f-fill-main btn-save" @click="confirmPassword()">본인 확인</button>
+            <button
+                type="button"
+                class="btn-f-fill-main btn-save"
+                @click="confirmPassword()"
+                title="본인 확인"
+            >
+              본인 확인
+            </button>
           </div>
         </template>
       </div>
@@ -159,6 +166,7 @@
           type="button"
           class="btn-main"
           @click="modal.modalClose()"
+          title="확인"
       >
         확인
       </button>
