@@ -7,134 +7,224 @@
         <template v-if="showForm">
           <div class="form">
             <div class="form-box">
-              <dl class="form-item">
-                <dt>아이디</dt>
-                <dd>
+              <div class="form-item" :class="{'is-error': errorMessage.nickname}">
+                <label class="form-label">
                   <input
                       type="text"
-                      placeholder="아이디를 입력해 주세요."
+                      placeholder="아이디"
                       v-model="formData.nickname"
+                      class="form-input"
                       disabled
                   />
-                </dd>
-              </dl>
+                  <span class="form-txt" v-if="formData.nickname">아이디</span>
+                  <span class="form-border"></span>
+                </label>
+              </div>
+
+              <div class="form-info" v-if="errorMessage.nickname">
+                <span>{{ errorMessage.nickname }}</span>
+              </div>
             </div>
 
             <div class="form-box">
-              <dl class="form-item">
-                <dt>비밀번호</dt>
-                <dd>
-                  <button
-                      type="button"
-                      class="btn-s-fill-main"
-                      @click="showChangePwd = !showChangePwd"
-                  >
-                    비밀번호 변경
-                  </button>
-                </dd>
-              </dl>
+              <div class="form-item">
+                <button
+                    type="button"
+                    class="btn-s-fill-main"
+                    @click="showChangePwd = !showChangePwd"
+                >
+                  비밀번호 변경
+                </button>
+              </div>
             </div>
 
             <div class="form-box" v-show="showChangePwd">
-              <dl class="form-item">
-                <dt>비밀번호 변경</dt>
-                <dd class="change-pwd">
+              <div class="form-item" :class="{'is-error': errorMessage.currentPassword}">
+                <label class="form-label">
                   <input
-                      type="password"
-                      placeholder="기존 비밀번호를 입력해 주세요."
+                      :type="showPassword ? 'text' : 'password'"
+                      placeholder="기존 비밀번호"
                       v-model="formData.currentPassword"
+                      class="form-input"
                   />
+                  <span class="form-txt" v-if="formData.currentPassword">기존 비밀번호</span>
+                  <span class="form-border"></span>
 
+                  <button
+                      type="button"
+                      class="btn-show-password"
+                      @click="showPassword = !showPassword"
+                      :title="showPassword ? '비밀번호 숨기기' : '비밀번호 보기'"
+                  >
+                    <i :class="showPassword ? 'icon-eye' : 'icon-eye-off'" />
+                  </button>
+                </label>
+              </div>
+
+              <div class="form-info" v-if="errorMessage.currentPassword">
+                <span>{{ errorMessage.currentPassword }}</span>
+              </div>
+            </div>
+
+            <div class="form-box" v-show="showChangePwd">
+              <div class="form-item" :class="{'is-error': errorMessage.newPassword}">
+                <label class="form-label">
                   <input
-                      type="password"
-                      placeholder="새 비밀번호를 입력해 주세요."
+                      :type="showNewPassword ? 'text' : 'password'"
+                      placeholder="새 비밀번호"
                       v-model="formData.newPassword"
+                      class="form-input"
                   />
+                  <span class="form-txt" v-if="formData.newPassword">새 비밀번호</span>
+                  <span class="form-border"></span>
 
+                  <button
+                      type="button"
+                      class="btn-show-password"
+                      @click="showNewPassword = !showNewPassword"
+                      :title="showNewPassword ? '비밀번호 숨기기' : '비밀번호 보기'"
+                  >
+                    <i :class="showNewPassword ? 'icon-eye' : 'icon-eye-off'" />
+                  </button>
+                </label>
+              </div>
+
+              <div class="form-info" v-if="errorMessage.newPassword">
+                <span>{{ errorMessage.newPassword }}</span>
+              </div>
+            </div>
+
+            <div class="form-box" v-show="showChangePwd">
+              <div class="form-item" :class="{'is-error': errorMessage.confirmPassword}">
+                <label class="form-label">
                   <input
-                      type="password"
-                      placeholder="새 비밀번호를 한번 더 입력해 주세요."
+                      :type="showConfirmPassword ? 'text' : 'password'"
+                      placeholder="새 비밀번호 확인"
                       v-model="formData.confirmPassword"
+                      class="form-input"
                   />
-                </dd>
-              </dl>
+                  <span class="form-txt" v-if="formData.confirmPassword">새 비밀번호 확인</span>
+                  <span class="form-border"></span>
+
+                  <button
+                      type="button"
+                      class="btn-show-password"
+                      @click="showConfirmPassword = !showConfirmPassword"
+                      :title="showConfirmPassword ? '비밀번호 숨기기' : '비밀번호 보기'"
+                  >
+                    <i :class="showConfirmPassword ? 'icon-eye' : 'icon-eye-off'" />
+                  </button>
+                </label>
+              </div>
+
+              <div class="form-info" v-if="errorMessage.confirmPassword">
+                <span>{{ errorMessage.confirmPassword }}</span>
+              </div>
             </div>
 
             <div class="form-box">
-              <dl class="form-item" :class="{'is-error': errorMessage.username}">
-                <dt>이름</dt>
-                <dd>
+              <div class="form-item" :class="{'is-error': errorMessage.username}">
+                <label class="form-label">
                   <input
                       type="text"
-                      placeholder="이름을 입력해 주세요."
+                      placeholder="이름"
                       v-model="formData.username"
+                      class="form-input"
                   />
-                </dd>
-              </dl>
+                  <span class="form-txt"  v-if="formData.username">이름</span>
+                  <span class="form-border"></span>
+                </label>
+              </div>
 
-              <div class="form-info" v-if="errorMessage.username">{{ errorMessage.username }}</div>
+              <div class="form-info" v-if="errorMessage.username">
+                <span>{{ errorMessage.username }}</span>
+              </div>
             </div>
 
             <div class="form-box">
-              <dl class="form-item" :class="{'is-error': errorMessage.email}">
-                <dt>이메일</dt>
-                <dd class="email">
-                  <div class="flex-box">
-                    <input
-                        type="text"
-                        placeholder="example"
-                        v-model="formData.emailPrefix"
-                    />
+              <div class="form-item" :class="{'is-error': errorMessage.email}">
+                <label class="form-label">
+                  <input
+                      type="text"
+                      placeholder="이메일"
+                      v-model="formData.email"
+                      @input="handleInput"
+                      @blur="handleBlur"
+                      @focus="handleFocus"
+                      class="form-input"
+                  />
+                  <span class="form-txt" v-if="formData.email">이메일</span>
+                  <span class="form-border"></span>
+                </label>
+              </div>
 
-                    <span>@</span>
-
-                    <input
-                        type="text"
-                        placeholder="example.com"
-                        v-model="formData.emailDomain"
-                    />
-                  </div>
-
-                  <select v-model="formData.selectedDomain" @change="handleDomainChange">
-                    <option value="직접입력">직접입력</option>
-                    <option value="naver.com">naver.com</option>
-                    <option value="daum.net">daum.net</option>
-                    <option value="kakao.net">kakao.net</option>
-                    <option value="gmail.com">gmail.com</option>
-                  </select>
-                </dd>
-              </dl>
-
-              <div class="form-info" v-if="errorMessage.email">{{ errorMessage.email }}</div>
+              <div class="form-info" v-if="errorMessage.email">
+                <span>{{ errorMessage.email }}</span>
+              </div>
             </div>
 
             <div class="form-box">
-              <dl class="form-item">
-                <dt>연락처</dt>
-                <dd>
-                  <input type="text" placeholder="연락처를 입력해 주세요." v-model="formData.phone" @input="formatPhoneNumber" />
-                </dd>
-              </dl>
+              <div class="form-item" :class="{'is-error': errorMessage.phone}">
+                <label class="form-label">
+                  <input
+                      type="text"
+                      placeholder="연락처 (-없이 숫자만 입력해 주세요.)"
+                      v-model="formData.phone"
+                      @input="formatPhoneNumber"
+                      class="form-input"
+                  />
+                  <span class="form-txt"  v-if="formData.phone">연락처</span>
+                  <span class="form-border"></span>
+                </label>
+              </div>
+
+              <div class="form-info" v-if="errorMessage.phone">
+                <span>{{ errorMessage.phone }}</span>
+              </div>
             </div>
           </div>
 
           <div class="btn-wrap">
-            <button type="button" class="btn-f-fill-main btn-save" @click="saveUserInfo()">저장</button>
+            <button
+                type="button"
+                class="btn-f-fill-main btn-save"
+                @click="saveUserInfo()"
+                title="저장"
+            >
+              저장
+            </button>
           </div>
         </template>
 
         <template v-else>
           <div class="form">
             <div class="form-box">
-              <dl class="form-item">
-                <dt class="alert">
+              <div class="form-item">
+                <div class="form-alert">
                   <i class="icon-info" />
                   <span class="txt">개인정보보호를 위해 본인확인을 진행하겠습니다.</span>
-                </dt>
-                <dd>
-                  <input type="text" placeholder="비밀번호를 입력해 주세요." v-model="identityVerification" />
-                </dd>
-              </dl>
+                </div>
+
+                <label class="form-label">
+                  <input
+                      :type="showIdentityVerification ? 'text' : 'password'"
+                      placeholder="비밀번호"
+                      v-model="identityVerification"
+                      class="form-input"
+                  />
+                  <span class="form-txt" v-if="identityVerification">비밀번호</span>
+                  <span class="form-border"></span>
+
+                  <button
+                      type="button"
+                      class="btn-show-password"
+                      @click="showIdentityVerification = !showIdentityVerification"
+                      :title="showIdentityVerification ? '비밀번호 숨기기' : '비밀번호 보기'"
+                  >
+                    <i :class="showIdentityVerification ? 'icon-eye' : 'icon-eye-off'" />
+                  </button>
+                </label>
+              </div>
             </div>
           </div>
 
@@ -183,17 +273,45 @@ const showChangePwd = ref(false);
 const modal = ref();
 const modalMsg = ref();
 
-// 이메일 도메인 변경 핸들러
-const handleDomainChange = () => {
-  formData.value.emailDomain = formData.value.selectedDomain === '직접입력' ? '' : formData.value.selectedDomain;
+const showIdentityVerification = ref(false);
+const showPassword = ref(false);
+const showNewPassword = ref(false);
+const showConfirmPassword = ref(false);
+
+const isBlurred = ref(false);
+
+// 이메일 유효성 검사
+const validateEmail = () => {
+  errorMessage.value.email = (!formData.value.email.includes('@'))
+      ? '@를 포함한 올바른 이메일 형식으로 입력해 주세요.'
+      : '';
 };
 
-// 전화번호 포맷팅
+const handleBlur = () => {
+  isBlurred.value = true;
+  validateEmail();
+};
+
+// Focus 후 실시간 이메일 유효성 검사 시작
+const handleFocus = () => {
+  if (isBlurred.value && errorMessage.value.email) {
+    validateEmail();
+  }
+};
+
+// blur된 후 입력 중 실시간 이메일 유효성 검사
+const handleInput = () => {
+  if (isBlurred.value) {
+    validateEmail();
+  }
+};
+
+// 연락처 포맷팅
 const formatPhoneNumber = () => {
   formData.value.phone = formData.value.phone
-    .replace(/\D/g, '')
-    .slice(0, 11)
-    .replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+      .replace(/\D/g, '')
+      .slice(0, 11)
+      .replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
 }
 
 // 폼 데이터
@@ -203,9 +321,7 @@ const formData = ref({
   newPassword: '',
   confirmPassword: '',
   nickname: '',
-  emailPrefix: '',
-  emailDomain: '',
-  selectedDomain: '직접입력',
+  email: '',
   phone: ''
 });
 
@@ -227,14 +343,10 @@ const fetchUserInfo = async () => {
     });
 
     if (response) {
-      const [emailPrefix, emailDomain] = response.email.split('@');
-
       formData.value = {
         nickname: response.nickname,
         username: response.username,
-        emailPrefix: emailPrefix,
-        emailDomain: emailDomain,
-        selectedDomain: ['naver.com', 'daum.net', 'kakao.net', 'gmail.com'].includes(emailDomain) ? emailDomain : '직접입력',
+        email: response.email,
         phone: response.phone
       };
     }
@@ -248,12 +360,12 @@ onMounted(()=> {
 });
 
 const saveUserInfo = async () => {
-  const { nickname, username, emailPrefix, emailDomain, phone } = formData.value;
+  const { nickname, username, email, phone } = formData.value;
 
   const formDataObj = {
     nickname,
     username,
-    email: `${emailPrefix}@${emailDomain}`,
+    email,
     phone
   };
 
@@ -293,6 +405,22 @@ const saveUserInfo = async () => {
     await changePassword();
   }
 };
+
+/* 비밀번호 일치 확인 */
+const validatePasswords = () => {
+  errorMessage.value.newPassword = (formData.value.newPassword && formData.value.confirmPassword && formData.value.newPassword !== formData.value.confirmPassword)
+      ? '비밀번호가 일치하지 않습니다.'
+      : '';
+};
+
+watch(() => formData.value.newPassword,
+    validatePasswords
+);
+
+watch(() => formData.value.confirmPassword,
+    validatePasswords
+);
+/* END: 비밀번호 일치 확인 */
 
 // 비밀번호 변경
 const changePassword = async () => {
@@ -398,9 +526,7 @@ const init = async () => {
     newPassword: '',
     confirmPassword: '',
     nickname: '',
-    emailPrefix: '',
-    emailDomain: '',
-    selectedDomain: '직접입력',
+    email: '',
     phone: ''
   };
 

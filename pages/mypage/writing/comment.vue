@@ -8,7 +8,12 @@
             :data="comments"
             @load-page="loadPage"
             :hasPagination="true"
+            v-if="comments?.length > 0"
         />
+
+        <template v-else>
+          <BaseNodata text="댓글 단 글이 없습니다." />
+        </template>
       </div>
     </div>
   </section>

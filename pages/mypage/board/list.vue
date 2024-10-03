@@ -8,7 +8,12 @@
             :data="board"
             @load-page="loadPage"
             :hasPagination="true"
+            v-if="board?.length > 0"
         />
+
+        <template v-else>
+          <BaseNodata text="게시판 요청 목록이 없습니다." />
+        </template>
       </div>
     </div>
   </section>

@@ -1,12 +1,19 @@
 <template>
   <header>
     <div class="header-inner">
+      <div class="logo-wrap">
+        <NuxtLink to="/" class="logo"></NuxtLink>
+      </div>
+
       <div class="user-info">
         <div class="profile">
           <div class="profile-default"></div>
         </div>
 
-        <div class="user-name">{{ userInfo?.username }}</div>
+        <div class="user">
+          <div class="user-name">{{ userInfo?.username }}님</div>
+          <div class="user-id">{{ userInfo?.nickname }}</div>
+        </div>
       </div>
     </div>
   </header>

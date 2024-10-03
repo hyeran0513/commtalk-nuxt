@@ -1,6 +1,6 @@
 .wrapper {
   display: flex;
-  background: #f8f8f8;
+  background: #fff;
 
   .mobile-nav {
     position: fixed;
@@ -83,7 +83,7 @@
           height: 24px;
           padding: 0 10px;
           border-radius: 12px;
-          border: 1px solid #d7d7d7;
+          border: 1px solid #e8e8e8;
           font-size: 12px;
           color: #666;
           letter-spacing: -0.05em;
@@ -162,10 +162,12 @@
   flex: 1;
 
   &.mypage {
-    margin: 0 20px 0 40px;
+    .mypage-containe {
+      display: flex;
 
-    & > .content {
-      padding-bottom: 0;
+      .content {
+        flex: 1;
+      }
     }
   }
 
@@ -220,10 +222,19 @@
 
   // 푸터
   footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-shrink: 0;
     padding: 50px 0;
     max-height: 272px;
-    background: #62666b;
+    border-top: 1px solid #e8e8e8;
+    background: #FFF;
+
+    .txt {
+      color: #5d5d5d;
+      font-size: 14px;
+    }
   }
 }
 
@@ -234,7 +245,13 @@
 
   .layout {
     &.mypage {
-      margin: 0;
+      .mypage-containe {
+        flex-direction: column;
+
+        .content {
+          flex: 1;
+        }
+      }
     }
 
     .quick-buttons {

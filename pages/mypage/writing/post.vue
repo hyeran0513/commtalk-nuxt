@@ -8,7 +8,12 @@
             :data="posts"
             @load-page="loadPage"
             :hasPagination="true"
+            v-if="posts?.length > 0"
         />
+
+        <template v-else>
+          <BaseNodata text="내가 쓴 글이 없습니다." />
+        </template>
       </div>
     </div>
   </section>

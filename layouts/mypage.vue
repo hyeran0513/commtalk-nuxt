@@ -1,14 +1,17 @@
 <template>
   <div class="wrapper">
     <LayoutHeader v-if="mobileVersion" />
-    <LayoutMypageSideBar />
 
     <div class="layout mypage">
       <LayoutMypageHeader />
       <LayoutMypageQuickButton />
 
-      <div class="content">
-        <slot />
+      <div class="mypage-containe">
+        <LayoutMypageSideBar />
+
+        <div class="content">
+          <slot />
+        </div>
       </div>
     </div>
   </div>

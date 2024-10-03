@@ -2,87 +2,132 @@ section {
   .form {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
 
     &-item {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-
       &.is-error {
-        & > dt {
-          color: var(--colorWheel10);
-        }
+        .form-label {
+          .form-txt {
+            color: #ff5b45;
+          }
 
-        & > dd {
-          input,
-          select {
-            border: 1px solid var(--colorWheel10);
+          .form-border {
+            border-color: #ff5b45;
           }
         }
       }
 
-      & > dt {
-        font-size: 18px;
+      .form-label {
+        display: flex;
+        position: relative;
+        -webkit-box-align: center;
+        align-items: center;
+        padding: 0 16px;
+        box-sizing: border-box;
+        z-index: 0;
+        height: 44px;
+        font-size: 14px;
+        font-weight: 400;
+        width: 100%;
 
-        &.alert {
-          display: flex;
-          align-items: center;
-          gap: 8px;
+        .form-input {
+          color: #363636;
+          outline: none;
+          border: 0;
+          padding: 0;
+          flex: 1 1 0;
+          font-size: inherit;
+          font-weight: inherit;
+
+          &:focus {
+            & + .form-txt {
+              color: var(--colorMain);
+            }
+
+            & ~ .form-border {
+              border-color: var(--colorMain);
+            }
+          }
+
+          &:disabled {
+            & ~ .form-border {
+              background: #efefef4d;
+            }
+          }
+        }
+
+        .form-txt {
+          font-size: 12px;
+          background-color: #FFF;
+          position: absolute;
+          padding: 0 4px;
+          left: 12px;
+          top: 0;
+          transform: translateY(-50%);
+          transition: color 0.2s linear;
+          color: #848484;
+        }
+
+        .form-border {
+          position: absolute;
+          display: block;
+          inset: 0;
+          z-index: -1;
+          border: 1px solid #d0d0d0;
+          border-radius: 8px;
+          background-color: transparent;
+          transition: border-color 0.2s linear;
+        }
+
+        .btn-show-password {
+          margin-left: 16px;
 
           & > i {
-            color: #999;
+            font-size: 16px;
+            cursor: pointer;
+            color: #848484;
+
+            &.icon-eye {
+              color: var(--colorMain);
+            }
           }
-
-          .txt {
-            font-weight: bold;
-            color: #999;
-          }
-        }
-      }
-
-      & > dd {
-        flex: 1;
-
-        &.email {
-          display: flex;
-          align-items: center;
-          gap: 4px;
-
-          .flex-box {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-          }
-        }
-
-        &.change-pwd {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-
-        input {
-          padding: 0 20px;
-          width: 100%;
-          height: 40px;
-          height: 38px;
-          border: 1px solid #d7d7d7;
-          border-radius: 4px;
         }
       }
     }
 
     &-info {
-      display: flex;
-      align-items: center;
-      gap: 6px;
       margin-top: 4px;
-      color: var(--colorWheel10);
+      display: flex;
 
-      &:before {
-        content: "\e98a";
-        font-family: 'iconFont';
+      & > span {
+        display: block;
+        padding: 0;
+        margin: 0;
+        font-weight: 400;
+        color: #ff5b45;
+        font-size: 12px;
+      }
+    }
+
+    &-alert {
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      margin-bottom: 24px;
+      padding: 16px 16px 16px 24px;
+      border-radius: 8px;
+      color: #363636;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 160%;
+      background-color: #f5f6f7;
+      width: 100%;
+      box-sizing: border-box;
+
+      & > i {
+        margin-right: 16px;
+        font-size: 24px;
+        color: #93A0B0;
       }
     }
   }
@@ -96,42 +141,6 @@ section {
   section {
     .form {
       padding: 0 16px;
-
-      &-item {
-        & > dt {
-          font-size: 14px;
-
-          &.alert {
-            gap: 4px;
-
-            & > i {
-              font-size: 14px;
-            }
-
-            .txt {
-              font-size: 14px;
-            }
-          }
-        }
-
-        & > dd {
-          input {
-            padding: 0 10px;
-            height: 34px;
-            line-height: 32px;
-            font-size: 14px;
-          }
-
-          &.email {
-            flex-wrap: wrap;
-
-            select {
-              flex: none;
-              width: 100%;
-            }
-          }
-        }
-      }
     }
 
     .btn-wrap {

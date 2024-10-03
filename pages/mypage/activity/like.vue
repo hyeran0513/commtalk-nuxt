@@ -8,7 +8,12 @@
            :data="likes"
            @load-page="loadPage"
            :hasPagination="true"
+           v-if="likes?.length > 0"
        />
+
+       <template v-else>
+         <BaseNodata text="공감 항목이 없습니다." />
+       </template>
      </div>
    </div>
  </section>

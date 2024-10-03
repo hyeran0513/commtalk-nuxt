@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     height: 200px;
-    border: 1px solid #d7d7d7;
+    border: 1px solid #e8e8e8;
     border-radius: 12px;
 
     .top-area {
@@ -73,7 +73,7 @@
       grid-template-columns: repeat(3, 1fr);
       height: 50px;
       line-height: 48px;
-      border-top: 1px solid #d7d7d7;
+      border-top: 1px solid #e8e8e8;
 
       & > a {
         position: relative;
@@ -91,7 +91,7 @@
             content: '';
             width: 1px;
             height: 14px;
-            background: #d7d7d7;
+            background: #e8e8e8;
           }
         }
 

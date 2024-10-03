@@ -1,10 +1,10 @@
 <template>
-  <section class="bg-transparency full-width">
+  <section class="full-width">
     <div class="widget">
       <div class="widget-item">
         <div class="title">
           <span class="txt">내가 쓴 글</span>
-          <NuxtLink to="/writing/post" class="btn-more"><i class="icon-plus" /></NuxtLink>
+          <NuxtLink to="/mypage/writing/post" class="btn-more"><i class="icon-plus" /></NuxtLink>
         </div>
         
         <div class="content">
@@ -15,7 +15,7 @@
       <div class="widget-item">
         <div class="title">
           <span class="txt">댓글 단 글</span>
-          <NuxtLink to="/writing/comment" class="btn-more"><i class="icon-plus" /></NuxtLink>
+          <NuxtLink to="/mypage/writing/comment" class="btn-more"><i class="icon-plus" /></NuxtLink>
         </div>
         
         <div class="content">
@@ -26,7 +26,7 @@
       <div class="widget-item">
         <div class="title">
           <span class="txt">공감</span>
-          <NuxtLink to="/activity/like" class="btn-more"><i class="icon-plus" /></NuxtLink>
+          <NuxtLink to="/mypage/activity/like" class="btn-more"><i class="icon-plus" /></NuxtLink>
         </div>
         
         <div class="content">
@@ -37,7 +37,7 @@
       <div class="widget-item">
         <div class="title">
           <span class="txt">스크랩</span>
-          <NuxtLink to="/activity/scrap" class="btn-more"><i class="icon-plus" /></NuxtLink>
+          <NuxtLink to="/mypage/activity/scrap" class="btn-more"><i class="icon-plus" /></NuxtLink>
         </div>
         
         <div class="content">
@@ -48,7 +48,7 @@
 <!--      <div class="widget-item">-->
 <!--        <div class="title">-->
 <!--          <span class="txt">신고</span>-->
-<!--          <NuxtLink to="/activity/report" class="btn-more"><i class="icon-plus" /></NuxtLink>-->
+<!--          <NuxtLink to="/mypage/activity/report" class="btn-more"><i class="icon-plus" /></NuxtLink>-->
 <!--        </div>-->
 <!--        -->
 <!--        <div class="content">-->

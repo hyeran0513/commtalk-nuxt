@@ -8,7 +8,12 @@
             :data="scraps"
             @load-page="loadPage"
             :hasPagination="true"
+            v-if="scraps?.length > 0"
         />
+
+        <template v-else>
+          <BaseNodata text="스크랩 항목이 없습니다." />
+        </template>
       </div>
     </div>
   </section>

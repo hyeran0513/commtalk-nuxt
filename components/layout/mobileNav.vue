@@ -28,7 +28,7 @@
           <p class="name">{{ userInfo?.username }}님</p>
 
           <NuxtLink
-              to="/info"
+              to="/mypage/info"
               class="btn-setting"
               @click="mobNavClose"
               title="개인정보 변경"
@@ -185,23 +185,33 @@ onMounted(async () => {
 const menuList = ref([
   {
     title: '내가 쓴 글',
-    link: '/writing/post',
+    link: '/mypage/writing/post',
     icon: 'edit-3'
   },
   {
     title: '댓글 단 글',
-    link: '/writing/comment',
+    link: '/mypage/writing/comment',
     icon: 'message-square'
   },
   {
     title: '공감',
-    link: '/activity/like',
+    link: '/mypage/activity/like',
     icon: 'outline-like'
   },
   {
     title: '스크랩',
-    link: '/activity/scrap',
+    link: '/mypage/activity/scrap',
     icon: 'outline-star'
+  },
+  {
+    title: '게시판 요청',
+    link: '/mypage/board/add',
+    icon: 'file-plus'
+  },
+  {
+    title: '게시판 요청 목록',
+    link: '/mypage/board/list',
+    icon: 'file'
   }
 ]);
 </script>

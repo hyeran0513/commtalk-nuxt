@@ -7,29 +7,46 @@
         <form @submit.prevent="submitForm">
           <div class="form">
             <div class="form-box">
-              <dl class="form-item">
-                <dt>게시판 이름</dt>
-                <dd>
+              <div class="form-item" :class="{'is-error': errorMessage.boardName}">
+                <div class="form-alert">
+                  <i class="icon-info" />
+                  <span class="txt">게시판 요청 시, 최대 15일 내로 접수 안내 드리도록 하겠습니다.</span>
+                </div>
+
+                <label class="form-label">
                   <input
                       type="text"
-                      placeholder="게시판 이름을 작성해 주세요."
+                      placeholder="게시판 이름"
                       v-model="formData.boardName"
+                      class="form-input"
                   />
-                </dd>
-              </dl>
+                  <span class="form-txt" v-if="formData.boardName">게시판 이름</span>
+                  <span class="form-border"></span>
+                </label>
+              </div>
+
+              <div class="form-info" v-if="errorMessage.boardName">
+                <span>{{ errorMessage.boardName }}</span>
+              </div>
             </div>
 
             <div class="form-box">
-              <dl class="form-item">
-                <dt>게시판 설명</dt>
-                <dd>
-                  <textarea
-                      class="textarea-custom"
-                      placeholder="게시판 설명을 작성해 주세요."
+              <div class="form-item" :class="{'is-error': errorMessage.desc}">
+                <label class="form-label">
+                  <input
+                      type="text"
+                      placeholder="게시판 설명"
                       v-model="formData.desc"
+                      class="form-input"
                   />
-                </dd>
-              </dl>
+                  <span class="form-txt" v-if="formData.desc">게시판 설명</span>
+                  <span class="form-border"></span>
+                </label>
+              </div>
+
+              <div class="form-info" v-if="errorMessage.desc">
+                <span>{{ errorMessage.desc }}</span>
+              </div>
             </div>
           </div>
 
@@ -83,6 +100,12 @@ const formData = ref({
   desc: ''
 });
 
+// 오류 메시지
+const errorMessage = ref({
+  boardName: '',
+  desc: ''
+})
+
 // 초기화
 const init = () => {
   formData.value = {
@@ -124,7 +147,9 @@ const submitForm = async () => {
 
       if (code === 'BAD_REQUEST') {
         Object.keys(message).forEach(key => {
-          console.log(message[key]);
+          if (key in errorMessage.value) {
+            errorMessage.value[key] = message[key];
+          }
         });
       }
     }

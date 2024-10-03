@@ -1,7 +1,19 @@
 .list {
   &-item {
-    padding: 20px 0;
+    padding: 38px 32px;
     background: #FFF;
+    border-top: 1px solid #e8e8e8;
+
+    &:hover {
+      .title {
+        text-decoration: underline;
+        text-underline-offset: 0.12em;
+      }
+    }
+
+    &:last-child {
+      border-bottom: 1px solid #e8e8e8;
+    }
 
     .board-name {
       margin-bottom: 8px;
@@ -13,11 +25,6 @@
       font-size: 18px;
       font-weight: bold;
       transition: all ease .2s;
-
-      &:hover {
-        text-decoration: underline;
-        text-underline-offset: 0.12em;
-      }
     }
 
     .content {
@@ -29,6 +36,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-top: 10px;
 
       .count {
         display: flex;

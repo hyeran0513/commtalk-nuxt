@@ -3,18 +3,21 @@ section {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+    padding: 40px;
 
     &-item {
-      padding: 20px 30px;;
+      padding: 20px 30px;
       background: #FFF;
       border-radius: 12px;
+      border: 1px solid #e8e8e8;
 
       & > .title {
         display: flex;
         justify-content: space-between;
+        align-items: center;
 
         .txt {
-          font-size: 20px;
+          font-size: 18px;
           font-weight: bold;
         }
         
@@ -48,6 +51,14 @@ section {
         padding: 0 20px;
         max-height: 280px;
 
+        &::v-deep(.list) {
+          margin-top: 20px;
+
+          .list-item {
+            padding: 20px;
+          }
+        }
+
         &::-webkit-scrollbar {
           width: 8px;
           cursor: pointer;
@@ -75,9 +86,10 @@ section {
 
     .widget {
       grid-template-columns: 1fr;
+      padding: 0;
 
       &-item {
-        padding: 0;
+        padding: 20px;
         background: transparent;
 
         & > .title {

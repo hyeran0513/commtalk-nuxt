@@ -1,15 +1,28 @@
 header {
-  padding: 20px 0;
-  height: 120px;
+  height: 80px;
+  border-bottom: 1px solid #e8e8e8;
 
   .header-inner {
     display: flex;
     align-items: center;
     margin: 0 auto;
-    padding: 0 30px;
+    padding: 0 40px 0 30px;
     height: 100%;
     background: #FFF;
     border-radius: 12px;
+
+    .logo-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .logo {
+        display: inline-block;
+        width: 100px;
+        height: 24px;
+        background: url('@/assets/images/default/logo.png') no-repeat center/auto 100%;
+      }
+    }
 
     .user-info {
       display: flex;
@@ -39,6 +52,13 @@ header {
             font-size: 24px;
             color: #FFF;
           }
+        }
+      }
+
+      .user {
+        &-id {
+          color: #5d5d5d;
+          font-size: 13px;
         }
       }
     }

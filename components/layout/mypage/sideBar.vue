@@ -1,10 +1,6 @@
 <template>
   <div class="sidebar">
     <div class="sidebar-inner">
-      <div class="logo-wrap">
-        <NuxtLink to="/" class="logo"></NuxtLink>
-      </div>
-
       <div class="profile">
         <div
             class="profile-img"
@@ -48,25 +44,27 @@
             {{ item?.title }}
           </NuxtLink>
 
-          <div
-              v-show="activeIndex === index"
-              class="submenu"
-          >
+          <transition name="slide">
             <div
-                v-for="(subItem, subIndex) in item.submenu"
-                :key="subIndex"
-                class="submenu-item"
+                v-show="activeIndex === index"
+                class="submenu"
             >
-              <NuxtLink
-                  :to="subItem.link"
-                  class="submenu-title"
-                  @click="setActiveSubIndex(subIndex)"
-                  :class="{'is-active': activeSubIndex === subIndex}"
+              <div
+                  v-for="(subItem, subIndex) in item.submenu"
+                  :key="subIndex"
+                  class="submenu-item"
               >
-                {{ subItem.title }}
-              </NuxtLink>
+                <NuxtLink
+                    :to="subItem.link"
+                    class="submenu-title"
+                    @click="setActiveSubIndex(subIndex)"
+                    :class="{'is-active': activeSubIndex === subIndex}"
+                >
+                  {{ subItem.title }}
+                </NuxtLink>
+              </div>
             </div>
-          </div>
+          </transition>
         </div>
       </div>
     </div>
@@ -78,6 +76,8 @@ import { ref } from 'vue';
 import { useLocalStorage } from "@vueuse/core";
 
 const token = useLocalStorage('token', '');
+
+const route = useRoute();
 
 const menuItems = ref([
   {
@@ -131,10 +131,26 @@ const menuItems = ref([
       }
     ]
   }
-])
+]);
 
 const activeIndex = ref(0);
 const activeSubIndex = ref();
+
+watch(() => route.path, (newPath) => {
+  menuItems.value.forEach((item, index) => {
+    if (item.link === newPath) {
+      activeIndex.value = index;
+      activeSubIndex.value = -1; // 서브메뉴 초기화
+    } else if (item.submenu) {
+      item.submenu.forEach((subItem, subIndex) => {
+        if (subItem.link === newPath) {
+          activeIndex.value = index;
+          activeSubIndex.value = subIndex;
+        }
+      });
+    }
+  });
+});
 
 const toggle = (index) => {
   activeSubIndex.value = '';
