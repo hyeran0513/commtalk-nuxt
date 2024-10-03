@@ -35,7 +35,6 @@ button {
 [class*="btn-f-"] {
   @include btn-base;
   @include btn-size(100%, 52px);
-  font-size: 18px;
   font-weight: bold;
 }
 
