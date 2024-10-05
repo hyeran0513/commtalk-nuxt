@@ -4,16 +4,7 @@
 
     <div class="section-content">
       <div class="section-content-inner">
-        <List
-            :data="board"
-            @load-page="loadPage"
-            :hasPagination="true"
-            v-if="board?.length > 0"
-        />
-
-        <template v-else>
-          <BaseNodata text="게시판 요청 목록이 없습니다." />
-        </template>
+        <div ref="gridElement"></div>
       </div>
     </div>
   </section>
@@ -22,6 +13,9 @@
 <script setup>
 import { useLocalStorage } from "@vueuse/core";
 import {ref, onMounted} from "vue";
+
+const { $toastGrid } = useNuxtApp();
+const gridElement = ref(null);
 
 const token = useLocalStorage('token', '');
 
@@ -50,6 +44,28 @@ const loadPage = async (num) => {
 
 onMounted(async () => {
   await executeBoard();
+
+  // 그리드 데이터로 변환
+  const gridData = board.value.boardReqs.map((req) => ({
+    requestId: req.boardReqId,
+    boardName: req.boardName,
+    description: req.description,
+    requesterNickname: req.requester.nickname,
+    status: req.reqSts
+  }));
+
+  // 그리드 생성
+  const grid = new $toastGrid({
+    el: gridElement.value,
+    data: gridData,  // 가공된 데이터
+    columns: [
+      { header: 'No', name: 'requestId' },
+      { header: '게시판', name: 'boardName' },
+      { header: '설명', name: 'description' },
+      { header: '요청자', name: 'requesterNickname' },
+      { header: '상태', name: 'status' }
+    ],
+  });
 });
 
 definePageMeta({

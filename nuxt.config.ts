@@ -20,12 +20,17 @@ export default defineNuxtConfig({
     },
   },
   css : [
-    "@/assets/scss/main.scss"
+    "@/assets/scss/main.scss",
+    'tui-grid/dist/tui-grid.css'
   ],
   modules: ['nuxt-font-loader', '@pinia/nuxt'],
   plugins: [
     {
-      src: '~/plugins/tui-editor',
+      src: '~/plugins/toast-editor',
+      mode: 'client'
+    },
+    {
+      src: '~/plugins/tui-grid.js',
       mode: 'client'
     }
   ],
