@@ -16,16 +16,19 @@ export default defineNuxtConfig({
         proxy: {
           to: "http://localhost:8080/**"
         }
-      },
-      "/write": {
-        ssr: false,
-      }, 
+      }
     },
   },
   css : [
     "@/assets/scss/main.scss"
   ],
   modules: ['nuxt-font-loader', '@pinia/nuxt'],
+  plugins: [
+    {
+      src: '~/plugins/tui-editor',
+      mode: 'client'
+    }
+  ],
   fontLoader: {
     local: [
       {
