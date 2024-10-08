@@ -109,7 +109,7 @@ const showComment = ref(true);
 const route = useRoute();
 
 // 게시판
-const { data: boardData, execute: exeBoardData } = await useAsyncData('boardData',
+const { data: boardData, refresh: refreshBoardData } = await useAsyncData('boardData',
   () => $fetch(`/api/v1/boards/${route.query.boardId}/posts/${route.params.id}`, {
     params: {
       boardId: route.query.boardId,
@@ -119,7 +119,7 @@ const { data: boardData, execute: exeBoardData } = await useAsyncData('boardData
 );
 
 // 댓글
-const { data: comments, execute: exeComments, refresh: refreshComments } = await useAsyncData('comments',
+const { data: comments, refresh: refreshComments } = await useAsyncData('comments',
   () => $fetch(`/api/v1/posts/${route.params.id}/comments`, {
     headers: {
       'Authorization': `Bearer ${token.value}`,
@@ -182,7 +182,7 @@ const handleScrap = async () => {
 }
 
 // 게시글 파일 URL 리스트 조회
-const { data: fileList, execute: exeFileList } = await useAsyncData('fileList',
+const { data: fileList, refresh: refreshFileList } = await useAsyncData('fileList',
     () => $fetch(`/api/v1/files/post/${route.params.id}`, {
       headers: {
         'Authorization': `Bearer ${token.value}`,
@@ -190,16 +190,6 @@ const { data: fileList, execute: exeFileList } = await useAsyncData('fileList',
       }
     })
 );
-
-onMounted(() => {
-  loadData();
-  exeFileList();
-});
-
-const loadData = async () => {
-  await exeBoardData();
-  await exeComments();
-}
 </script>
 
 <style lang="scss" scoped>
