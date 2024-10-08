@@ -14,6 +14,6 @@ commtalk - 커뮤니티
 
 |front-end|back-end|DB|
 |---|---|---|
-|Nuxt3|spring boot|jpa|
+|Nuxt3, pinia, vue-draggable, tui-grid, toast-editer|spring boot|jpa|
 |scss||mysql|
 |UI&UX|||
