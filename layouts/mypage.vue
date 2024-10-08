@@ -6,7 +6,7 @@
       <LayoutMypageHeader />
       <LayoutMypageQuickButton />
 
-      <div class="mypage-containe">
+      <div class="mypage-container">
         <LayoutMypageSideBar />
 
         <div class="content">

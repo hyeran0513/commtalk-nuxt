@@ -215,11 +215,6 @@ const { data: userInfo, execute: exeUserInfo } = await useAsyncData('userInfo',
       }
     })
 );
-
-onMounted(async () => {
-  await exeUserInfo();
-  await exeProfile();
-})
 </script>
 
 <style lang="scss" scoped>

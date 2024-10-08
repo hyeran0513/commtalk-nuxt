@@ -8,7 +8,7 @@
             :data="comments"
             @load-page="loadPage"
             :hasPagination="true"
-            v-if="comments?.length > 0"
+            v-if="comments?.posts?.length > 0"
         />
 
         <template v-else>

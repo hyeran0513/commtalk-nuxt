@@ -8,7 +8,7 @@
             :data="scraps"
             @load-page="loadPage"
             :hasPagination="true"
-            v-if="scraps?.length > 0"
+            v-if="scraps?.posts?.length > 0"
         />
 
         <template v-else>

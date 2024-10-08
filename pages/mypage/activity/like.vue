@@ -8,7 +8,7 @@
            :data="likes"
            @load-page="loadPage"
            :hasPagination="true"
-           v-if="likes?.length > 0"
+           v-if="likes?.posts?.length > 0"
        />
 
        <template v-else>

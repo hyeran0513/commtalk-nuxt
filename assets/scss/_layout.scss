@@ -160,9 +160,10 @@
   flex-direction: column;
   min-height: 100vh;
   flex: 1;
+  overflow: hidden;
 
   &.mypage {
-    .mypage-containe {
+    .mypage-container {
       display: flex;
 
       .content {
@@ -245,7 +246,7 @@
 
   .layout {
     &.mypage {
-      .mypage-containe {
+      .mypage-container {
         flex-direction: column;
 
         .content {

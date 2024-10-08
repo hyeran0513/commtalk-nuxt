@@ -8,7 +8,7 @@
             :data="posts"
             @load-page="loadPage"
             :hasPagination="true"
-            v-if="posts?.length > 0"
+            v-if="posts?.posts?.length > 0"
         />
 
         <template v-else>
