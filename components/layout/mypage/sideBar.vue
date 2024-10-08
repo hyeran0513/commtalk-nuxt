@@ -72,7 +72,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import {onMounted, ref} from 'vue';
 import { useLocalStorage } from "@vueuse/core";
 
 const token = useLocalStorage('token', '');
@@ -136,21 +136,24 @@ const menuItems = ref([
 const activeIndex = ref(0);
 const activeSubIndex = ref();
 
-watch(() => route.path, (newPath) => {
+const setActiveIndex = (path) => {
   menuItems.value.forEach((item, index) => {
-    if (item.link === newPath) {
+    if (item.link === path) {
       activeIndex.value = index;
       activeSubIndex.value = -1; // 서브메뉴 초기화
     } else if (item.submenu) {
       item.submenu.forEach((subItem, subIndex) => {
-        if (subItem.link === newPath) {
+        if (subItem.link === path) {
           activeIndex.value = index;
           activeSubIndex.value = subIndex;
         }
       });
     }
   });
-});
+};
+
+watch(() => route.path, setActiveIndex);
+onMounted(() => setActiveIndex(route.path));
 
 const toggle = (index) => {
   activeSubIndex.value = '';

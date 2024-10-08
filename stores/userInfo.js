@@ -8,7 +8,7 @@ export const useUserInfoStore = defineStore('userInfo', {
     actions: {
         updateUserInfo(userInfo) {
             this.userInfo = userInfo;
-            this.admin = (userInfo.nickname === 'admin');
+            this.admin = (userInfo && userInfo.nickname === 'admin');
         }
     }
 });
