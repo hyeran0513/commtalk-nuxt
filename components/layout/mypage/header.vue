@@ -22,6 +22,7 @@
 <script setup>
 import { useLocalStorage } from "@vueuse/core";
 import { useUserInfoStore } from '@/stores/userInfo';
+const emit = defineEmits(['userInfoLoaded']);
 
 const token = useLocalStorage('token', '');
 const userInfoStore = useUserInfoStore();
@@ -38,6 +39,8 @@ const { data: userInfo, execute: exeUserInfo } = await useAsyncData('userInfo',
 onMounted(async () => {
   await exeUserInfo();
   userInfoStore.updateUserInfo(userInfo.value);
+
+  emit('userInfoLoaded');
 });
 </script>
 
