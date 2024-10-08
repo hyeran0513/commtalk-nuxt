@@ -2,12 +2,12 @@
   <div class="wrapper">
     <div class="layout bg-white">
       <LayoutSubHeader />
-      <LayoutHeader />
+      <LayoutHeader @userInfoLoaded="handleUserInfoLoaded" />
       <LayoutCategory />
       <LayoutBackButton />
       <LayoutQuickButton />
 
-      <div class="content">
+      <div class="content" v-if="isUserInfoLoaded">
         <slot />
       </div>
 
@@ -15,3 +15,13 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import {ref} from "vue";
+
+const isUserInfoLoaded = ref(false);
+
+const handleUserInfoLoaded = () => {
+  isUserInfoLoaded.value = true;
+};
+</script>

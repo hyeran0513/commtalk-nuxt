@@ -6,10 +6,11 @@
       <LayoutMypageHeader @userInfoLoaded="handleUserInfoLoaded" />
       <LayoutMypageQuickButton />
 
-      <div class="mypage-container">
+      <div class="mypage-container" v-if="isUserInfoLoaded">
         <LayoutMypageSideBar />
+
         <div class="content">
-          <slot v-if="isUserInfoLoaded" />
+          <slot />
         </div>
       </div>
     </div>

@@ -37,7 +37,7 @@
 
       <transition name="slide-left">
         <MobileNav
-            v-if="mobNavShow"
+            v-if="mobNavShow && isUserInfoLoaded"
             @mobNavMove="mobNavMove"
         />
       </transition>
@@ -47,6 +47,7 @@
 
 <script setup>
 import {useLocalStorage} from "@vueuse/core";
+import { useUserInfoStore } from '@/stores/userInfo';
 import { useMenuStore } from '@/stores/menu';
 import MobileNav from "~/components/layout/mobileNav.vue";
 import {ref} from "vue";
@@ -56,6 +57,9 @@ const props = defineProps(['isGate']);
 const menuStore = useMenuStore();
 const route = useRoute();
 const router = useRouter();
+const userInfoStore = useUserInfoStore();
+
+const emit = defineEmits(['userInfoLoaded']);
 
 watch(() => route.path, (newPath) => {
   menuStore.updateButtons(route);
@@ -80,6 +84,25 @@ const mobNavMove = (type) => {
     mobNavShow.value = false;
   }
 }
+
+const { data: userInfo, execute: exeUserInfo } = await useAsyncData('userInfo',
+    () => $fetch(`/api/v1/members/me`, {
+      headers: {
+        'Authorization': `Bearer ${token.value}`,
+        'Content-Type': 'application/json'
+      }
+    })
+);
+
+const isUserInfoLoaded = ref(false);
+
+onMounted(async () => {
+  await exeUserInfo();
+  userInfoStore.updateUserInfo(userInfo.value);
+
+  emit('userInfoLoaded');
+  isUserInfoLoaded.value = true;
+});
 </script>
 
 <style lang="scss" scoped>

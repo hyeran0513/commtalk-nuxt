@@ -89,18 +89,20 @@
 
     <div class="scroll-area">
       <ul class="menu" v-if="isLogin">
-        <li class="menu-item" v-for="(menu, menuIdx) in menuList">
-          <NuxtLink
-              :to="menu?.link"
-              @click="mobNavClose"
-          >
-            <span class="icon">
-              <i :class="`icon-${menu?.icon}`" />
-            </span>
+        <template v-for="(menu, menuIdx) in menuList">
+          <li class="menu-item" v-if="!menu.adminOnly || userInfoStore.admin">
+            <NuxtLink
+                :to="menu?.link"
+                @click="mobNavClose"
+            >
+              <span class="icon">
+                <i :class="`icon-${menu?.icon}`" />
+              </span>
 
-            <span class="txt">{{ menu?.title }}</span>
-          </NuxtLink>
-        </li>
+              <span class="txt">{{ menu?.title }}</span>
+            </NuxtLink>
+          </li>
+        </template>
       </ul>
 
       <ul class="gnb">
@@ -120,10 +122,12 @@
 
 <script setup>
 import { useLocalStorage } from '@vueuse/core';
+import { useUserInfoStore } from '@/stores/userInfo';
 
 const router = useRouter();
 
 const token = useLocalStorage('token', '');
+const userInfoStore = useUserInfoStore();
 const emit = defineEmits(['mobNavMove']);
 
 // 로그인 여부
@@ -212,6 +216,12 @@ const menuList = ref([
     title: '게시판 요청 목록',
     link: '/mypage/board/list',
     icon: 'file'
+  },
+  {
+    title: '게시판 목록 관리',
+    link: '/mypage/board/manage',
+    icon: 'file',
+    adminOnly: true
   }
 ]);
 </script>

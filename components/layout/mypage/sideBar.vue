@@ -40,6 +40,7 @@
               class="menu-title"
               @click="toggle(index)"
               :class="{'is-active': activeIndex === index}"
+              v-if="!item.adminOnly || userInfoStore.admin"
           >
             {{ item?.title }}
           </NuxtLink>
@@ -59,6 +60,7 @@
                     class="submenu-title"
                     @click="setActiveSubIndex(subIndex)"
                     :class="{'is-active': activeSubIndex === subIndex}"
+                    v-if="!subItem.adminOnly || userInfoStore.admin"
                 >
                   {{ subItem.title }}
                 </NuxtLink>
@@ -72,11 +74,13 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useLocalStorage } from "@vueuse/core";
+import { useUserInfoStore } from '@/stores/userInfo';
+import { useRoute } from 'vue-router'; // vue-router 추가
 
 const token = useLocalStorage('token', '');
-
+const userInfoStore = useUserInfoStore();
 const route = useRoute();
 
 const menuItems = ref([
@@ -112,10 +116,6 @@ const menuItems = ref([
         title: '스크랩',
         link: '/mypage/activity/scrap'
       },
-      // {
-      //   title: '신고',
-      //   link: '/mypage/activity/report'
-      // }
     ]
   },
   {
@@ -128,6 +128,11 @@ const menuItems = ref([
       {
         title: '게시판 요청 목록',
         link: '/mypage/board/list'
+      },
+      {
+        title: '게시판 목록 관리',
+        link: '/mypage/board/manage',
+        adminOnly: true
       }
     ]
   }
