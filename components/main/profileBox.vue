@@ -11,7 +11,7 @@
 
           <div class="profile-default" v-else />
 
-          <NuxtLink to="/info" class="btn-setting">
+          <NuxtLink to="/mypage/info" class="btn-setting">
             <i class="icon-settings" />
           </NuxtLink>
         </div>
@@ -28,9 +28,9 @@
     </div>
 
     <div class="btn-wrap">
-      <NuxtLink to="/writing/comment" title="내 댓글">내 댓글</NuxtLink>
-      <NuxtLink to="/activity/like" title="내 공감">내 공감</NuxtLink>
-      <NuxtLink to="/activity/scrap" title="내 스크랩">내 스크랩</NuxtLink>
+      <NuxtLink to="/mypage/writing/comment" title="내 댓글">내 댓글</NuxtLink>
+      <NuxtLink to="/mypage/activity/like" title="내 공감">내 공감</NuxtLink>
+      <NuxtLink to="/mypage/activity/scrap" title="내 스크랩">내 스크랩</NuxtLink>
     </div>
   </div>
 </template>

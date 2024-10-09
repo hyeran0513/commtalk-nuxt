@@ -64,11 +64,6 @@
       <template #title>게시판 노출 위치 편집</template>
 
       <template #default>
-        <div class="info">
-          <i class="icon-info" />
-          <span>게시판 노출은 최대 6개까지 가능합니다.</span>
-        </div>
-
         <div class="checkbox-list">
           <div v-for="(item, i) in withCheckedBoards" :key="i">
             <label class="checkbox-custom">
