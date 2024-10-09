@@ -296,7 +296,7 @@ const handleLike = async () => {
   }
 }
 
-onMounted( () => {
+onMounted(() => {
   commentContent.value = props.comment.content;
 });
 </script>
