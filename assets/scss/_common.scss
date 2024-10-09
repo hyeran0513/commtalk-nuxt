@@ -49,7 +49,11 @@ a {
     }
 
     &-gray {
-      @include btn-type(#999, white, var(--colorMainClear), var(--colorMainClear));
+      @include btn-type(#999, white, #999, #f8f8f8);
+    }
+
+    &-red {
+      @include btn-type(var(--colorWheel10), white, var(--colorWheel10), #ffeff1);
     }
   }
 
@@ -60,6 +64,10 @@ a {
 
     &-gray {
       @include btn-type-fill(#999, white, darken(#999, 10%));
+    }
+
+    &-red {
+      @include btn-type-fill(var(--colorWheel10), white, darken(#fc696a, 10%));
     }
   }
 }
@@ -531,6 +539,55 @@ section {
     width: 100px;
     background: #666;
     color: #FFF;
+  }
+}
+
+// tui-grid용 state 라벨
+[class*=state-label] {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  line-height: 1;
+  border-radius: 4px;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    margin-right: 6px;
+    @include size(6px);
+    border-radius: 50%;
+  }
+
+  &.state-label {
+    &-red {
+      color: #f55d73;
+      background: #ffeff1;
+
+      &:before {
+        background: #f55d73;
+      }
+    }
+
+    &-blue {
+      color: #47a1e6;
+      background: #ecf5fc;
+
+      &:before {
+        background: #47a1e6;
+      }
+    }
+  }
+}
+
+// tui-grid용 버튼
+[class*=tui-grid-btn] {
+  &.tui-grid-btn {
+    padding: 10px 20px;
+    min-width: auto;
+    height: auto;
+    line-height: 1;
+    border-radius: 4px;
+    font-size: inherit;
   }
 }
 

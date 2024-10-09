@@ -104,11 +104,45 @@ class activeRenderer {
     const rowObject = props.grid.getRow(props.rowKey);
 
     el.innerHTML = props.columnInfo.header;
-    el.className = 'btn-s-fill-main';
+
+    if (props.columnInfo.name === 'reject') {
+      el.className = 'tui-grid-btn btn-s-line-red';
+    }
+
+    if (props.columnInfo.name === 'approve') {
+      el.className = 'tui-grid-btn btn-s-line-main';
+    }
+
+    if (props.columnInfo.name === 'cancel') {
+      el.className = 'tui-grid-btn btn-s-line-gray';
+    }
+
+    if (rowObject.status)
 
     el.addEventListener('click', (ev) => {
       fn(props.columnInfo.name, rowObject.requestId);
     });
+
+    this.el = el;
+    this.render(props);
+  }
+
+  getElement() {
+    return this.el;
+  }
+
+  render(props) {
+    this.el.value = String(props.value);
+  }
+}
+
+class statusRenderer {
+  constructor(props) {
+    const el = document.createElement('label');
+    const rowObject = props.grid.getRow(props.rowKey);
+
+    el.innerHTML = rowObject.status;
+    el.className = (rowObject.status === '거절') ? 'state-label-red' : 'state-label-blue';
 
     this.el = el;
     this.render(props);
@@ -154,7 +188,10 @@ const gridProps = {
     {
       header: '상태',
       name: 'status',
-      align: 'center'
+      align: 'center',
+      renderer: {
+        type: statusRenderer
+      }
     },
     {
       header: '취소 상태',
@@ -199,7 +236,7 @@ const gridProps = {
     }
   ],
   myTheme: {
-    name: 'myTheme',
+    name: 'striped',
     value: {
       cell: {
         normal: {
@@ -208,9 +245,9 @@ const gridProps = {
         header: {
           background: '#f4f6fa'
         },
-        editable: {
-          background: '#fbfbfb',
-        },
+        evenRow: {
+          background: '#fff'
+        }
       },
     },
   },

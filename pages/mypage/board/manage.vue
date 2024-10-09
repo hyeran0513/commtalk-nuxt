@@ -34,7 +34,7 @@ class deleteRenderer {
     const rowObject = props.grid.getRow(props.rowKey);
 
     el.innerHTML = props.columnInfo.header;
-    el.className = 'btn-s-fill-main';
+    el.className = 'tui-grid-btn btn-s-line-red';
 
     el.addEventListener('click', (ev) => {
       fn(rowObject.boardId);
@@ -109,7 +109,7 @@ const gridProps = {
     },
   ],
   myTheme: {
-    name: 'myTheme',
+    name: 'striped',
     value: {
       cell: {
         normal: {
@@ -118,9 +118,9 @@ const gridProps = {
         header: {
           background: '#f4f6fa'
         },
-        editable: {
-          background: '#fbfbfb',
-        },
+        evenRow: {
+          background: '#fff'
+        }
       },
     },
   },
