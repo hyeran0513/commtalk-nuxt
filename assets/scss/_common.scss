@@ -484,6 +484,12 @@ section {
         &.w-600 {
           max-width: 600px;
         }
+
+        .tui-grid-cell {
+          &.has-bg {
+            background: var(--colorMainClear);
+          }
+        }
       }
     }
   }

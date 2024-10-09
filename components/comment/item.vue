@@ -22,7 +22,7 @@
             <transition name="fade">
               <div class="tooltip-box" v-if="showActions">
                 <ul class="tooltip-list">
-                  <li class="item">
+                  <li class="item" v-if="false">
                     <button
                         type="button"
                         class="has-icon"

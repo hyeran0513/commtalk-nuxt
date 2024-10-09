@@ -12,7 +12,12 @@
               :theme="gridProps.myTheme"
               :rowHeaders="gridProps.rowHeaders"
               :columnOptions="gridProps.columnOptions"
+              v-if="board?.boardReqs?.length > 0"
           />
+
+          <template v-else>
+            <BaseNodata text="게시판 요청 목록이 없습니다." />
+          </template>
         </div>
       </div>
     </section>
@@ -116,8 +121,6 @@ class activeRenderer {
     if (props.columnInfo.name === 'cancel') {
       el.className = 'tui-grid-btn btn-s-line-gray';
     }
-
-    if (rowObject.status)
 
     el.addEventListener('click', (ev) => {
       fn(props.columnInfo.name, rowObject.requestId);

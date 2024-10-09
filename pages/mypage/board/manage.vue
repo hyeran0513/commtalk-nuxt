@@ -11,7 +11,12 @@
           :theme="gridProps.myTheme"
           :rowHeaders="gridProps.rowHeaders"
           :columnOptions="gridProps.columnOptions"
-      />
+          v-if="board?.length > 0"
+        />
+
+        <template v-else>
+          <BaseNodata text="게시판 목록이 없습니다." />
+        </template>
       </div>
     </section>
   </section>
