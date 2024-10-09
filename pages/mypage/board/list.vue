@@ -57,7 +57,7 @@ const transformGridData = (boardReqs) => {
     description: req.description,
     requesterNickname: req.requester.nickname,
     status: req.reqSts,
-    cancelStatus: req.canceledYN === true ? '취소' : '-'
+    cancelStatus: req.canceledYN === true ? 'Y' : 'N'
   }));
 }
 
@@ -101,30 +101,31 @@ const handleRequest = async (action, boardReqId) => {
   }
 };
 
+const getButtonClass = (rowObject, name) => {
+  if (rowObject.status !== '대기') return '';
+
+  return name === 'reject' ? 'tui-grid-btn btn-s-line-red' :
+      name === 'approve' ? 'tui-grid-btn btn-s-line-main' :
+          name === 'cancel' && rowObject.cancelStatus === 'N' ? 'tui-grid-btn btn-s-line-gray' : '';
+}
+
 // 커스텀 렌더링
 class activeRenderer {
   constructor(props) {
-    const el = document.createElement('button');
-    const { fn } = props.columnInfo.renderer.options;
     const rowObject = props.grid.getRow(props.rowKey);
+    const { fn } = props.columnInfo.renderer.options;
+    const el = document.createElement('button');
 
-    el.innerHTML = props.columnInfo.header;
+    el.innerHTML = rowObject.status === '대기' ? props.columnInfo.header : '-';
+    el.className = getButtonClass(rowObject, props.columnInfo.name);
 
-    if (props.columnInfo.name === 'reject') {
-      el.className = 'tui-grid-btn btn-s-line-red';
+    if (el.innerHTML !== '-') {
+      el.addEventListener('click', () => fn(props.columnInfo.name, rowObject.requestId));
     }
 
-    if (props.columnInfo.name === 'approve') {
-      el.className = 'tui-grid-btn btn-s-line-main';
+    if (props.columnInfo.name === 'cancel' && rowObject.cancelStatus !== 'N') {
+      el.innerHTML = '-';
     }
-
-    if (props.columnInfo.name === 'cancel') {
-      el.className = 'tui-grid-btn btn-s-line-gray';
-    }
-
-    el.addEventListener('click', (ev) => {
-      fn(props.columnInfo.name, rowObject.requestId);
-    });
 
     this.el = el;
     this.render(props);
@@ -246,7 +247,7 @@ const gridProps = {
           fn: handleRequest
         }
       },
-      hidden: !userInfoStore.admin
+      hidden: userInfoStore.admin
     }
   ],
   myTheme: {

@@ -131,9 +131,7 @@ const userInfoStore = useUserInfoStore();
 const emit = defineEmits(['mobNavMove']);
 
 // 로그인 여부
-const isLogin = computed(() => {
-  return !!token.value;
-});
+const isLogin = ref(false);
 
 // 로그아웃
 const logout = () => {
@@ -224,4 +222,30 @@ const menuList = ref([
     adminOnly: true
   }
 ]);
+
+// 토큰 유효성 체크
+const checkTokenValidate = async () => {
+  try {
+    const response = await fetch(`/api/v1/members/token/validate`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token.value}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      console.log("성공");
+      isLogin.value = true;
+    } else {
+      console.log("성공X");
+    }
+  } catch (error) {
+    console.error('에러:', error);
+  }
+}
+
+onMounted(() => {
+  checkTokenValidate();
+});
 </script>

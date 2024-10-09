@@ -27,6 +27,8 @@
         width: 100%;
         height: 100%;
         background: #eaeaea;
+        overflow: hidden;
+        border-radius: 50%;
 
         &:before {
           position: absolute;
@@ -36,7 +38,7 @@
           content: "\ea07";
           font-family: 'iconFont';
           color: #FFF;
-          font-size: 24px;
+          font-size: 60px;
         }
       }
 
