@@ -168,7 +168,7 @@ const refreshComments = () => {
   emits('refreshComments');
 }
 
-const showActions = ref(false)
+const showActions = ref(false);
 
 const toggleActions = () => {
   showActions.value = !showActions.value

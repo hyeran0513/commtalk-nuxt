@@ -16,7 +16,10 @@ export default defineNuxtConfig({
         proxy: {
           to: "http://localhost:8080/**"
         }
-      }
+      },
+      "/write": {
+        ssr: false,
+      },
     },
   },
   css : [

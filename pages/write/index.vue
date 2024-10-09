@@ -27,7 +27,12 @@
         <dl class="form-box">
           <dt>내용</dt>
           <dd>
-            <BaseEditor v-model="formData.content" @get-editor="getEditor" :defaultValue="defaultValue" />
+            <BaseEditor
+                v-model="formData.content"
+                @get-editor="getEditor"
+                :defaultValue="defaultValue"
+                v-if="isLoaded"
+            />
           </dd>
         </dl>
       </div>
@@ -91,7 +96,8 @@
 
     <div class="btn-wrap">
       <NuxtLink to="/board/1" class="btn-s-line-main" @click="router.go(-1);">취소</NuxtLink>
-      <button class="btn-s-fill-main" @click="submitForm()">완료</button>
+      <button class="btn-s-fill-main" @click="editForm()" v-if="route.query.postId">수정</button>
+      <button class="btn-s-fill-main" @click="submitForm()" v-else>완료</button>
     </div>
   </div>
 
@@ -118,7 +124,18 @@ const router = useRouter();
 
 const token = useLocalStorage('token', '');
 
-const defaultValue = ref('내용');
+// 게시판
+const { data: boardData, refresh: refreshBoardData } = await useAsyncData('boardData',
+    () => $fetch(`/api/v1/boards/${route.query.boardId}/posts/${route.query.postId}`, {
+      params: {
+        boardId: route.query.boardId,
+        postId: route.query.postId
+      }
+    })
+);
+
+const defaultValue = ref();
+const isLoaded = ref(false);
 
 let editor = null;
 const getEditor = (_editor) => {
@@ -181,6 +198,44 @@ const submitForm = async () => {
     console.error('에러:', error);
   }
 };
+
+// 게시글 수정
+const editForm = async () => {
+  const {title, content, anonymousYN, commentableYN, hashtags, boardId} = formData.value;
+
+  const formDataObj = {
+    title,
+    content,
+    anonymousYN,
+    commentableYN,
+    hashtags
+  };
+
+  try {
+    const response = await fetch(`/api/v1/boards/${route.query.boardId}/posts/${route.query.postId}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token.value}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formDataObj)
+    });
+
+    if (response.ok) {
+      modal.value.modalOpen();
+      router.push(`/board/${route.query.boardId}`);
+    } else {
+      const errorData = await response.json();
+      const {code, message} = errorData;
+
+      if (code === 'BAD_REQUEST') {
+        console.log(message);
+      }
+    }
+  } catch (error) {
+    console.error('에러:', error);
+  }
+}
 
 const { data: categoryData, execute: exeCategoryData } = await useAsyncData('categoryData', async () => {
   const response = await fetch(`/api/v1/boards`);
@@ -245,9 +300,35 @@ const uploadProfile = async () => {
 }
 /* END: 회원 프로필 사진 업로드 */
 
+const setData = () => {
+  if (route.query.postId) {
+    Object.assign(formData.value, {
+      boardId: boardData.value.board.boardId,
+      title: boardData.value.title,
+      anonymousYN: boardData.value.anonymousYN,
+      commentableYN: boardData.value.commentableYN
+    });
+
+    defaultValue.value = boardData.value.content;
+    fileNames.value = fileList.value.map(file => file.fileUrl);
+  }
+}
+
 onMounted(async () => {
   await exeCategoryData();
-})
+  setData();
+  isLoaded.value = true;
+});
+
+// 게시글 파일 URL 리스트 조회
+const { data: fileList, refresh: refreshFileList } = await useAsyncData('fileList',
+    () => $fetch(`/api/v1/files/post/${route.query.postId}`, {
+      headers: {
+        'Authorization': `Bearer ${token.value}`,
+        'Content-Type': 'application/json'
+      }
+    })
+);
 </script>
 
 <style lang="scss" scoped>

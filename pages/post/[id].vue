@@ -12,6 +12,43 @@
             <div class="user-name">{{ boardData?.author?.nickname }}</div>
             <div class="date">{{ boardData?.updatedAt }}</div>
           </div>
+
+          <div class="tooltip" ref="tooltipRef" v-if="(boardData?.author?.nickname === userInfoStore?.userInfo?.nickname) || userInfoStore.admin">
+            <transition name="fade">
+              <div class="tooltip-box" v-if="showActions">
+                <ul class="tooltip-list">
+                  <li class="item" v-if="boardData?.author?.nickname === userInfoStore?.userInfo?.nickname">
+                    <NuxtLink
+                        :to="{ path: '/write', query: { boardId: route.query.boardId, postId: route.params.id }}"
+                        class="has-icon"
+                    >
+                      <i class="icon-edit" />
+                      <span class="txt">수정</span>
+                    </NuxtLink>
+                  </li>
+
+                  <li class="item" v-if="userInfoStore.admin">
+                    <button
+                        type="button"
+                        class="has-icon"
+                        @click="deletePost"
+                    >
+                      <i class="icon-trash-2" />
+                      <span class="txt">삭제</span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </transition>
+
+            <button
+                type="button"
+                class="btn-dots tooltip-btn"
+                @click="toggleActions"
+            >
+              <i class="icon-more-vertical" />
+            </button>
+          </div>
         </div>
 
         <div class="title">{{ boardData?.title }}</div>
@@ -97,16 +134,70 @@
       </template>
     </div>
   </div>
+
+  <BaseModal ref="modal">
+    <template #default>
+      <div class="alert">
+        <i class="icon-check-circle" />
+        <div class="txt">게시물이 삭제되었습니다..</div>
+      </div>
+    </template>
+
+    <template #footer>
+      <button type="button" class="btn-main" @click="modal.modalClose()">확인</button>
+    </template>
+  </BaseModal>
 </template>
 
 <script setup>
-import {onMounted} from "vue";
-import {useLocalStorage} from "@vueuse/core";
+import {onMounted, ref} from "vue";
+import {onClickOutside, useLocalStorage} from "@vueuse/core";
+import { useUserInfoStore } from '@/stores/userInfo';
 
 const token = useLocalStorage('token', '');
-
+const userInfoStore = useUserInfoStore();
+const modal = ref();
 const showComment = ref(true);
 const route = useRoute();
+const router = useRouter();
+
+const showActions = ref(false);
+const tooltipRef = ref();
+
+onClickOutside(tooltipRef, event => {
+  showActions.value = false;
+});
+
+const toggleActions = () => {
+  showActions.value = !showActions.value
+}
+
+// 게시글 삭제
+const deletePost = async () => {
+  try {
+    const response = await fetch(`/api/v1/boards/${route.query.boardId}/posts/${route.params.id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token.value}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      modal.value.modalOpen();
+      router.push(`/board/${route.query.boardId}`);
+    } else {
+      const errorData = await response.json();
+      const {code, message} = errorData;
+
+      if (code === 'BAD_REQUEST') {
+        console.log(message);
+      }
+    }
+  } catch (error) {
+    console.error('에러:', error);
+  }
+}
 
 // 게시판
 const { data: boardData, refresh: refreshBoardData } = await useAsyncData('boardData',
