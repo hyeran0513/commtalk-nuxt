@@ -26,10 +26,9 @@ commtalk - 커뮤니티
 
  ##### [메인화면]
 - 주요 기능: 사용자가 게시판 위치를 드래그하여 자유롭게 변경할 수 있습니다.
-<img width="1280" alt="화면 캡처 2024-10-09 153454" src="https://github.com/user-attachments/assets/4ff5d009-846a-4e47-baf9-3268fbfd0c88">
-
+![localhost_3000 - Chrome 2024-10-09 15-47-33](https://github.com/user-attachments/assets/b2bcdec9-1971-4524-b511-1212a658dfac)
 <br/>
 
 ##### [마이페이지]
 - 주요 기능: 관리자가 사용자가 요청한 게시판을 승인하거나 거절할 수 있습니다.
-<img width="1280" alt="화면 캡처 2024-10-09 153150" src="https://github.com/user-attachments/assets/8355ffc7-5a32-4943-8221-7e65a570e79a">
+![localhost_3000_mypage_board_list - Chrome 2024-10-09 15-45-53 (1)](https://github.com/user-attachments/assets/0467b391-ee3a-430c-a5b6-58b1748db094)
