@@ -145,7 +145,18 @@ class statusRenderer {
     const rowObject = props.grid.getRow(props.rowKey);
 
     el.innerHTML = rowObject.status;
-    el.className = (rowObject.status === '거절') ? 'state-label-red' : 'state-label-blue';
+
+    if (rowObject.status === '거절') {
+      el.className ='state-label-red';
+    }
+
+    if (rowObject.status === '승인') {
+      el.className ='state-label-blue';
+    }
+
+    if (rowObject.status === '대기') {
+      el.className ='state-label-green';
+    }
 
     this.el = el;
     this.render(props);

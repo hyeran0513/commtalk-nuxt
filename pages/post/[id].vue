@@ -114,7 +114,7 @@
 
         <NuxtLink
             to="/board/1"
-            class="btn-s-fill-main btn-list"
+            class="btn-s-line-gray btn-list"
             title="목록으로"
         >
           목록으로

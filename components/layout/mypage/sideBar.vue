@@ -8,6 +8,8 @@
             :style="{background: `#f8f8f8 url(${ profile?.fileUrl }) no-repeat center/auto 100%`}"
         />
 
+        <div v-else class="profile-default"></div>
+
         <button
             type="button"
             class="btn-setting"

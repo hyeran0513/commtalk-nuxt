@@ -582,6 +582,15 @@ section {
         background: #47a1e6;
       }
     }
+
+    &-green {
+      color: #3da68c;
+      background: #e5f7f2;
+
+      &:before {
+        background: #3da68c;
+      }
+    }
   }
 }
 

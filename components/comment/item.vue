@@ -18,7 +18,7 @@
             </div>
           </div>
 
-          <div class="tooltip" ref="tooltipRef">
+          <div class="tooltip" ref="tooltipRef" v-if="userInfoStore.userInfo.nickname === comment?.writer?.nickname">
             <transition name="fade">
               <div class="tooltip-box" v-if="showActions">
                 <ul class="tooltip-list">
@@ -163,9 +163,12 @@
 <script setup>
 import { ref } from 'vue'
 import {onClickOutside, useLocalStorage} from "@vueuse/core";
+import { useUserInfoStore } from '@/stores/userInfo';
+
 const route = useRoute();
 
 const token = useLocalStorage('token', '');
+const userInfoStore = useUserInfoStore();
 
 const modal = ref();
 

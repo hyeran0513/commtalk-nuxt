@@ -72,12 +72,17 @@
             }
 
             .info {
-              display: flex;
-              flex-direction: column;
-
               .user-name {
+                display: inline-block;
+                padding: 4px 8px;
                 font-size: 14px;
                 font-weight: bold;
+                border-radius: 4px;
+
+                &.is-active {
+                  color: #f55d73;
+                  background: #ffeff1;
+                }
               }
 
               .date {
@@ -100,7 +105,6 @@
           gap: 8px;
 
           .btn-reply {
-            color: #999;
             font-size: 14px;
           }
 
