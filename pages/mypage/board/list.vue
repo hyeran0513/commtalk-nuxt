@@ -80,7 +80,7 @@ watch(board, (newBoard) => {
 // API 요청 처리 함수
 const handleRequest = async (action, boardReqId) => {
   const response = await fetch(`/api/v1/boards/requests/${boardReqId}/${action}`, {
-    method: action === 'cancel' ? 'POST' : 'PATCH',
+    method: (action === 'cancel') ? 'POST' : 'PATCH',
     headers: {
       'Authorization': `Bearer ${token.value}`,
       'Content-Type': 'application/json',
